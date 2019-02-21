@@ -1,0 +1,30 @@
+<div>
+  <nav class="navbar navbar-dark navbar-fixed-top">
+    <div class="navbar-center">
+        <div class="col-md-12 row">
+          <div class="col-md-2">
+            <img src="###" width="169px" height="64px" class="visible-xs-8  hidden-md">
+          </div>
+          <div class="col-md-6">
+            <ul class="nav navbar-nav nav-margin">
+              <li class="li" routerLinkActive="active"><a routerLink="./index">首页</a></li>
+              <li class="li" routerLinkActive="active"><a routerLink="./lostSth">寻物</a></li>
+              <li class="li" routerLinkActive="active"><a routerLink="./findSth">招领</a></li>
+              <li class="li" routerLinkActive="active"><a routerLink="./publishNews">发布信息</a></li>
+              <li class="li" routerLinkActive="active"><a routerLink="./aboutUs">关于我们</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <img src="###" width="80px" height="60px">
+            <span routerLink="/login">[登录]</span>
+            <span>所在城市：四川省成都市</span>
+            <span>[切换城市]</span>
+          </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="container" style="margin-top:70px;">
+  <router-outlet></router-outlet>
+  <footer style="text-align: center">Made by me</footer>
+</div>

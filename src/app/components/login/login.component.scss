@@ -1,0 +1,80 @@
+@import '../../publicSource/basicColor';
+
+.container-fluid1{
+  padding:0;
+  margin:0;
+  height:100%;
+}
+.bg-img{
+  //height:100%;
+  /*渐变色背景*/
+  //background:-webkit-gradient(linear, 0 0, 0 100%, from($basicColor), to($basicColor-deepgreen));
+  //background: url("../../../assets/img/bg3.jpg");
+  background: url("../../../assets/img/bg6.jpg");
+  background-size:100% 110%;
+  /*opacity: 1;
+  animation-delay:0s;
+  animation-duration:1s;
+  animation-fill-mode:forwards;
+  animation-timing-function: ease;*/
+}
+
+/*@keyframes fadeIn {
+  0%{opacity: 1}
+  100%{opacity:0.5}
+}*/
+
+/*The css for Login*/
+.row{
+  width:100%;
+  margin:0;
+  padding:0;
+}
+#login{
+  width:350px;
+  height:400px;
+  background: rgba(255,255,255,0.6);
+  border-radius:10px;
+  position: absolute;
+  top:50%;
+  left:60%;
+  margin-top:-200px;
+  //filter:alpha(opacity=60);-moz-opacity:0.6;opacity:0.60;
+  .title{
+    padding:10px;
+    font-size:30px;
+    background: rgba($basicColor-deepgreen,0.7);
+    border-radius:10px 10px 0 0;
+    color:white;
+  }
+
+  .login-body{
+    padding:50px 20px;
+    & input{
+      height:30px;
+      margin-bottom:20px;
+    }
+    & label{
+      font-size:14px;
+      line-height: 30px;
+      color:$basicColor-deepgreen;
+    }
+    .btn-line{
+      margin:30px 10px;
+      .btn{
+        padding:0;
+      }
+      .btn-warning{
+        left:15px;
+        //background-color: $basicColor-orange;
+        //border:1px $basicColor-orange solid;
+      }
+    }
+    .register{
+      padding-right:20px;
+      margin-top:-50px;
+      color: #1172b5;
+      cursor:pointer;
+    }
+  }
+}

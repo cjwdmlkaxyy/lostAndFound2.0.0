@@ -1,0 +1,8 @@
+:host {
+  display: block;
+  border: 1px solid #ff6502;
+}
+:host-context(.theme-light) h2 {
+  background-color: #31ff69;
+}
+

@@ -1,0 +1,141 @@
+<div class="bgImg">
+    <div class="container register">
+        <div class="register-title row">
+            <p>公益缺你不可</p>
+            <p class="margin50">欢迎注册“千与千寻”失物招领网站</p>
+        </div>
+        <form class="form-inline register-body">
+            <div class="row" [className]="css.userName">
+                <label>*登录账号:</label>
+                <input type="text" class="form-control" autocomplete="off"
+                       (blur)="checkUserName(registerInfos.account)"
+                       [(ngModel)]="registerInfos.account" name="account">
+                <ng-container *ngIf="css.userName == ''">
+                  <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
+                  <span>登录账号可由数组、字母或下划线组成（4-20）位字符</span>
+                </ng-container>
+                <ng-container *ngIf="css.userName == 'has-success'">
+                  <span class="glyphicon glyphicon-ok-sign icon icon-success"></span>
+                </ng-container>
+                <ng-container *ngIf="css.userName == 'has-error'">
+                  <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
+                  <span *ngIf="registerInfos.account == null || registerInfos.account ==''">亲，登录账号不能为空哦！</span>
+                  <span *ngIf="registerInfos.account != null && registerInfos.account !=''">亲，输入有误哦！登录账号可由数组、字母或下划线组成（4-20）位字符</span>
+                </ng-container>
+            </div>
+
+
+            <div class="row" [className]="css.psd">
+                <label>*密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+                <input type="password" class="form-control" autocomplete="off"
+                       (blur)="checkPsd(registerInfos.psd)"
+                       [(ngModel)]="registerInfos.psd" name="psd">
+                <ng-container *ngIf="css.psd == ''">
+                  <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
+                  <span>至少六位字符</span>
+                </ng-container>
+                <ng-container *ngIf="css.psd == 'has-success'">
+                  <span class="glyphicon glyphicon-ok-sign icon icon-success"></span>
+                </ng-container>
+                <ng-container *ngIf="css.psd == 'has-error'">
+                  <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
+                  <span *ngIf="registerInfos.psd == null || registerInfos.psd ==''">亲，您还没有输入密码哦！</span>
+                  <span *ngIf="registerInfos.psd != null && registerInfos.psd !=''">亲，密码至少6位字符</span>
+                </ng-container>
+            </div>
+
+
+            <div class="row" [className]="css.confirmPsd">
+                <label>*确认密码:</label>
+                <input type="password" class="form-control" autocomplete="off"
+                       (blur)="confirmPsd(registerInfos.confirmPsd)"
+                       [(ngModel)]="registerInfos.confirmPsd" name="confirmPsd">
+                <ng-container *ngIf="css.confirmPsd == 'has-success'">
+                  <span class="glyphicon glyphicon-ok-sign icon icon-success"></span>
+                </ng-container>
+                <ng-container *ngIf="css.confirmPsd == 'has-error'">
+                  <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
+                  <span *ngIf="registerInfos.confirmPsd == null || registerInfos.confirmPsd ==''">亲，请确认密码！</span>
+                  <span *ngIf="registerInfos.confirmPsd != registerInfos.psd && registerInfos.confirmPsd">Oh,密码不一样欸！</span>
+                </ng-container>
+            </div>
+
+
+            <div class="row" [className]="css.netName">
+                <label>&nbsp;&nbsp;网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</label>
+                <input type="text" class="form-control" autocomplete="off"
+                       (blur)="checkNetName(registerInfos.userName)"
+                       [(ngModel)]="registerInfos.userName" name="userName">
+              <ng-container *ngIf="css.netName == ''">
+                <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
+                <span>网名不能超过15位字符</span>
+              </ng-container>
+              <ng-container *ngIf="css.netName == 'has-success'">
+                <span class="glyphicon glyphicon-ok-sign icon icon-success"></span>
+              </ng-container>
+              <ng-container *ngIf="css.netName == 'has-error' && registerInfos.userName.length>15">
+                <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
+                <span>亲，网名不能超过15位字符啦！</span>
+              </ng-container>
+            </div>
+
+
+            <div class="row" [className]="css.phone">
+                <label>*电话号码:</label>
+                <input type="text" class="form-control" autocomplete="off"
+                       (blur)="checkPhone(registerInfos.phoneNum)"
+                       [(ngModel)]="registerInfos.phoneNum" name="phoneNum">
+              <ng-container *ngIf="css.userName == 'has-success'">
+                <span class="glyphicon glyphicon-ok-sign icon icon-success"></span>
+              </ng-container>
+              <ng-container *ngIf="css.phone == 'has-error'">
+                <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
+                <span *ngIf="registerInfos.phoneNum == null || registerInfos.phoneNum ==''">亲，电话号码怎么不填呢！</span>
+                <span *ngIf="registerInfos.phoneNum != null && registerInfos.phoneNum !=''">亲，输入有误哦！</span>
+              </ng-container>
+            </div>
+
+
+            <div class="row" [className]="none">
+                <label>&nbsp;&nbsp;出生日期:</label>
+                <input type="text" class="form-control" autocomplete="off"
+                     [(ngModel)]="registerInfos.birthday" name="birthday">
+            </div>
+            <div class="row has-warning" [className]="css.email">
+                <label>*邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>
+                <input type="text" class="form-control" autocomplete="off"
+                     (blur)="checkEmail(registerInfos.email)"
+                     [(ngModel)]="registerInfos.email" name="E-mail">
+              <ng-container *ngIf="css.email == 'has-success'">
+                <span class="glyphicon glyphicon-ok-sign icon icon-success"></span>
+              </ng-container>
+              <ng-container *ngIf="css.email == 'has-error'">
+                <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
+                <span *ngIf="registerInfos.email == null || registerInfos.email ==''">人家怎么Email你呢！</span>
+                <span *ngIf="registerInfos.email != null && registerInfos.email !=''">亲，输入有误哦！</span>
+              </ng-container>
+            </div>
+
+
+            <div class="row" [className]="none">
+                <label>*所在区域:</label>
+                <input type="text" class="form-control" autocomplete="off"
+                     [(ngModel)]="registerInfos.area" name="area">
+            </div>
+
+
+            <div class="row" [className]="none">
+                <label>&nbsp;&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</label>
+                <input type="text" class="form-control" autocomplete="off"
+                     [(ngModel)]="registerInfos.realName" name="realName">
+            </div>
+            <div class="row" style="margin-top:50px;">
+                <button class="btn btn-success col-md-4 col-md-offset-4" autocomplete="off"
+                      (click)="registerConfirm()">立即注册</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

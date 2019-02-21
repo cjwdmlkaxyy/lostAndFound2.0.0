@@ -1,0 +1,44 @@
+<!--<div class="container">
+  <form>
+    <label>登录账号:</label>
+    <input type="text" name="userName"
+      [(ngModel)]="loginInfos.username"><br>
+    <label>密码:</label>
+    <input type="password" name="psd"
+           [(ngModel)]="loginInfos.password">
+  </form>
+</div>
+<p>
+  <button (click)="login()">登录</button>
+</p>
+<p>
+  <button routerLink="/register">立即注册</button>
+</p>-->
+<div class="container-fluid1 bg-img" style="height:100%;">
+  <div class="container">
+    <div id="login">
+      <div class="title text-center">用户登录</div>
+      <div class="login-body">
+        <form class="form-inline" (ngSubmit)="login()">
+          <div class="row">
+            <label class="col-md-4">登录账号：</label>
+            <input class="col-md-7" type="text" placeholder="请输入登录账号" autocomplete="off" name="username"
+                   [(ngModel)]="loginInfos.username">
+          </div>
+          <div class="row">
+            <label class="col-md-4">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+            <input class="col-md-7" type="text" placeholder="请输入密码" autocomplete="off" name="psd"
+                   [(ngModel)]="loginInfos.password">
+          </div>
+          <div class="row btn-line">
+            <input class="col-md-5 btn btn-success" type="submit" value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录">
+            <input class="col-md-3 col-md-offset-2 btn btn-warning" type="button" value="忘记密码" (click)="forgetPsd()">
+          </div>
+          <div class="row register">
+            <span class="right" routerLink="/register">立即注册>></span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

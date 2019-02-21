@@ -1,0 +1,72 @@
+@import '../../publicSource/basicColor.scss';
+
+$color:$basicColor-deepgreen;
+
+
+#tabModle{
+  padding-top:100px;
+}
+
+#myTabContent{
+  margin-top:-1px;
+  width:100%;
+  //height:500px;
+  border:1px $basicColor-orange solid;
+  //border-top:0;
+  border-top-color:transparent;
+}
+
+.nav-tabs{
+  border-bottom:1px $basicColor-orange solid;
+}
+
+#myTab{
+  & > li a{
+    width:100%;
+  }
+
+  & > li:first-child a{
+    background-color: $basicColor-orange;
+    color:#fff;
+  }
+
+  & > li:nth-child(2) a{
+    background-color: $basicColor-green;
+    color:#fff;
+  }
+
+  & > li.active:first-child a{
+    background-color: #fff;
+    color: $basicColor-orange;
+    border:1px $basicColor-orange solid;
+    border-bottom-color:transparent;
+    //border-right-color: transparent;
+  }
+
+  & > li.active:nth-child(2) a{
+    background-color: #fff;
+    color: $basicColor-green;
+    border:1px $basicColor-green solid;
+    border-bottom-color:transparent;
+    //border-left-color:transparent;
+  }
+}
+
+.form-body{
+  padding:50px;
+  .row{
+    margin-bottom:15px;
+  }
+  & label{
+    margin-right:10px;
+    vertical-align:top;
+  }
+
+  textarea{
+    resize:none;
+  }
+
+}
+.width-40{
+  width:40%;
+}

@@ -1,0 +1,31 @@
+@import "../../publicSource/basicColor";
+.bgImg{
+  width:100%;
+  height:100%;
+  background: url("../../../assets/img/bg6.jpg");
+  padding-top:5%;
+}
+
+.register{
+  width:900px;
+  height:700px;
+  background: rgba(255,255,255,0.6);
+}
+
+.register-title{
+  font-size:30px;
+  background-color: rgba($basicColor-green,0.6);
+  padding:10px;
+  color:#fff;
+  .margin50{
+    margin-left:60px;
+  }
+}
+
+.register-body{
+  padding:20px 30px;
+  & input{
+    margin:5px 10px;
+    width:200px;
+  }
+}

@@ -1,0 +1,53 @@
+<!--<p>Hip!</p>-->
+<!--<ng-template>-->
+  <!--<p>Hip!</p>-->
+<!--</ng-template>-->
+<!--<p>Hooray!</p>-->
+<!--
+<div>
+  Pick your favorite hero
+  (<label><input type="checkbox" checked (change)="showSad = !showSad">show sad</label>)
+</div>
+<select [(ngModel)]="hero">
+  <ng-container *ngFor="let h of heroes">
+    <ng-container *ngIf="showSad || h.emotion !== 'sad'">
+      <option [ngValue]="h">{{h.name}} ({{h.emotion}})</option>
+    </ng-container>
+  </ng-container>
+</select>
+
+<br/>
+<h2 id="appUnless">UnlessDirective</h2>
+<p>The condition is currently
+  <span [ngClass]="{'a': !condition, 'b': condition, 'unless': true}">{{condition}}</span>
+  <button (click)="condition = !condition"
+    [ngClass]="{'a': condition, 'b': !condition}">Toggle condition to {{condition ? 'false' : 'true'}}</button>
+</p>
+<p *appUnless="condition" class="unless a">
+  (A) This paragraph is displayed because the condition is false
+</p>
+
+<p *appUnless="!condition" class="unless b">
+  (B) Although the condition is true,
+  this paragraph is displayed becausse appUnless is set to false
+</p>
+<p>管道</p>
+<p>{{date | date:'yy-MM-dd'}}</p>
+<p>
+  <label>Name:</label>
+  &lt;!&ndash;<input type="text" [formControl]="name">&ndash;&gt;
+</p>
+
+<p id="my-element">hahahahahahahahaha</p>
+
+<p>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>
+
+<form action="<%=http://192.168.2.28:8082/goods/img/upload=%>/fileUpload" method="post" enctype="multipart/form-data" (ngSubmit)="upload()" id="ddd">
+  <input type="file" name="file" id="form1">
+  &lt;!&ndash;姓名:&ndash;&gt;
+  &lt;!&ndash;<input name="name" />&ndash;&gt;
+  &lt;!&ndash;<input type="hidden" name="add" value="深圳"/>&ndash;&gt;
+  <input type="submit">
+</form>
+-->
+dddddddddd

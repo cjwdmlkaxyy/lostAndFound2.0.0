@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+  font-family: '微软雅黑';
+  //overflow-x: hidden;
+}
+.body{
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+}
+.fullHeight{
+  height: 100vh;
+}
+.right{
+  float:right;
+}
+.left{
+  float:left;
+}
+
+/*icon css*/
+.icon{
+  margin:0 5px 0 10px;
+}
+.icon-success{
+  color: #59d66d;
+}
+.icon-remind{
+  color: #5ebde3;
+}
+.icon-danger{
+  color: #b71b00;
+}
+.icon-warning{
+  color: #ff9000;
+}
+
+.img-top{
+  width:100%;
+}
+.inline-block{
+  display: inline-block;
+}
+.font-color-deepgray{
+  color: #565c56;
+}
+.font-color-gray{
+  color:#636963;
+}

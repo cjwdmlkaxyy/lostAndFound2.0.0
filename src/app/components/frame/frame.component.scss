@@ -1,0 +1,44 @@
+.navbar{
+  background-color: #00816e;
+  width:100%;
+  min-width:1500px;
+  height:64px;
+}
+
+.navbar-center{
+  width:80%;
+  margin-left:10%;
+  padding:0;
+}
+.nav{
+  width:100%;
+  display: flex;
+  justify-content: space-around;
+  .li{
+    float:left;
+    a{
+      color:#fff;
+      font-size:22px;
+      &:hover{
+        background-color: #0ca386;
+      }
+      &:visited{
+        background-color: #0ca386;
+      }
+      &:active{
+        background-color: #0ca386;
+      }
+      /*&:link{
+        background-color: #0ca386;
+      }*/
+    }
+
+  }
+}
+.nav-margin{
+  margin-top:14px;
+}
+.active{
+  background-color: #0ca386;
+  //color:#03A533;
+}
