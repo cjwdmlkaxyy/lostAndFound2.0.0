@@ -18,6 +18,7 @@ import {UnlessDirective} from './directive/unless.directiva';
 import {ExponentialStrengthPipe} from './pipe/exponential-strength.pipe';
 import { NewDetialsComponent } from './components/new-detials/new-detials.component';
 import {CheckValueDirective} from './directive/check-value.directive';
+import { StatementComponent } from './components/statement/statement.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {CheckValueDirective} from './directive/check-value.directive';
     UnlessDirective,
     ExponentialStrengthPipe,
     NewDetialsComponent,
-    CheckValueDirective
+    CheckValueDirective,
+    StatementComponent
   ],
   imports: [
     BrowserModule,

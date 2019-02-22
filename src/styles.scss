@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "app/publicSource/basicColor";
+
 *{
   font-family: '微软雅黑';
   //overflow-x: hidden;
@@ -9,6 +11,19 @@
   width: 100vw;
   overflow-x: hidden;
 }
+
+/*
+*the css of scroball
+*/
+::-webkit-scrollbar{
+  width:5px;
+  //background-color: $basicColor-green;
+}
+::-webkit-scrollbar-thumb{
+  background-color: $basicColor-orange;
+}
+
+
 .fullHeight{
   height: 100vh;
 }
@@ -47,4 +62,13 @@
 }
 .font-color-gray{
   color:#636963;
+}
+.font-color-blue{
+  color:#3372E3;
+}
+.font-color-cyan{
+  color: #1ec2e3;
+}
+.font-margin-10{
+  margin:0 10px;
 }

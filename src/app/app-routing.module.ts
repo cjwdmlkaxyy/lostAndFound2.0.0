@@ -9,6 +9,7 @@ import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {FrameComponent} from './components/frame/frame.component';
 import {NewDetialsComponent} from './components/new-detials/new-detials.component';
+import {StatementComponent} from './components/statement/statement.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/frame/index', pathMatch: 'full'},
@@ -19,9 +20,12 @@ const routes: Routes = [
     {path: 'index', component: HomeComponent},
     {path: 'index/:id', component: NewDetialsComponent},
     {path: 'findSth', component: FindSthComponent},
+    {path: 'findSth/:id', component: NewDetialsComponent},
     {path: 'lostSth', component: LostSthComponent},
+    {path: 'lostSth/:id', component: NewDetialsComponent},
     {path: 'aboutUs', component: AboutUsComponent},
-    {path: 'publishNews', component: PublishNewsComponent}
+    {path: 'publishNews', component: PublishNewsComponent},
+    {path: 'statement', component: StatementComponent}
   ]},
 ];
 

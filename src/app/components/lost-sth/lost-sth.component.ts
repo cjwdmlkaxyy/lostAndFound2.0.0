@@ -9,10 +9,17 @@ export class LostSthComponent implements OnInit {
 
   constructor() { }
 
-  // color: string;
+  tags: any;
 
   ngOnInit() {
-
+    this.tags = [
+      {id: 0, category:1},
+      {id: 1, category:2},
+      {id: 2, category:1},
+      {id: 3, category:1},
+      {id: 4, category:2},
+      {id: 5, category:1}
+    ]
   }
 
 }

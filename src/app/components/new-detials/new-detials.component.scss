@@ -1,0 +1,71 @@
+@import "../../publicSource/basicColor";
+
+.main{
+  margin-top:100px;
+  padding:20px 40px;
+  border:1px $basicColor-orange solid;
+
+  img{
+    margin:0 10px;
+  }
+
+  .row{
+    margin-bottom:10px;
+    & > span:first-child{
+      margin-right:10px;
+      font-weight:bold;
+    }
+  }
+  & > .row:first-child{
+    padding-bottom:20px;
+  }
+  .title{
+    color:$basicColor-orange;
+    font-size:30px;
+  }
+}
+
+/*
+**the leave words css
+*/
+.leave-word{
+  background-color: rgba($basicColor-gray,0.2);
+  margin-top:50px;
+  width:60%;
+
+  .row{
+    margin:0;
+    padding:0;
+  }
+
+  & > .row:first-child div{
+    width:90px;
+    background-color: $basicColor-green;
+    color:#fff;
+    font-size:15px;
+    padding:5px 0;
+  }
+  .messages{
+    padding:25px 35px 5px 30px;
+
+    .row{
+      margin-bottom:15px;
+
+      & > div:nth-child(2){
+        font-size:10px;
+        color:$basicColor-gray;
+        margin-top:-12px;
+      }
+    }
+
+    & > .row:last-child{
+      padding-top:20px;
+    }
+  }
+
+
+  button{
+    margin:0 10px;
+    padding:5px 10px;
+  }
+}

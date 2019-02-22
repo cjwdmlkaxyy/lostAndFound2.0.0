@@ -1,8 +1,72 @@
-:host {
-  display: block;
-  border: 1px solid #ff6502;
+@import "../../publicSource/basicColor";
+
+.seach-block{
+  form{
+    padding:100px 30px;
+  }
+  input{
+    margin-right:20px;
+  }
+  label{
+    margin-right:10px;
+  }
+  button{
+    margin-right:20px;
+  }
+
+  span{
+    margin:0 5px;
+  }
+  .row{
+    margin-bottom:5px;
+  }
 }
-:host-context(.theme-light) h2 {
-  background-color: #31ff69;
+.width-40{
+  width:40%;
+}
+
+
+/*
+*the css of news lists
+*/
+.news-block{
+  .title{
+    color:$basicColor;
+    font-weight:bold;
+    font-size:30px;
+  }
+  .title-describe{
+    color:$basicColor-gray;
+  }
+  .news{
+    //height:800px;
+    border: 1px yellow solid;
+    //padding-top:50px;
+    overflow: hidden;
+  }
+  .infos-item{
+    width:40%;
+    height:250px;
+    border:1px greenyellow solid;
+    padding:0;
+    cursor:pointer;
+    .markLogo{
+      float:right;
+      color:#fff;
+      width:50px;
+      text-align: center;
+    }
+    .find{
+      background-color: $basicColor-orange;
+    }
+    .lost{
+      background-color: $basicColor-green;
+
+    }
+  }
+}
+
+.right{
+  float:right;
 }
 
