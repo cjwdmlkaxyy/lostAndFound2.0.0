@@ -45,8 +45,16 @@
 }
 
 .footer{
+  width:100%;
+  background: url("../../../assets/img/footerbg1.jpg");
+  //background-position: center center;
+  background-attachment: fixed;
+  background-size:100% 100%;
+}
+
+.footer .footer-main{
   margin-top:150px;
-  background-color:$basicColor-seniorGray;
+  background-color:rgba($basicColor-seniorGray,0.85);
   padding:40px 320px 30px;
   color:$basicColor-gray;
 

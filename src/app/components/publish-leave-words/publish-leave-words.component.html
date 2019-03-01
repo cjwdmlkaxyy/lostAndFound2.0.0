@@ -1,0 +1,19 @@
+<div class="main">
+  <div class="title text-center">
+      <span>我要留言</span>
+  </div>
+  <div class="leave-body">
+    <div class="row">
+      <div>
+        <img src="http://temp.im/50x50" />
+        <span class="font-color-cyan">一致小白兔:</span>
+      </div>
+    </div>
+    <div class="row">
+      <textarea cols="30" rows="8" [(ngModel)]="testValue"></textarea>
+    </div>
+    <div class="row text-center">
+      <button class="btn btn-danger" (click)="publishMessage()">发表留言</button>
+    </div>
+  </div>
+</div>

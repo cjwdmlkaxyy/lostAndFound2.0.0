@@ -1,0 +1,23 @@
+<!--<div>
+  <ul class="pagination">
+    <li (click)="prevPage()">
+      <a href="javascript:;" title="上一页"><span class="glyphicon glyphicon-menu-left"></span></a>
+    </li>
+    <li class="pages" *ngIf="pages[0] !== 1"
+        (click)="firstPage()">1</li>
+    <li *ngIf="pages[0] !== 1">...</li>
+    <li class="pages" *ngFor="let x of pages"
+        (click)="changePage(x)"
+        [ngClass]="currentPage === x ? 'active' : ''"
+    >{{x}}</li>
+    <li *ngIf="pages[pages.length-1] !== totalPage">...</li>
+    <li class="pages" *ngIf="pages[pages.length-1] !== totalPage"
+        (click)="lastPage()">{{totalPage}}</li>
+    <li (click)="nextPage()">
+      <a href="javascript:;" title="下一页"><span class="glyphicon glyphicon-menu-right"></span></a>
+    </li>
+  </ul>
+</div>-->
+<nz-pagination [nzPageIndex]="pageIndex" [nzTotal]="totalNum"
+               [nzPageSize]="pageSize" (nzPageIndexChange)="changeData($event)"
+></nz-pagination>

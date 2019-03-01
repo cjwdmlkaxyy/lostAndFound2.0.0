@@ -9,7 +9,7 @@ import {LoginService} from '../../service/login.service';
 @Component({
   selector: 'app-find-sth',
   templateUrl: './find-sth.component.html',
-  styleUrls: ['../lost-sth/lost-sth.component.scss']
+  styleUrls: ['../lost-sth/lost-sth.component.scss','../home/home.component.scss']
 })
 
 
