@@ -10,6 +10,12 @@
   padding: 0;
   width: 100vw;
   overflow-x: hidden;
+  min-width:1000px;
+}
+
+.container{
+  width:1200px !important;
+  max-width:none;
 }
 
 /*

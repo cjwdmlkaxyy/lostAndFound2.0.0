@@ -21,14 +21,14 @@
 
   .news{
     //height:800px;
-    border: 1px yellow solid;
-    padding-top:50px;
+    padding-top:20px;
     overflow: hidden;
   }
   .infos-item{
     width:40%;
     height:250px;
-    border:1px greenyellow solid;
+    //background-color: rgba(108, 255, 183, 0.2);
+    border:1px rgba($basicColor-orange,0.2) solid;
     padding:0;
     cursor:pointer;
     .markLogo{
@@ -46,7 +46,47 @@
     }
   }
 }
+/*background-color find or lost*/
+.bgc-find{
+  background-color:rgba($basicColor-orange,0.5) !important;
+
+}
+
+.bgc-lost{
+  background-color:rgba($basicColor-green,0.5) !important;
+
+}
 
 .right{
   float:right;
+}
+
+.tabBody{
+  padding:15px;
+
+  .row{
+    margin:0;
+  }
+  .col-md-6{
+    margin:0;
+    padding:0;
+  }
+
+  & > .row:first-child{
+    .text-center{
+      border-bottom: 2px orange solid;
+      font-size:20px;
+      font-weight:bolder;
+      padding:5px;
+    }
+
+    .text-left{
+      padding:5px 0 0 10px;
+
+      & .inline-block span:first-child{
+        font-weight: bold;
+        margin-right: 5px;
+      }
+    }
+  }
 }

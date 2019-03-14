@@ -47,39 +47,44 @@
       <span>四川省成都市锦江区仁恒置地广场B座1203室</span>
     </div>
   </div>
-  <div class="leave-word">
-    <div class="row">
-      <div class="text-center">网友留言</div>
+  <div class="row">
+    <div class="leave-word left">
+      <div class="row">
+        <div class="text-center">网友留言</div>
+      </div>
+      <div class="messages">
+        <div class="row">
+          <div>
+            <img src="http://temp.im/50x50" />
+            <span class="font-color-cyan">一致小白兔:</span>
+            <span>我好像看到有人在天府广场上捡到了张身份证，然后就交个了警察</span>
+          </div>
+          <div class="right">2019-02-22 18:00:11</div>
+        </div>
+        <div class="row">
+          <div>
+            <img src="http://temp.im/50x50" />
+            <span class="font-color-cyan">一致小白兔:</span>
+            <span>我好像看到有人在天府广场上捡到了张身份证，然后就交个了警察</span>
+          </div>
+          <div class="right">2019-02-22 18:00:11</div>
+        </div>
+        <div class="row">
+          <div>
+            <img src="http://temp.im/50x50" />
+            <span class="font-color-cyan">一致小白兔:</span>
+            <span>我好像看到有人在天府广场上捡到了张身份证，然后就交个了警察</span>
+          </div>
+          <div class="right">2019-02-22 18:00:11</div>
+        </div>
+        <div class="row text-center">
+          <button class="btn btn-success">更多留言</button>
+          <button class="btn btn-warning" (click)="leaveWords()">我要留言</button>
+        </div>
+      </div>
     </div>
-    <div class="messages">
-      <div class="row">
-        <div>
-          <img src="http://temp.im/50x50" />
-          <span class="font-color-cyan">一致小白兔:</span>
-          <span>我好像看到有人在天府广场上捡到了张身份证，然后就交个了警察</span>
-        </div>
-        <div class="right">2019-02-22 18:00:11</div>
-      </div>
-      <div class="row">
-        <div>
-          <img src="http://temp.im/50x50" />
-          <span class="font-color-cyan">一致小白兔:</span>
-          <span>我好像看到有人在天府广场上捡到了张身份证，然后就交个了警察</span>
-        </div>
-        <div class="right">2019-02-22 18:00:11</div>
-      </div>
-      <div class="row">
-        <div>
-          <img src="http://temp.im/50x50" />
-          <span class="font-color-cyan">一致小白兔:</span>
-          <span>我好像看到有人在天府广场上捡到了张身份证，然后就交个了警察</span>
-        </div>
-        <div class="right">2019-02-22 18:00:11</div>
-      </div>
-      <div class="row text-center">
-        <button class="btn btn-success">更多留言</button>
-        <button class="btn btn-warning">我要留言</button>
-      </div>
+    <div id="leaveWords" class="right">
+      <app-publish-leave-words (listen)="test($event)" [data]="num"></app-publish-leave-words>
     </div>
   </div>
 </div>

@@ -40,14 +40,13 @@
   }
   .news{
     //height:800px;
-    border: 1px yellow solid;
     //padding-top:50px;
     overflow: hidden;
   }
   .infos-item{
     width:40%;
     height:250px;
-    border:1px greenyellow solid;
+    border:1px rgba($basicColor-orange,0.2) solid;
     padding:0;
     cursor:pointer;
     .markLogo{
