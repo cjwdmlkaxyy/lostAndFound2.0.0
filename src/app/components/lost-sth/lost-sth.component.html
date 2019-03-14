@@ -5,46 +5,48 @@
   <div class="seach-block text-left">
     <form class="form-inline">
       <div class="row">
-        <input type="text" class="form-control width-40" placeholder="物品、地点搜索">
-        <button class="btn btn-success" (click)="search()">搜索</button>
+        <input type="text" class="form-control width-40" placeholder="物品搜索" name="goodsSearch"
+               [(ngModel)]="goodsSearch">
+        <button class="btn btn-success" (click)="search(goodsSearch)">搜索</button>
         <div class="inline-block">
           <label>热门搜索:</label>
-          <span class="font-color-blue">身份证</span>
-          <span class="font-color-blue">钱包</span>
-          <span class="font-color-blue">钥匙</span>
-          <span class="font-color-blue">银行卡</span>
-          <span class="font-color-blue">文件</span>
+          <span class="font-color-blue"
+                *ngFor="let i of hotSearch"
+                (click)="search(i.key)">{{i.val}}</span>
         </div>
       </div>
       <div class="row">
-        <label>所属区域:</label>
-        <div class="inline-block">
+        <div>
+          <label>所属区域:</label>
           <span class="font-color-cyan">本市</span>
-          <span class="font-color-cyan">金牛区</span>
-          <span class="font-color-cyan">锦江区</span>
-          <span class="font-color-cyan">青羊区</span>
+          <span class="font-color-cyan"
+                *ngFor="let i of district"
+                (click)="search(i[0])">{{i[1]}}</span>
         </div>
       </div>
       <div class="row">
         <label>物品种类:</label>
         <div class="inline-block">
-          <span class="font-color-cyan font-margin-10">不限</span>
-          <span class="font-color-cyan font-margin-10">钥匙</span>
-          <span class="font-color-cyan font-margin-10">钱包</span>
-          <span class="font-color-cyan font-margin-10">卡类</span>
+          <span class="font-color-cyan font-margin-10"
+                *ngFor="let i of goodsType"
+                (click)="search(i.key)">{{i.val}}</span>
         </div>
       </div>
       <div class="row">
         <label>丢失时间:</label>
-        <input type="text" class="form-control" placeholder="开始时间" autocomplete="off">
-        <input type="text" class="form-control" placeholder="结束时间" autocomplete="off">
+        <nz-date-picker nzPlaceHolder="开始时间" name="startTime"
+                        [(ngModel)]="startTime"
+                        (ngModelChange)="getTimestamp($event,'start')"></nz-date-picker>
+        <nz-date-picker nzPlaceHolder="结束时间"  name="endTime" style="margin-left:20px;"
+                        [(ngModel)]="endTime"
+                        (ngModelChange)="getTimestamp($event,'end')"></nz-date-picker>
       </div>
       <div class="row">
         <label>感谢方式:</label>
         <div class="inline-block">
-          <span class="font-color-cyan">不限</span>
-          <span class="font-color-cyan">发布感谢信</span>
-          <span class="font-color-cyan">重金酬谢</span>
+          <span class="font-color-cyan"
+                *ngFor="let i of thankWay"
+                (click)="search(i.key)">{{i.val}}</span>
         </div>
       </div>
     </form>
@@ -84,7 +86,7 @@
       </div>
     </div>
     <div class="pageComponent text-right" style="padding-top:60px;margin-right:-100px;">
-      <app-common-page></app-common-page>
+      <app-common-page [pageSize]="pageSize" [totalNum]="totalNum" (currentIndex)="changePage($event)"></app-common-page>
     </div>
   </div>
 
