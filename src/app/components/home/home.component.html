@@ -1,4 +1,3 @@
-<!--<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">-->
 <div class="container">
   <div id="carousel" class="carousel" data-ride="carousel">
     <!-- 指示符 -->
@@ -39,7 +38,7 @@
       <p><span class="title-describe">显示最新发布的50条消息，每十分钟更新一次</span></p>
     </div>
     <div class="news row">
-      <div class="col-md-6 infos-item" *ngFor="let x of tags"
+      <div class="infos-item" *ngFor="let x of tags"
            [ngClass]="x.id % 2 !== 0 ? 'right' :''"
            [style.margin-top.px]="20"
            [routerLink]="x.id">

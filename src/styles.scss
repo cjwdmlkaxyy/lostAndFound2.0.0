@@ -1,20 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import "app/publicSource/basicColor";
 
+@media screen and (max-width:1250px){
+  html{
+    //font-size:8px !important;
+  }
+}
+html{
+  font-size:10px;
+}
+
 *{
   font-family: '微软雅黑';
   //overflow-x: hidden;
   outline: none;
-  botton{
-    outline: none;
+  .row{
+    padding:0 !important;
+    margin:0 !important;
   }
 }
 .body{
   margin: 0;
   padding: 0;
-  width: 100vw;
-  overflow-x: hidden;
-  min-width:1000px;
+  width: 100%;
+  //overflow-x: auto;
+  //font-size:10px;
 }
 
 .container{
@@ -26,7 +36,8 @@
 *the css of scroball
 */
 ::-webkit-scrollbar{
-  width:5px;
+  width:7px;
+  height:7px;
   //background-color: $basicColor-green;
 }
 ::-webkit-scrollbar-thumb{
@@ -46,7 +57,7 @@
 
 /*icon css*/
 .icon{
-  margin:0 5px 0 10px;
+  margin:0 0.5rem 0 1rem;
 }
 .icon-success{
   color: #59d66d;

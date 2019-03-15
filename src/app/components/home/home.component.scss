@@ -1,5 +1,7 @@
 @import '../../publicSource/basicColor';
-
+div::before,div::after{
+  display: none;
+}
 .container{
   width:100%;
   text-align: center;
@@ -21,11 +23,16 @@
 
   .news{
     //height:800px;
-    padding-top:20px;
+    padding:20px 0 0 0;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
   .infos-item{
-    width:40%;
+    width:450px;
+    min-width:450px;
     height:250px;
     //background-color: rgba(108, 255, 183, 0.2);
     border:1px rgba($basicColor-orange,0.2) solid;
@@ -58,7 +65,7 @@
 }
 
 .right{
-  float:right;
+  //float:right;
 }
 
 .tabBody{

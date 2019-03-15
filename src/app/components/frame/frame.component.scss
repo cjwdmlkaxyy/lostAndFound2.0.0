@@ -1,14 +1,26 @@
 @import "../../publicSource/basicColor";
-.navbar{
+.header{
+  width:  100%;
+  min-width: 1300px;
+  height: 64px;
   background-color: #00816e;
-  width:100%;
-  min-width:1500px;
-  height:64px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 99999;
+  padding:0 50px 0 100px;
+  box-sizing: border-box;
 }
-
+.navbar11{
+  height:64px;
+  width:800px !important;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 .navbar-center{
-  width:80%;
-  margin-left:10%;
+  width:1300px;
   padding:0;
 }
 .nav{
@@ -19,7 +31,8 @@
     float:left;
     a{
       color:#fff;
-      font-size:22px;
+      font-size: 22px;
+      padding:9.5px 15px;
       &:hover{
         background-color: #0ca386;
       }
@@ -29,11 +42,7 @@
       &:active{
         background-color: #0ca386;
       }
-      /*&:link{
-        background-color: #0ca386;
-      }*/
     }
-
   }
 }
 .nav-margin{
@@ -41,29 +50,52 @@
 }
 .active{
   background-color: #0ca386;
-  //color:#03A533;
+}
+.user-infos{
+  width: 400px;
+  min-width: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.content{
+  display: flex;
+  padding-top:100px;
 }
 
 .footer{
   width:100%;
+  min-width:1300px;
+  padding-top: 200px;
+  box-sizing: border-box;
+}
+.footer-bgImg{
   background: url("../../../assets/img/footerbg1.jpg");
   //background-position: center center;
   background-attachment: fixed;
   background-size:100% 100%;
 }
-
-.footer .footer-main{
-  margin-top:150px;
+.footer-bgColor{
   background-color:rgba($basicColor-seniorGray,0.85);
-  padding:40px 320px 30px;
+  padding:50px 0;
+  box-sizing: border-box;
+}
+
+.footer .container{
+  display:flex;
+  flex-direction: column;
   color:$basicColor-gray;
 
   .main div{
-    margin-bottom:10px;
+    font-size:15px;
   }
 
   .row:nth-child(2){
     padding:5px 50px 0 50px;
+    box-sizing: border-box;
 
     span{
       margin:auto 10px !important;
@@ -73,5 +105,4 @@
   span{
     margin:auto 15px;
   }
-
 }

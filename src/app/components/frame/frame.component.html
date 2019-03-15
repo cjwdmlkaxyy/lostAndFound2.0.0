@@ -1,69 +1,67 @@
-<div>
-  <nav class="navbar navbar-dark navbar-fixed-top">
-    <div class="navbar-center">
-        <div class="col-md-12 row">
-          <div class="col-md-2">
-            <img src="###" width="169px" height="64px" class="visible-xs-8  hidden-md">
-          </div>
-          <div class="col-md-6">
-            <ul class="nav navbar-nav nav-margin">
-              <li class="li" routerLinkActive="active"><a routerLink="./index">首页</a></li>
-              <li class="li" routerLinkActive="active"><a routerLink="./lostSth">寻物</a></li>
-              <li class="li" routerLinkActive="active"><a routerLink="./findSth">招领</a></li>
-              <li class="li" routerLinkActive="active"><a routerLink="./publishNews">发布信息</a></li>
-              <li class="li" routerLinkActive="active"><a routerLink="./aboutUs">关于我们</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <img src="###" width="80px" height="60px">
-            <span routerLink="/login">[登录]</span>
-            <span>所在城市：四川省成都市</span>
-            <span>[切换城市]</span>
-          </div>
-      </div>
-    </div>
+<header class="header">
+  <div class="nav_detail">
+    <img src="http://placehold.it/169x64" width="169px" height="64px">
+  </div>
+  <nav class="navbar11">
+    <ul class="nav nav-margin">
+      <li class="li" routerLinkActive="active"><a routerLink="./index">首页</a></li>
+      <li class="li" routerLinkActive="active"><a routerLink="./lostSth">寻物</a></li>
+      <li class="li" routerLinkActive="active"><a routerLink="./findSth">招领</a></li>
+      <li class="li" routerLinkActive="active"><a routerLink="./publishNews">发布信息</a></li>
+      <li class="li" routerLinkActive="active"><a routerLink="./aboutUs">关于我们</a></li>
+    </ul>
   </nav>
-</div>
-<div class="container" style="margin-top:70px;">
-  <router-outlet></router-outlet>
-</div>
-<div class="footer">
-  <footer class="footer-main">
-    <div class="main">
-      <div class="row">友情链接:</div>
-      <div class="row">
-        <div>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
+  <div class="user-infos">
+    <img src="http://placehold.it/80x60" width="80px" height="60px">
+    <span routerLink="/login">[登录]</span>
+    <span>所在城市：四川省成都市</span>
+    <span>[切换城市]</span>
+  </div>
+</header>
+<content class="content">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</content>
+<footer class="footer">
+  <div class="footer-bgImg">
+    <div class="footer-bgColor">
+      <div class="container">
+        <div class="row">友情链接:</div>
+        <div class="row text-center">
+          <div>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+          </div>
+          <div>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+            <span>中国拾物招领网</span>
+          </div>
         </div>
-        <div>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
-          <span>中国拾物招领网</span>
+        <div class="text-center">
+          <span>关于我们</span>
+          <span routerLink="./statement">网站声明</span>
         </div>
-      </div>
-      <div class="text-center">
-        <span>关于我们</span>
-        <span routerLink="./statement">网站声明</span>
-      </div>
-      <div class="text-center">
-        <span>Made By 四川轻化工大学 计算机学院 计算机科学与技术20156班 陈金燕</span>
+        <div class="text-center">
+          <span>Made By 四川轻化工大学 计算机学院 计算机科学与技术20156班 陈金燕</span>
+        </div>
       </div>
     </div>
-  </footer>
-</div>
+  </div>
+</footer>
+
+
