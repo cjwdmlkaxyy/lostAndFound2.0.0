@@ -10,7 +10,7 @@ div::before,div::after{
   width:100%;
 }
 
-.container .newest{
+.newest{
   padding-top:100px;
   .title{
     color:$basicColor;
@@ -20,37 +20,36 @@ div::before,div::after{
   .title-describe{
     color:$basicColor-gray;
   }
-
-  .news{
-    //height:800px;
-    padding:20px 0 0 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+}
+.news{
+  //height:800px;
+  padding:20px 0 0 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.infos-item{
+  width:450px;
+  min-width:450px;
+  height:250px;
+  //background-color: rgba(108, 255, 183, 0.2);
+  border:1px rgba($basicColor-orange,0.2) solid;
+  padding:0;
+  cursor:pointer;
+  .markLogo{
+    float:right;
+    color:#fff;
+    width:50px;
+    text-align: center;
   }
-  .infos-item{
-    width:450px;
-    min-width:450px;
-    height:250px;
-    //background-color: rgba(108, 255, 183, 0.2);
-    border:1px rgba($basicColor-orange,0.2) solid;
-    padding:0;
-    cursor:pointer;
-    .markLogo{
-      float:right;
-      color:#fff;
-      width:50px;
-      text-align: center;
-    }
-    .find{
-      background-color: $basicColor-orange;
-    }
-    .lost{
-      background-color: $basicColor-green;
+  .find{
+    background-color: $basicColor-orange;
+  }
+  .lost{
+    background-color: $basicColor-green;
 
-    }
   }
 }
 /*background-color find or lost*/

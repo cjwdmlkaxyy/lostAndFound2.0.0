@@ -52,13 +52,16 @@
   background-color: #0ca386;
 }
 .user-infos{
-  width: 400px;
-  min-width: 400px;
+  width: 350px;
+  min-width: 330px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: nowrap;
   align-items: center;
+  & img, & span{
+    cursor: pointer;
+  }
 }
 
 .content{

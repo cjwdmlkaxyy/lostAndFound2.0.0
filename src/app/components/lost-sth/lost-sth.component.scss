@@ -25,46 +25,6 @@
   width:40%;
 }
 
-
-/*
-*the css of news lists
-*/
-.news-block{
-  .title{
-    color:$basicColor;
-    font-weight:bold;
-    font-size:30px;
-  }
-  .title-describe{
-    color:$basicColor-gray;
-  }
-  .news{
-    //height:800px;
-    //padding-top:50px;
-    overflow: hidden;
-  }
-  .infos-item{
-    width:40%;
-    height:250px;
-    border:1px rgba($basicColor-orange,0.2) solid;
-    padding:0;
-    cursor:pointer;
-    .markLogo{
-      float:right;
-      color:#fff;
-      width:50px;
-      text-align: center;
-    }
-    .find{
-      background-color: $basicColor-orange;
-    }
-    .lost{
-      background-color: $basicColor-green;
-
-    }
-  }
-}
-
 .right{
   float:right;
 }

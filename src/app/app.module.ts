@@ -21,6 +21,7 @@ import {CheckValueDirective} from './directive/check-value.directive';
 import { StatementComponent } from './components/statement/statement.component';
 import { PublishLeaveWordsComponent } from './components/publish-leave-words/publish-leave-words.component';
 import { CommonPageComponent } from './components/common-page/common-page.component';
+import { SwitchCityComponent} from './components/switch-city/switch-city.component';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -39,6 +40,7 @@ registerLocaleData(zh);
     LostSthComponent,
     PublishNewsComponent,
     FrameComponent,
+    SwitchCityComponent,
     HighlightDirective,
     UnlessDirective,
     ExponentialStrengthPipe,
