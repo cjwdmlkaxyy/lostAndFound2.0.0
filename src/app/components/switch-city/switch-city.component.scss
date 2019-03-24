@@ -1,0 +1,62 @@
+@mixin ulStyle{
+  display: flex;
+  ul{
+    padding:0;
+    margin:0;
+    li{
+      list-style: none;
+      float:left;
+      margin:0 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  padding-top: 200px;
+  box-sizing: border-box;
+}
+.search-tool{
+  width:100%;
+  padding:10px;
+  box-sizing:border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f2f2;
+  border: 1px #e0dfdf solid
+}
+
+.hotCity{
+  @include ulStyle;
+}
+
+.search-cities{
+  margin-top: 10px;
+  .cities{
+    .header{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height:30px;
+      width:70px;
+      padding:0;
+      background: #d4d4d4;
+
+      label{
+        font-weight: bold;
+        color: #333;
+        padding:0 !important;
+        margin:0 !important;
+      }
+    }
+
+    @include ulStyle;
+    width:100%;
+    align-items: center;
+    background: #efefef;
+    border: 1px #f5e3e3 solid;
+  }
+}
+

@@ -14,6 +14,7 @@
 .navbar11{
   height:64px;
   width:800px !important;
+  min-width:700px !important;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -28,11 +29,15 @@
   display: flex;
   justify-content: space-around;
   .li{
-    float:left;
+    //float:left;
+    width:20%;
+    height:100%;
+    text-align: center;
     a{
       color:#fff;
       font-size: 22px;
-      padding:9.5px 15px;
+      padding-top:20px !important;
+      height:64px;
       &:hover{
         background-color: #0ca386;
       }
@@ -45,23 +50,17 @@
     }
   }
 }
-.nav-margin{
-  margin-top:14px;
-}
 .active{
   background-color: #0ca386;
 }
 .user-infos{
-  width: 350px;
-  min-width: 330px;
+  width: 400px;
+  min-width: 400px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: nowrap;
   align-items: center;
-  & img, & span{
-    cursor: pointer;
-  }
 }
 
 .content{

@@ -2,12 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import { HttpRequestService } from '../../service/http-request.service';
 import 'rxjs'
 
-import { PublicDateService } from './public-date.service';
+import { PublicDateService } from '../../service/public-date.service';
 
 @Component({
   selector: 'app-lost-sth',
   templateUrl: './lost-sth.component.html',
-  styleUrls: ['./lost-sth.component.scss', '../home/home.component.scss']
+  styleUrls: ['./lost-sth.component.scss','../home/home.component.scss']
 })
 export class LostSthComponent implements OnInit {
 

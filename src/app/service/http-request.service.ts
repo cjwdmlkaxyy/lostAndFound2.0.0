@@ -11,7 +11,7 @@ export class HttpRequestService{
     token: localStorage.getItem('token')
   };
   // urlFront = 'http://192.168.2.28:8085/';//本地服务
-  urlFront = 'http://144.202.49.116:8085/';
+  urlFront = 'http://47.102.139.16:8082/';
 
   constructor(public http: HttpClient){}
 
@@ -36,5 +36,21 @@ export class HttpRequestService{
       })
     });
   }
+
+  /*
+  * get all Province
+  * */
+  getProvence(): Observable<any>{
+    return this.http.get(this.urlFront + 'goods/findAllProvince');
+  }
+
+  /*
+  * get cities of province
+ * */
+  getCities(val): Observable<any>{
+     // return this.http.get(this.urlFront + 'goods/findCityByProvince/' + val);
+     return this.http.get(this.urlFront + 'goods/findAreaByCity/' + '510100');
+  }
+
 
 }

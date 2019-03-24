@@ -1,1 +1,28 @@
-switch city
+<div class="container">
+  <div id="topImg">
+    <img src="http://static.runoob.com/images/mix/img_fjords_wide.jpg" class="img-top">
+  </div>
+  <div class="main">
+    <div class="search-tool">
+      <div class="hotCity">
+        <label style="color:red;">热门城市</label>
+        <ul>
+          <li *ngFor="let item of hotCity">{{item.val}}</li>
+        </ul>
+      </div>
+      <div>
+        <span style="font-weight:bold;color:#333;">全国城市列表（不分先后顺序）</span>
+      </div>
+    </div>
+    <div class="search-cities">
+      <div class="cities">
+        <div class="header">
+          <label>直辖市</label>
+        </div>
+        <ul>
+          <li *ngFor="let item of directlyCity">{{item.val}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

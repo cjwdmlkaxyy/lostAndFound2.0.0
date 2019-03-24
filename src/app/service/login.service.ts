@@ -10,7 +10,7 @@ export class LoginService {
   }
 
   // urlFront = 'http://192.168.2.28:8081';//本地服务
-  urlFront = 'http://144.202.49.116:8081';
+  urlFront = 'http://47.102.139.16:8081';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': undefined
