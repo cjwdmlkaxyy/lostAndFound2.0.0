@@ -18,12 +18,12 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) { }
 
-  loginInfos:object = {};
+  loginInfos: object = {};
 
   ngOnInit() {
     this.loginInfos = {
-      username:'',
-      password:''
+      username: '',
+      password: ''
     };
     $('#login').fadeIn(200);
   }
@@ -32,8 +32,10 @@ export class LoginComponent implements OnInit {
   login(){
     this.loginService.login(this.loginInfos).subscribe(res => {
       console.log(res);
-      localStorage.setItem('token', res.token);
-      console.log(localStorage.getItem('token'));
+      console.log(this.loginInfos);
+      localStorage.setItem('token', res.token); // 保存token
+      localStorage.setItem('userName', this.loginInfos.username);
+      console.log(localStorage.getItem('userInfos'));
       this.router.navigate(['/frame/index']);
     }, error => {
         console.log(error);

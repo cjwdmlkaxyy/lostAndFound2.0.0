@@ -18,6 +18,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'frame', component: FrameComponent,
   children: [
+    {path:'', redirectTo: 'index', pathMatch: 'full'},
     {path: 'index', component: HomeComponent},
     {path: 'index/:id', component: NewDetialsComponent},
     {path: 'findSth', component: FindSthComponent},

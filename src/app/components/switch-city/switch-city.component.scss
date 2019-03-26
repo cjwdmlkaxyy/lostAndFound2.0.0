@@ -1,13 +1,20 @@
 @mixin ulStyle{
   display: flex;
   ul{
-    padding:0;
+    padding:0 0 0 15px;
     margin:0;
     li{
       list-style: none;
       float:left;
       margin:0 10px;
       cursor: pointer;
+    }
+
+    li:hover{
+      color: #0ca386;
+    }
+    li:active{
+      color:#3372E3;
     }
   }
 }
@@ -33,16 +40,18 @@
 }
 
 .search-cities{
-  margin-top: 10px;
+  margin-top: 30px;
   .cities{
+    margin-bottom:15px;
+    height:42px;
     .header{
+      height:100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      height:30px;
-      width:70px;
-      padding:0;
+      padding:5px 10px;
       background: #d4d4d4;
+      white-space: nowrap;
 
       label{
         font-weight: bold;

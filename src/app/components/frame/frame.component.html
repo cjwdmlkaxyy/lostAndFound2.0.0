@@ -13,9 +13,24 @@
   </nav>
   <div class="user-infos">
     <img src="../../../assets/img/user.jpg" style="border-radius:50%;width:60px;height:60px;">
-    <span routerLink="/login">[登录]</span>
-    <span>所在城市：四川省成都市</span>
-    <span routerLink="./switchCity">[切换城市]</span>
+    <div>
+      <div *ngIf="userName === '' || userName === null"><span routerLink="/login">点击登录</span></div>
+      <div *ngIf="userName !== ''">
+        <nz-dropdown [nzClickHide]="false" [nzTrigger]="'click'">
+          <span nz-dropdown style="color:#fff;cursor:pointer;">{{userName}}</span>
+          <ul nz-menu style="z-index:1000;">
+            <li nz-menu-item>
+              <a routerLink="/login">退出登录</a>
+            </li>
+            <li nz-menu-item>
+              <a>我的账户</a>
+            </li>
+          </ul>
+        </nz-dropdown>
+      </div>
+    </div>
+    <span style="color:#fff;text-overflow:ellipsis;width:210px;overflow: hidden;">所在城市：{{loction.province}}{{loction.city}}</span>
+    <span routerLink="./switchCity" style="color:#9decff;cursor:pointer;">[切换城市]</span>
   </div>
 </header>
 <content class="content">

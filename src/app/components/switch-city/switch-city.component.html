@@ -20,7 +20,19 @@
           <label>直辖市</label>
         </div>
         <ul>
-          <li *ngFor="let item of directlyCity">{{item.val}}</li>
+          <li *ngFor="let item of directlyCity"
+              (click)="selectCity(item.key)">{{item.val}}</li>
+        </ul>
+      </div>
+      <!--load cities-->
+      <div class="cities" *ngFor="let item of cities">
+        <div class="header">
+          <label for="">{{item.name}}</label>
+        </div>
+        <ul>
+          <li *ngFor="let x of item.val"
+              (click)="selectCity(x,item.name)"
+          >{{x[1]}}</li>
         </ul>
       </div>
     </div>

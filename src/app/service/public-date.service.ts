@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpRequestService} from './http-request.service';
 
 /*定义接口*/
 interface type {
@@ -33,36 +34,85 @@ export class PublicDateService{
    ];
 
    thankWay = [
-     {key:'', val:'不限'},
-     {key:0, val:'发布感谢信'},
-     {key:1, val:'重金酬谢'},
+     {key: '', val: '不限'},
+     {key: 0, val: '发布感谢信'},
+     {key: 1, val: '重金酬谢'},
    ];
 
    hotSearch = [
-     {key:0, val: '身份证'},
-     {key:1, val: '银行卡'},
-     {key:2, val: '钥匙'},
-     {key:3, val: '钱包'},
-     {key:4, val: '背包'},
+     {key: 0, val: '身份证'},
+     {key: 1, val: '银行卡'},
+     {key: 2, val: '钥匙'},
+     {key: 3, val: '钱包'},
+     {key: 4, val: '背包'},
    ];
 
    hotCity = [
-     {key:'110000', val: '北京'},
-     {key:'310000', val: '上海'},
-     {key:2, val: '广州'},
-     {key:3, val: '深圳'},
-     {key:4, val: '成都'},
-     {key:5, val: '杭州'},
-     {key:6, val: '南京'},
+     {key: '110000', val: '北京'},
+     {key: '310000', val: '上海'},
+     {key: 2, val: '广州'},
+     {key: 3, val: '深圳'},
+     {key: 4, val: '成都'},
+     {key: 5, val: '杭州'},
+     {key: 6, val: '南京'},
    ];
 
-    directlyCity = [
-      {key: '110000', val: '北京市'},
-      {key: '310000', val: '上海市'},
-      {key: '120000', val: '天津市'},
-      {key: '500000', val: '重庆市'},
-    ];
+  directlyCity = [
+    {key: '110000', val: '北京市'},
+    {key: '310000', val: '上海市'},
+    {key: '120000', val: '天津市'},
+    {key: '500000', val: '重庆市'},
+  ];
+
+  directlyCities = ['北京市', '上海市', '天津市', '重庆市'];
+
+  user = ''; // 用户信息
+
+  switchCity = {
+    province: '',
+    city: '',
+    cityId: ''
+  };
+
+  getProvinces: Array<any> = []; // 得到所有的省
+  getAllCities: Array<any> = []; // 得到所有城市,除直辖市外
+
+  constructor(public httpRequest: HttpRequestService) {}
+
+  /*
+  * get all province
+  * */
+  getProvince() {
+    this.httpRequest.getProvence().subscribe(res => {
+      let province = JSON.parse(res.data);
+      console.log(province);
+      for (let i = 0; i < province.length; i++) {
+        if (this.directlyCities.indexOf(province[i][1]) === -1) {
+          this.getCities(province[i]);
+          this.getProvinces = province[i];
+        }
+      }
+    }, err => {
+      console.log(err);
+    });
+  }
+
+  /*
+  * get cities of province
+  * */
+  getCities(province) {
+    this.httpRequest.getCities(province[0]).subscribe( res => {
+      let city = JSON.parse(res.data);
+      // console.log(city);
+      let provinceObj = {
+        name: province[1],
+        val: city
+      };
+      this.getAllCities.push(provinceObj);
+    }, err => {
+      console.log(err);
+    });
+  }
 
 
-  constructor(){}
 }

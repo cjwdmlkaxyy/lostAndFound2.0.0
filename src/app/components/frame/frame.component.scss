@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   position: fixed;
-  z-index: 99999;
+  z-index: 999;
   padding:0 50px 0 100px;
   box-sizing: border-box;
 }
@@ -61,6 +61,7 @@
   justify-content: space-around;
   flex-wrap: nowrap;
   align-items: center;
+  white-space: nowrap;
 }
 
 .content{
@@ -106,5 +107,17 @@
 
   span{
     margin:auto 15px;
+  }
+}
+
+/*
+* the css of ant dropdown
+*/
+.ant-dropdown-menu-item > a, .ant-dropdown-menu-submenu-title > a {
+  color: rgba(62, 52, 52, 0.65);
+
+  &:hover{
+    color: rgba(34, 193, 106, 0.65);
+    text-decoration-line: none;
   }
 }
