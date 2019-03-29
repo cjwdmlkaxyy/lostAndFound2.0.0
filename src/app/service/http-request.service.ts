@@ -19,8 +19,8 @@ export class HttpRequestService{
   /*
   * get the district by cityId
   * */
-  getArea(): Observable<any> {
-    return this.http.get(this.urlFront + 'goods/findAreaByCity/' + '510100');
+  getArea(val): Observable<any> {
+    return this.http.get(this.urlFront + 'goods/findAreaByCity/' + val);
   }
 
   /*

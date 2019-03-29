@@ -31,6 +31,7 @@
         </div>
         <ul>
           <li *ngFor="let x of item.val"
+              [ngClass]="x[0] == currentCity ? 'currentCity' : ''"
               (click)="selectCity(x,item.name)"
           >{{x[1]}}</li>
         </ul>

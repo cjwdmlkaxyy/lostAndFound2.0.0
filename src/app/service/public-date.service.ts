@@ -2,11 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService} from './http-request.service';
 
 /*定义接口*/
-interface type {
-  key: number,
-  val: string
-}
-
 
 @Injectable({
   providedIn: 'root'
@@ -65,14 +60,6 @@ export class PublicDateService{
   ];
 
   directlyCities = ['北京市', '上海市', '天津市', '重庆市'];
-
-  user = ''; // 用户信息
-
-  switchCity = {
-    province: '',
-    city: '',
-    cityId: ''
-  };
 
   getProvinces: Array<any> = []; // 得到所有的省
   getAllCities: Array<any> = []; // 得到所有城市,除直辖市外
