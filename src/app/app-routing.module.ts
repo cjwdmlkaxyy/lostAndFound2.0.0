@@ -11,6 +11,7 @@ import {FrameComponent} from './components/frame/frame.component';
 import {NewDetialsComponent} from './components/new-detials/new-detials.component';
 import {StatementComponent} from './components/statement/statement.component';
 import {SwitchCityComponent} from './components/switch-city/switch-city.component';
+import {UsersComponent} from './components/users-account/users.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/frame/index', pathMatch: 'full'},
@@ -28,7 +29,8 @@ const routes: Routes = [
     {path: 'aboutUs', component: AboutUsComponent},
     {path: 'publishNews', component: PublishNewsComponent},
     {path: 'statement', component: StatementComponent},
-    {path: 'switchCity', component: SwitchCityComponent}
+    {path: 'switchCity', component: SwitchCityComponent},
+    {path: 'users', component: UsersComponent},
   ]},
 ];
 

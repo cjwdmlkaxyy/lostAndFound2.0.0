@@ -16,14 +16,14 @@
     <div>
       <div *ngIf="userName === '' || userName === null"><span routerLink="/login" style="color:#ffa730;font-weight: bold;">点击登录</span></div>
       <div *ngIf="userName !== ''">
-        <nz-dropdown [nzClickHide]="false" [nzTrigger]="'click'">
+        <nz-dropdown [nzTrigger]="'click'">
           <span nz-dropdown style="color:#fff;cursor:pointer;">{{userName}}</span>
           <ul nz-menu style="z-index:1000;">
             <li nz-menu-item>
               <a routerLink="/login" (click)="logOut()">退出登录</a>
             </li>
             <li nz-menu-item>
-              <a>我的账户</a>
+              <a routerLink="users">我的账户</a>
             </li>
           </ul>
         </nz-dropdown>

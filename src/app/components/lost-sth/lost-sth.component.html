@@ -52,34 +52,34 @@
     </form>
   </div>
   <div class="news-block">
-    <div class="news row">
-      <div class="infos-item" *ngFor="let x of tags"
-           [ngClass]="x.id % 2 !== 0 ? 'right' :''"
-           [style.margin-top.px]="20"
-           [routerLink]="x.id">
-        <div class="markLogo" [ngClass]="x.category == 1 ? 'find' : 'lost'">
-          <span *ngIf="x.category == 1">寻物</span>
-          <span *ngIf="x.category == 2">招领</span>
-        </div>
-        <div class="tabBody">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="http://temp.im/212x150">
-            </div>
-            <div class="col-md-6" style="padding-left:15px;">
-              <div class="text-center">身份证丢了</div>
-              <div class="text-left">
-                <div class="inline-block"><span>丢失类型:</span><span>证件类</span></div>
-                <div class="inline-block"><span>丢失地点:</span><span>四川省成都市天府广场附近</span></div>
-                <div class="inline-block"><span>丢失时间:</span><span>2019-02-12</span></div>
-                <div class="inline-block"><span>发布者:</span><span>小白兔好好吃</span></div>
+    <div class="news">
+      <div class="messages" *ngFor="let x of tags">
+        <div class="message-content">
+          <div class="m-img">
+            <img src="http://temp.im/212x150">
+          </div>
+          <div class="m-right">
+            <div class="m-tag">
+              <div [ngClass]="x.category == 1 ? 'find' : 'lost'">
+                <span *ngIf="x.category == 1">寻物</span>
+                <span *ngIf="x.category == 2">招领</span>
               </div>
             </div>
+            <div class="m-main-information">
+              <div class="m-title"><span>身份证丢了</span></div>
+              <div class="line"><span class="sr-only">这是一根线</span></div>
+              <div class="m-margin-bottom"><span>丢失类型:</span><span>证件类</span></div>
+              <div class="m-margin-bottom"><span>丢失地点:</span><span>四川省成都市天府广场附近</span></div>
+              <div class="m-margin-bottom"><span>丢失时间:</span><span>2019-02-12</span></div>
+              <div class="m-margin-bottom"><span>发布者:</span><span>小白兔好好吃</span></div>
+            </div>
           </div>
-          <div class="row text-left" style="margin-top:10px;">
-            <span style="font-weight: bold;">描述:</span><span>地方计费hi偶尔费偶尔无人地方快结束了时间是让人触不及防的东西，分解费访问对对对对对对多多</span>
+        </div>
+        <div class="m-footer">
+          <div>
+            <span style="font-weight: bold;">描述:</span><span style="line-height: 22px;">地方计费hi偶尔费偶尔无人地方快结束了时间是让人触不及防的东西，分解费访问对对对对对对多多</span>
           </div>
-          <div class="row text-right" style="margin-top:5px;">
+          <div style="padding-right:5px;">
             <span>发布时间:</span><span>2019-02-12 18:00:03</span>
           </div>
         </div>
