@@ -19,8 +19,9 @@
                 </ng-container>
                 <ng-container *ngIf="css.userName == 'has-error'">
                   <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
+                  <span *ngIf="userNameRepeat">亲，该账号已经被人注册了哦！</span>
                   <span *ngIf="registerInfos.account == null || registerInfos.account ==''">亲，登录账号不能为空哦！</span>
-                  <span *ngIf="registerInfos.account != null && registerInfos.account !=''">亲，输入有误哦！登录账号可由数组、字母或下划线组成（4-20）位字符</span>
+                  <span *ngIf="registerInfos.account != null && registerInfos.account !='' && !userNameRepeat">亲，输入有误哦！登录账号可由数组、字母或下划线组成（4-20）位字符</span>
                 </ng-container>
             </div>
 
@@ -85,13 +86,14 @@
                 <input type="text" class="form-control" autocomplete="off"
                        (blur)="checkPhone(registerInfos.phoneNum)"
                        [(ngModel)]="registerInfos.phoneNum" name="phoneNum">
-              <ng-container *ngIf="css.userName == 'has-success'">
+              <ng-container *ngIf="css.phone == 'has-success'">
                 <span class="glyphicon glyphicon-ok-sign icon icon-success"></span>
               </ng-container>
               <ng-container *ngIf="css.phone == 'has-error'">
                 <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
+                <span *ngIf="phoneNumRepeat">亲，该号码已经被注册过了！</span>
                 <span *ngIf="registerInfos.phoneNum == null || registerInfos.phoneNum ==''">亲，电话号码怎么不填呢！</span>
-                <span *ngIf="registerInfos.phoneNum != null && registerInfos.phoneNum !=''">亲，输入有误哦！</span>
+                <span *ngIf="registerInfos.phoneNum != null && registerInfos.phoneNum !='' && !phoneNumRepeat">亲，输入有误哦！</span>
               </ng-container>
             </div>
 
@@ -111,8 +113,9 @@
               </ng-container>
               <ng-container *ngIf="css.email == 'has-error'">
                 <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
+                <span *ngIf="emailRepeat">该邮箱已经被注册过了！</span>
                 <span *ngIf="registerInfos.email == null || registerInfos.email ==''">人家怎么Email你呢！</span>
-                <span *ngIf="registerInfos.email != null && registerInfos.email !=''">亲，输入有误哦！</span>
+                <span *ngIf="registerInfos.email != null && registerInfos.email !='' && !emailRepeat">亲，输入有误哦！</span>
               </ng-container>
             </div>
 

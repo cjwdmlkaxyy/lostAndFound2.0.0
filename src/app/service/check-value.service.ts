@@ -16,6 +16,24 @@ export class CheckValueService {
     } else {
       return false;
     }
+  }
 
+  checkPhoneNum(val) {
+    let res = /^1[3|4|5|7|8][0-9]\d{8}$/
+    if(res.test(val)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  checkEmail(val){
+    let res = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+    if(res.test(val)){
+      return true;
+    }else{
+      console.log('false');
+      return false;
+    }
   }
 }

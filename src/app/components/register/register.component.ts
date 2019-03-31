@@ -40,6 +40,9 @@ export class RegisterComponent implements OnInit {
     email:''
   };
 
+  userNameRepeat = false;
+  phoneNumRepeat = false;
+  emailRepeat = false;
 
 
   ngOnInit() {
@@ -58,39 +61,37 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.Registerhttp.register(this.registerInfos);
-    this.router.navigate(['login']);
+    this.Registerhttp.register(this.registerInfos).subscribe( res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    });
+    // this.router.navigate(['login']);
   }
 
   /*校验登录账号是否正确输入*/
   checkUserName(name){
     let flag = this.CheckValue.checkUserName(name);
-    if(name == '' || name == null){
+    if(name == '' || name == null || !flag){
       this.css.userName = 'has-error';
-      console.log('不能为空');
       return;
     }
     if(flag){
-      this.css.userName = 'has-success';
-      this.checkIsRepeat('account',name);
-
-    }else{
-      this.css.userName = 'has-error';
+      this.Registerhttp.checkInformation('account',name).subscribe((res: any)=>{
+        if(res.code == '000004'){
+          this.userNameRepeat = true;
+          this.css.userName = 'has-error';
+        }else{
+          this.css.userName = 'has-success';
+        }
+      });
     }
-  }
-
-  /*校验登录账号是否已存在*/
-  checkIsRepeat(flag,info){
-    this.Registerhttp.checkAccount(flag,info).subscribe((res: any)=>{
-      console.log(res);
-    });
   }
 
   /*checkPsd*/
   checkPsd(psd){
     if(psd == '' || psd == null){
       this.css.psd = 'has-error';
-      console.log('不能为空');
       return;
     }
     if(psd.length >= 6){
@@ -121,30 +122,39 @@ export class RegisterComponent implements OnInit {
 
   /*check phone*/
   checkPhone(value){
-    if(value == '' || value == null){
+    let flag = this.CheckValue.checkPhoneNum(value);
+    if(value == '' || value == null || !flag){
       this.css.phone = 'has-error';
-      console.log('不能为空');
       return;
-    }else {
-
     }
-    /*if(value.length >= 6){
-      this.css.phone = 'has-success';
-    }else{
-      this.css.phone = 'has-error';
-    }*/
+    if(flag){
+      this.Registerhttp.checkInformation('phone',value).subscribe( res => {
+        if(res.code === '000004'){
+          this.css.phone = 'has-error';
+          this.phoneNumRepeat = true;
+        }else{
+          this.css.phone = 'has-success';
+        }
+      });
+    }
   }
 
+
   checkEmail(value){
-    if(value == '' || value == null){
+    let flag = this.CheckValue.checkEmail(value);
+    if(value == '' || value == null || !flag){
       this.css.email = 'has-error';
-      console.log('不能为空');
       return;
     }
-    if(value.length >= 6){
-      this.css.email = 'has-success';
-    }else{
-      this.css.email = 'has-error';
+    if(flag){
+      this.Registerhttp.checkInformation('email',value).subscribe( res => {
+        if(res.code === '000004'){
+          this.css.email = 'has-error';
+          this.emailRepeat = true;
+        }else{
+          this.css.email = 'has-success';
+        }
+      })
     }
   }
 
