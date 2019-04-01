@@ -10,15 +10,19 @@
   width:900px;
   height:700px;
   background: rgba(255,255,255,0.6);
+  padding:0;
+  display: flex;
+  flex-direction: column;
 }
 
 .register-title{
+  width:100%;
   font-size:30px;
   background-color: rgba($basicColor-green,0.6);
-  padding:10px;
+  padding:10px 20px;
   color:#fff;
-  .margin50{
-    margin-left:60px;
+  p:nth-child(2){
+    margin-left: 50px;
   }
 }
 
