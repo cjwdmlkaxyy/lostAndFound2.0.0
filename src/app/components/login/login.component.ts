@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../../service/login.service';
-import 'rxjs'
+import 'rxjs';
 import {Router, ActivatedRoute} from '@angular/router';
-import * as $ from 'jquery'
+import * as $ from 'jquery';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers:[LoginService]
+  providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
 
@@ -18,13 +18,12 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) { }
 
-  loginInfos: object = {};
+  loginInfos = {
+    username: '',
+    password: ''
+  };
 
   ngOnInit() {
-    this.loginInfos = {
-      username: '',
-      password: ''
-    };
     $('#login').fadeIn(200);
   }
 
@@ -43,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   /*忘记密码*/
-  forgetPsd(){
+  forgetPsd() {
     console.log(222);
   }
 }

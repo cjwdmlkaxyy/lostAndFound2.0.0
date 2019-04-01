@@ -100,8 +100,10 @@
 
             <div class="row" [className]="none">
                 <label>&nbsp;&nbsp;出生日期:</label>
-                <input type="text" class="form-control" autocomplete="off"
-                     [(ngModel)]="registerInfos.birthday" name="birthday">
+                <nz-demo-date-picker-start-end style="margin: 5px 10px;"
+                    [isShowEndPicker]="false"
+                    (startDateVal)="getStartDate($event)">
+                </nz-demo-date-picker-start-end>
             </div>
             <div class="row has-warning" [className]="css.email">
                 <label>*邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>

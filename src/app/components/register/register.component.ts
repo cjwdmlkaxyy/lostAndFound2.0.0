@@ -6,17 +6,17 @@ import {Router, ActivatedRoute} from '@angular/router';
 /*services*/
 import {CheckValueService} from '../../service/check-value.service';
 
-interface Register {
-  account:number,
-  psd:string,
-  confirmPsd:string,
-  name:string,
-  phoneNum:string,
-  birthday:any,
-  email:any,
-  area:any,
-  realName:string
-}
+/*interface Register {
+  account: number,
+  psd: string,
+  confirmPsd: string,
+  name: string,
+  phoneNum: string,
+  birthday: any,
+  email: any,
+  area: any,
+  realName: string
+}*/
 
 @Component({
   selector: 'app-register',
@@ -33,31 +33,34 @@ export class RegisterComponent implements OnInit {
   registerInfos: any;
   css = {
     userName: '',
-    psd:'',
-    confirmPsd:'',
-    netName:'',
-    phone:'',
-    email:''
+    psd: '',
+    confirmPsd: '',
+    netName: '',
+    phone: '',
+    email: ''
   };
 
   userNameRepeat = false;
   phoneNumRepeat = false;
   emailRepeat = false;
 
+  nowDate = new Date();
+
 
   ngOnInit() {
     this.registerInfos = {
       account: '',
-      psd: "",
-      confirmPsd: "",
-      userName: "",
-      phoneNum: "",
-      birthday: "",
-      email: "",
-      area: "",
-      realName: ""
+      psd: '',
+      confirmPsd: '',
+      userName: '',
+      phoneNum: '',
+      birthday: '',
+      email: '',
+      area: '',
+      realName: ''
     };
 
+    console.log(this.nowDate);
   }
 
   register() {
@@ -70,18 +73,18 @@ export class RegisterComponent implements OnInit {
   }
 
   /*校验登录账号是否正确输入*/
-  checkUserName(name){
+  checkUserName(name) {
     let flag = this.CheckValue.checkUserName(name);
-    if(name == '' || name == null || !flag){
+    if (name === '' || name === null || !flag) {
       this.css.userName = 'has-error';
       return;
     }
-    if(flag){
-      this.Registerhttp.checkInformation('account',name).subscribe((res: any)=>{
-        if(res.code == '000004'){
+    if (flag) {
+      this.Registerhttp.checkInformation('account', name).subscribe((res: any) => {
+        if (res.code === '000004') {
           this.userNameRepeat = true;
           this.css.userName = 'has-error';
-        }else{
+        } else {
           this.css.userName = 'has-success';
         }
       });
@@ -158,31 +161,35 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  registerConfirm(){
-    if(this.css.userName == 'has-error'){
+  registerConfirm() {
+    if (this.css.userName === 'has-error') {
       return;
-    }else if(this.css.psd == 'has-error'){
+    } else if (this.css.psd === 'has-error') {
       return;
-    }else if(this.css.confirmPsd == 'has-error'){
+    } else if (this.css.confirmPsd === 'has-error') {
       return;
-    }else if(this.css.netName == 'has-error'){
+    } else if (this.css.netName === 'has-error') {
       return;
-    }else if(this.css.phone == 'has-error'){
+    } else if (this.css.phone === 'has-error') {
       return;
-    }else if(this.css.email == 'has-error'){
+    } else if (this.css.email === 'has-error') {
       return;
-    }else if(this.css.userName ==''){
+    } else if (this.css.userName === '') {
       this.css = {
         userName: 'has-error',
-        psd:'has-error',
-        confirmPsd:'',
-        netName:'',
-        phone:'has-error',
-        email:'has-error'
+        psd: 'has-error',
+        confirmPsd: '',
+        netName: '',
+        phone: 'has-error',
+        email: 'has-error'
       };
       return;
     }
 
     this.register();
+  }
+
+  getStartDate(e) {
+    console.log(e);
   }
 }

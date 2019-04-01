@@ -23,6 +23,7 @@ import { PublishLeaveWordsComponent } from './components/publish-leave-words/pub
 import { CommonPageComponent } from './components/common-page/common-page.component';
 import { SwitchCityComponent } from './components/switch-city/switch-city.component';
 import { UsersComponent } from './components/users-account/users.component';
+import { NzDemoDatePickerStartEndComponent } from './publicSource/date-picker/nz-date-picker.common';
 
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,7 +52,8 @@ registerLocaleData(zh);
     PublishLeaveWordsComponent,
     CommonPageComponent,
     SwitchCityComponent,
-    UsersComponent
+    UsersComponent,
+    NzDemoDatePickerStartEndComponent
   ],
   imports: [
     BrowserModule,

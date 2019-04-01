@@ -7,7 +7,7 @@ import { Observable, Subject} from 'rxjs';
 
 export class CommunicateWithHeaderService {
   constructor() {}
-  messagesVal: Object;
+  messagesVal: any;
   // 发送消息订阅对象
   private messages = new Subject<any>();
 
