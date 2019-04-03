@@ -66,6 +66,9 @@ export class RegisterComponent implements OnInit {
   register() {
     this.Registerhttp.register(this.registerInfos).subscribe( res => {
       console.log(res);
+      if(res.code === '000000'){
+        this.router.navigate(['login']);
+      }
     }, err => {
       console.log(err);
     });
@@ -132,11 +135,11 @@ export class RegisterComponent implements OnInit {
     }
     if(flag){
       this.Registerhttp.checkInformation('phone',value).subscribe( res => {
-        if(res.code === '000004'){
+        if(res.code === '000000'){
+          this.css.phone = 'has-success';
+        }else{
           this.css.phone = 'has-error';
           this.phoneNumRepeat = true;
-        }else{
-          this.css.phone = 'has-success';
         }
       });
     }
@@ -151,7 +154,7 @@ export class RegisterComponent implements OnInit {
     }
     if(flag){
       this.Registerhttp.checkInformation('email',value).subscribe( res => {
-        if(res.code === '000004'){
+        if(res.code === '000006'){
           this.css.email = 'has-error';
           this.emailRepeat = true;
         }else{
@@ -191,5 +194,17 @@ export class RegisterComponent implements OnInit {
 
   getStartDate(e) {
     console.log(e);
+    let date = new Date(e);
+    let month:any = date.getMonth() + 1;
+    let day:any = date.getDate();
+    if(month < 10){
+      month = '0' + month;
+    }
+    if(day < 10){
+      day = '0' + day;
+    }
+    let birthday = date.getFullYear() + '-' + month + '-' + day;
+    console.log(birthday);
+    this.registerInfos.birthday = birthday;
   }
 }
