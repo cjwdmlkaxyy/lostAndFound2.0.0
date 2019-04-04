@@ -47,7 +47,7 @@ export class PublicDateService{
      {key: '310000', val: '上海'},
      {key: 2, val: '广州'},
      {key: 3, val: '深圳'},
-     {key: 4, val: '成都'},
+     {key: '510100', val: '成都'},
      {key: 5, val: '杭州'},
      {key: 6, val: '南京'},
    ];

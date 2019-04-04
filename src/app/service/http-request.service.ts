@@ -52,5 +52,11 @@ export class HttpRequestService{
      // return this.http.get(this.urlFront + 'goods/findAreaByCity/' + '510100');
   }
 
+  /*
+  * 发布消息
+  * */
+  publishNews(data): Observable<any> {
+    return this.http.post(this.urlFront + 'goods/img/upload', data);
+  }
 
 }

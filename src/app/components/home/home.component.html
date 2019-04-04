@@ -38,7 +38,7 @@
       <p><span class="title-describe">显示最新发布的50条消息，每十分钟更新一次</span></p>
     </div>
     <div class="news">
-      <div class="messages" *ngFor="let x of tags">
+      <div class="messages" *ngFor="let x of tags" [routerLink]="x.id">
         <div class="message-content">
           <div class="m-img">
             <img src="http://temp.im/212x150">

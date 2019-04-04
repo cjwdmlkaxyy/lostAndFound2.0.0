@@ -55,7 +55,20 @@ $color:$basicColor-deepgreen;
 .form-body{
   padding:50px;
   .row{
-    margin-bottom:15px;
+    margin-bottom:15px !important;
+    input[type='text']{
+      height:32px;
+      border: 1px #b9b9b9 solid;
+      border-radius: 5px;
+    }
+    textarea{
+      border: 1px #b9b9b9 solid;
+      border-radius: 5px;
+    }
+    input[type='text']:focus,textarea:focus{
+      border: 1px #11b98a solid;
+      box-shadow: 0 0 3px #11b98a;
+    }
   }
   & label{
     margin-right:10px;
@@ -70,3 +83,57 @@ $color:$basicColor-deepgreen;
 .width-40{
   width:40%;
 }
+
+.radio-circle{
+  display: inline-block;
+  position: relative;
+  line-height:30px;
+
+  input[type="radio"]{
+    width:15px;
+    height:15px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  i{
+    position: absolute;
+    width: 15px;
+    height:15px;
+    left:0;
+    top:5px;
+    border-radius: 50%;
+    border: 1px solid #999;
+  }
+
+  /*设置选中的input样式*/
+  input:checked+i{
+    //background: #fe6d32;
+    border:1px solid #fe6d32;
+    box-shadow: 0 0 3px #fe6d32;
+  }
+  input:checked+i::after{
+    position:absolute;
+    content:'';
+    width:9px;
+    height:9px;
+    background-color: #ff7f11;
+    border-radius: 50%;
+    top:2px;
+    left:2px;
+  }
+}
+
+.btn-success{
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+  width: 140px;
+  font-size: 17px;
+}
+
+.must{
+  color: red;
+}
+

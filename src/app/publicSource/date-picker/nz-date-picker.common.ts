@@ -10,6 +10,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       nzPlaceHolder="Start"
       (ngModelChange)="onStartChange($event)"
       [nzShowToday]="false"
+      [nzPlaceHolder]="'请选择日期'"
     >
     </nz-date-picker>
     <nz-date-picker

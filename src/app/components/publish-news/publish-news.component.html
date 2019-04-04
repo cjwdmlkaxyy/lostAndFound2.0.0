@@ -14,77 +14,70 @@
         <div class="form-body">
           <form class="form-inline">
             <div class="row">
-              <label class="font-color-deepgray">物品种类:</label>
-              <div class="inline-block">
-                <div>
-                  <input type="checkbox" value="">钱包
-                  <input type="checkbox" value="">证件
-                  <input type="checkbox" value="">卡类
-                  <input type="checkbox" value="">章印
-                  <input type="checkbox" value="">钥匙
-                  <input type="checkbox" value="">衣物
-                  <input type="checkbox" value="">手机
-                  <input type="checkbox" value="">首饰
-                </div>
-                <div>
-                  <input type="checkbox" value="">票据
-                  <input type="checkbox" value="">数码
-                  <input type="checkbox" value="">车牌
-                  <input type="checkbox" value="">电脑
-                  <input type="checkbox" value="">包裹
-                  <input type="checkbox" value="">衣物
-                  <input type="checkbox" value="">宠物
-                  <input type="checkbox" value="">其他
+              <label class="font-color-deepgray"><span class="must">*</span>物品种类:</label>
+              <div class="inline-block" style="position:relative; top:-5px;">
+                <div *ngFor="let item of goodsClass">
+                  <span class="radio-circle" *ngFor="let i of item">
+                    <input class="radio-circle" type="radio" name="googdsType" name="goodsType"
+                           [value]="i.key"
+                           [(ngModel)]="saveInfos.typeOfGoods"
+                           (click)="getGoodsType(i.key)">
+                    <i></i>
+                    <span style="display: inline-block; margin: -2px 15px 0 5px;">{{i.val}}</span>
+                  </span>
                 </div>
               </div>
             </div>
             <div class="row">
-              <label>*信息标题:</label>
-              <input type="text" class="width-40">
+              <label><span class="must">*</span>信息标题:</label>
+              <input type="text" class="" style="width: 45%;padding-left:10px;" name="title"
+                     [(ngModel)]="saveInfos.infoTittle">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>15个字符内</span>
             </div>
             <div class="row">
-              <label>*描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</label>
-              <textarea rows="6" class="width-40"></textarea>
+              <label><span class="must">*</span>描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</label>
+              <textarea rows="6" class="width-40" name="decription"
+                        [(ngModel)]="saveInfos.decription"></textarea>
             </div>
             <div class="row">
               <label class="left">上传图片:</label>
               <input type="file" class="left">
             </div>
             <div class="row">
-              <label>*丢失地点:</label>
-              <input type="text">
+              <label><span class="must">*</span>丢失地点:</label>
+              <input type="text" name="lostPlace"
+                     [(ngModel)]="saveInfos.lostPlace">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入丢失地点</span>
             </div>
             <div class="row">
-              <label>*丢失时间:</label>
-              <input type="text">
+              <label><span class="must">*</span>丢失时间:</label>
+              <nz-demo-date-picker-start-end [isShowEndPicker]="false" (startDateVal)="getDate($event)"></nz-demo-date-picker-start-end>
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入丢失时间</span>
             </div>
             <div class="row">
               <label>&nbsp;&nbsp;联系地址:</label>
-              <input type="text">
+              <input type="text" name="concPlace" [(ngModel)]="saveInfos.concPlace">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入联系地址</span>
             </div>
             <div class="row">
-              <label>*&nbsp;&nbsp;&nbsp;联系人:</label>
-              <input type="text">
+              <label><span class="must">*</span>&nbsp;&nbsp;&nbsp;联系人:</label>
+              <input type="text" name="concactor" [(ngModel)]="saveInfos.concPersion">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入联系人姓名</span>
             </div>
             <div class="row">
-              <label>*联系电话:</label>
-              <input type="text">
+              <label><span class="must"><span class="must">*</span></span>联系电话:</label>
+              <input type="text" name="phoneNum" [(ngModel)]="saveInfos.phoneNo">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入联系人姓名</span>
             </div>
             <div class="row">
               <label>&nbsp;&nbsp;&nbsp;&nbsp;Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q:</label>
-              <input type="text">
+              <input type="text" name="qq" [(ngModel)]="saveInfos.qq">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入联系人姓名</span>
             </div>
@@ -93,11 +86,29 @@
               <label>酬谢方式:</label>
               <input type="checkbox"><pre>通过“千与千寻”拾物招领发布感谢信</pre>
             </div>-->
-            <div class="row"><label>*&nbsp;&nbsp;问题一:</label><input type="text"></div>
-            <div class="row"><label>&nbsp;&nbsp;&nbsp;&nbsp;问题二:</label><input type="text"></div>
-            <div class="row"><label>&nbsp;&nbsp;&nbsp;&nbsp;问题三:</label><input type="text"></div>
+            <div class="row">
+              <label><span class="must">*</span>&nbsp;&nbsp;问题一:</label>
+              <input type="text" name="question1"
+                     [(ngModel)]="saveInfos.findGoodsQuestion1">
+              <label style="margin-left:50px;"><span class="must"><span class="must">*</span></span>  答案:</label>
+              <input type="text" name="answer1" [(ngModel)]="saveInfos.findGoodsAnswer1">
+            </div>
+            <div class="row">
+              <label>&nbsp;&nbsp;&nbsp;&nbsp;问题二:</label>
+              <input type="text" name="question2"
+                     [(ngModel)]="saveInfos.findGoodsQuestion2">
+              <label style="margin-left:50px;">答案:</label>
+              <input type="text" name="answer2" [(ngModel)]="saveInfos.findGoodsAnswer2">
+            </div>
+            <div class="row">
+              <label>&nbsp;&nbsp;&nbsp;&nbsp;问题三:</label>
+              <input type="text" name="question3"
+                     [(ngModel)]="saveInfos.findGoodsQuestion3">
+              <label style="margin-left:50px;">答案:</label>
+              <input type="text" name="answer3" [(ngModel)]="saveInfos.findGoodsAnswer3">
+            </div>
             <div class="row text-center">
-              <button class="btn btn-success">立即发布</button>
+              <button class="btn btn-success" (click)="publishNews()">立即发布</button>
             </div>
           </form>
         </div>

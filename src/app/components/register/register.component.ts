@@ -5,6 +5,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 
 /*services*/
 import {CheckValueService} from '../../service/check-value.service';
+import { PublicDateService } from '../../service/public-date.service';
 
 /*interface Register {
   account: number,
@@ -28,7 +29,8 @@ export class RegisterComponent implements OnInit {
   constructor(public Registerhttp: RegisterService,
               private router: Router,
               private route: ActivatedRoute,
-              private CheckValue: CheckValueService) { }
+              private CheckValue: CheckValueService,
+              private PublicDate: PublicDateService) { }
   // name:string = '';
   registerInfos: any;
   css = {
@@ -45,9 +47,12 @@ export class RegisterComponent implements OnInit {
   emailRepeat = false;
 
   nowDate = new Date();
+  getProvinces: any;
+  getCities: any;
 
 
   ngOnInit() {
+    this.PublicDate.getProvince();
     this.registerInfos = {
       account: '',
       psd: '',
@@ -59,8 +64,9 @@ export class RegisterComponent implements OnInit {
       area: '',
       realName: ''
     };
-
-    console.log(this.nowDate);
+    this.getProvinces = this.PublicDate.getProvinces;
+    this.getCities = this.PublicDate.getAllCities;
+    console.log(this.getCities);
   }
 
   register() {
