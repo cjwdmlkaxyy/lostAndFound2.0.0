@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterService} from '../../service/register.service';
 import 'rxjs';
 import {Router, ActivatedRoute} from '@angular/router';
+import { HttpRequestService } from '../../service/http-request.service';
 
 /*services*/
 import {CheckValueService} from '../../service/check-value.service';
@@ -30,7 +31,8 @@ export class RegisterComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private CheckValue: CheckValueService,
-              private PublicDate: PublicDateService) { }
+              private PublicDate: PublicDateService,
+              public HttpRequest: HttpRequestService) { }
   // name:string = '';
   registerInfos: any;
   css = {
@@ -61,12 +63,14 @@ export class RegisterComponent implements OnInit {
       phoneNum: '',
       birthday: '',
       email: '',
-      area: '',
+      province: '',
+      city: '',
       realName: ''
     };
-    this.getProvinces = this.PublicDate.getProvinces;
-    this.getCities = this.PublicDate.getAllCities;
-    console.log(this.getCities);
+    this.HttpRequest.getProvence().subscribe( (res: any) => {
+      this.getProvinces = JSON.parse(res.data);
+    })
+    this.getCities = [];
   }
 
   register() {
@@ -212,5 +216,26 @@ export class RegisterComponent implements OnInit {
     let birthday = date.getFullYear() + '-' + month + '-' + day;
     console.log(birthday);
     this.registerInfos.birthday = birthday;
+  }
+
+  chooseCity(val){
+    for(let item of this.getProvinces){
+      if(val === item[1]){
+        this.registerInfos.province = item[0];
+        break;
+      }
+    }
+    this.HttpRequest.getCities(this.registerInfos.province).subscribe( res => {
+     this.getCities = JSON.parse(res.data);
+    })
+  }
+
+  formatCity(val){
+    for (let item of this.getCities){
+      if(val === item[1]){
+        this.registerInfos.city = item[0];
+        break;
+      }
+    }
   }
 }

@@ -6,7 +6,7 @@
         </div>
         <form class="form-inline register-body">
             <div class="row" [className]="css.userName">
-                <label>*登录账号:</label>
+                <label><span class="starColor"><span class="starColor">*</span></span>登录账号:</label>
                 <input type="text" class="form-control" autocomplete="off"
                        (blur)="checkUserName(registerInfos.account)"
                        [(ngModel)]="registerInfos.account" name="account">
@@ -27,7 +27,7 @@
 
 
             <div class="row" [className]="css.psd">
-                <label>*密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+                <label><span class="starColor">*</span>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
                 <input type="password" class="form-control" autocomplete="off"
                        (blur)="checkPsd(registerInfos.psd)"
                        [(ngModel)]="registerInfos.psd" name="psd">
@@ -47,7 +47,7 @@
 
 
             <div class="row" [className]="css.confirmPsd">
-                <label>*确认密码:</label>
+                <label><span class="starColor">*</span>确认密码:</label>
                 <input type="password" class="form-control" autocomplete="off"
                        (blur)="confirmPsd(registerInfos.confirmPsd)"
                        [(ngModel)]="registerInfos.confirmPsd" name="confirmPsd">
@@ -82,7 +82,7 @@
 
 
             <div class="row" [className]="css.phone">
-                <label>*电话号码:</label>
+                <label><span class="starColor">*</span>电话号码:</label>
                 <input type="text" class="form-control" autocomplete="off"
                        (blur)="checkPhone(registerInfos.phoneNum)"
                        [(ngModel)]="registerInfos.phoneNum" name="phoneNum">
@@ -106,7 +106,7 @@
                 </nz-demo-date-picker-start-end>
             </div>
             <div class="row has-warning" [className]="css.email">
-                <label>*邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>
+                <label><span class="starColor">*</span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>
                 <input type="text" class="form-control" autocomplete="off"
                      (blur)="checkEmail(registerInfos.email)"
                      [(ngModel)]="registerInfos.email" name="E-mail">
@@ -123,9 +123,19 @@
 
 
             <div class="row" [className]="none">
-                <label>*所在区域:</label>
-                <input type="text" class="form-control" autocomplete="off"
-                     [(ngModel)]="registerInfos.area" name="area">
+                <label><span class="starColor">*</span>所在区域:</label>
+              <select class="form-control" (change)="chooseCity($event.target.value)">
+                <option name="province"
+                        *ngFor="let item of getProvinces">{{item[1]}}</option>
+              </select>
+              <select class="form-control"
+                    *ngIf="getCities.length !== 0 && (registerInfos.area.province != '110000' &&
+                             registerInfos.area.province != '310000' && registerInfos.area.province != '120000'
+                             && registerInfos.area.province != '500000')"
+                      (change)="formatCity($event.target.value)">
+                <option name="province"
+                        *ngFor="let item of getCities">{{item[1]}}</option>
+              </select>
             </div>
 
 
