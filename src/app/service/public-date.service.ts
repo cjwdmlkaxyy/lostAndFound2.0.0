@@ -7,7 +7,7 @@ import { HttpRequestService} from './http-request.service';
   providedIn: 'root'
 })
 
-export class PublicDateService{
+export class PublicDateService {
    goodsType = [
      {key: '', val: '不限'},
      {key: 0, val: '钱包'},

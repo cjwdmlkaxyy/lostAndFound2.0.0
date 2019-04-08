@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import 'jquery';
 import { PublicDateService } from '../../service/public-date.service';
-import { NzDemoDatePickerStartEndComponent } from '../../publicSource/date-picker/nz-date-picker.common';
 import { HttpRequestService } from '../../service/http-request.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-publish-news',
@@ -12,7 +12,8 @@ import { HttpRequestService } from '../../service/http-request.service';
 export class PublishNewsComponent implements OnInit {
 
   constructor(private PublicDate: PublicDateService,
-              public HttpRequest: HttpRequestService) { }
+              public HttpRequest: HttpRequestService,
+              private NzMessage: NzMessageService) { }
 
   goodsClass: any = [];
 
@@ -37,6 +38,14 @@ export class PublishNewsComponent implements OnInit {
     thankWay: null // 0-当面支付  1-平台交易
   };
 
+  headers = {
+    token: localStorage.getItem('token')
+  };
+
+  userInfos: any; // 用户信息
+
+  isLogined = false; // 判断用户是否登录或是否存在用户登录信息
+
   ngOnInit() {
     let goodType = this.PublicDate.goodsType.concat();
     goodType.splice(0, 1);
@@ -46,6 +55,12 @@ export class PublishNewsComponent implements OnInit {
         k++;
       }
       this.goodsClass[k].push(goodType[i]);
+    }
+    if (this.headers.token === '') {
+      this.isLogined = true;
+    } else {
+      this.userInfos = JSON.parse(localStorage.getItem('userInfos'));
+      this.saveInfos.username = this.userInfos.username;
     }
   }
 
@@ -77,12 +92,15 @@ export class PublishNewsComponent implements OnInit {
   }
 
   getGoodsType(val) {
-    console.log(val);
     this.saveInfos.typeOfGoods = val;
   }
   /*发布消息*/
   publishNews() {
     console.log(this.saveInfos);
+    if (this.isLogined) {
+      this.NzMessage.info('亲,请先登录哟！');
+      return;
+    }
     this.HttpRequest.publishNews(this.saveInfos).subscribe( res => {
       console.log(res);
     });

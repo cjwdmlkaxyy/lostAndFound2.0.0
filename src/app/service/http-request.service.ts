@@ -28,7 +28,7 @@ export class HttpRequestService{
   * */
   searchGoods(data): Observable<any> {
     console.log(this.header);
-    return this.http.post(this.urlFront + 'goods/getGoodsInfo', data,{
+    return this.http.post(this.urlFront + 'goods/getGoodsInfo', data, {
       headers: new HttpHeaders({
         // 'Content-Type':  'application/json',
         // 'Authorization': 'my-auth-token',
@@ -56,7 +56,11 @@ export class HttpRequestService{
   * 发布消息
   * */
   publishNews(data): Observable<any> {
-    return this.http.post(this.urlFront + 'goods/img/upload', data);
+    return this.http.post(this.urlFront + 'goods/img/upload', data, {
+      headers: new HttpHeaders({
+        'token': this.header.token
+      })
+    });
   }
 
 }

@@ -34,7 +34,6 @@ export class RegisterComponent implements OnInit {
               private PublicDate: PublicDateService,
               public HttpRequest: HttpRequestService) { }
   // name:string = '';
-  registerInfos: any;
   css = {
     userName: '',
     psd: '',
@@ -44,45 +43,46 @@ export class RegisterComponent implements OnInit {
     email: ''
   };
 
+  registerInfos = {
+    username: '', // 用户登录账号
+    password: '',
+    phone: '',
+    netName: '', // 可选
+    birthday: '', // 可选
+    email: '',
+    province: '',
+    city: '',
+    district: '',
+    name: ''  // 可选
+  };
+
   userNameRepeat = false;
   phoneNumRepeat = false;
   emailRepeat = false;
 
-  nowDate = new Date();
   getProvinces: any;
   getCities: any;
 
 
   ngOnInit() {
     this.PublicDate.getProvince();
-    this.registerInfos = {
-      account: '',
-      psd: '',
-      confirmPsd: '',
-      userName: '',
-      phoneNum: '',
-      birthday: '',
-      email: '',
-      province: '',
-      city: '',
-      realName: ''
-    };
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.getProvinces = JSON.parse(res.data);
-    })
+      this.registerInfos.province = this.getProvinces[0][0];
+    });
     this.getCities = [];
   }
 
   register() {
+    // console.log(this.registerInfos);
     this.Registerhttp.register(this.registerInfos).subscribe( res => {
       console.log(res);
-      if(res.code === '000000'){
+      if (res.code === '000000') {
         this.router.navigate(['login']);
       }
     }, err => {
       console.log(err);
     });
-    // this.router.navigate(['login']);
   }
 
   /*校验登录账号是否正确输入*/
@@ -105,49 +105,49 @@ export class RegisterComponent implements OnInit {
   }
 
   /*checkPsd*/
-  checkPsd(psd){
-    if(psd == '' || psd == null){
+  checkPsd(psd) {
+    if (psd === '' || psd == null) {
       this.css.psd = 'has-error';
       return;
     }
-    if(psd.length >= 6){
+    if (psd.length >= 6) {
       this.css.psd = 'has-success';
-    }else{
+    } else {
       this.css.psd = 'has-error';
     }
   }
 
-  confirmPsd(value){
-    if(value == this.registerInfos.psd){
+  confirmPsd(value) {
+    if (value === this.registerInfos.password) {
       this.css.confirmPsd = 'has-success';
-    }else{
+    } else {
       this.css.confirmPsd = 'has-error';
     }
   }
 
-  checkNetName(value){
-    if(value.length <= 15){
+  checkNetName(value) {
+    if (value.length <= 15) {
       this.css.netName = 'has-success';
-      if(value.length == 0){
+      if (value.length === 0) {
         this.css.netName = '';
       }
-    }else{
+    } else {
       this.css.netName = 'has-error';
     }
   }
 
   /*check phone*/
-  checkPhone(value){
+  checkPhone(value) {
     let flag = this.CheckValue.checkPhoneNum(value);
-    if(value == '' || value == null || !flag){
+    if (value === '' || value == null || !flag) {
       this.css.phone = 'has-error';
       return;
     }
-    if(flag){
-      this.Registerhttp.checkInformation('phone',value).subscribe( res => {
-        if(res.code === '000000'){
+    if (flag) {
+      this.Registerhttp.checkInformation('phone', value).subscribe(res => {
+        if (res.code === '000000') {
           this.css.phone = 'has-success';
-        }else{
+        } else {
           this.css.phone = 'has-error';
           this.phoneNumRepeat = true;
         }
@@ -156,21 +156,21 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  checkEmail(value){
+  checkEmail(value) {
     let flag = this.CheckValue.checkEmail(value);
-    if(value == '' || value == null || !flag){
+    if (value === '' || value == null || !flag) {
       this.css.email = 'has-error';
       return;
     }
-    if(flag){
-      this.Registerhttp.checkInformation('email',value).subscribe( res => {
-        if(res.code === '000006'){
+    if (flag) {
+      this.Registerhttp.checkInformation('email', value).subscribe(res => {
+        if (res.code === '000006') {
           this.css.email = 'has-error';
           this.emailRepeat = true;
-        }else{
+        } else {
           this.css.email = 'has-success';
         }
-      })
+      });
     }
   }
 
@@ -205,12 +205,12 @@ export class RegisterComponent implements OnInit {
   getStartDate(e) {
     console.log(e);
     let date = new Date(e);
-    let month:any = date.getMonth() + 1;
-    let day:any = date.getDate();
-    if(month < 10){
+    let month: any = date.getMonth() + 1;
+    let day: any = date.getDate();
+    if (month < 10) {
       month = '0' + month;
     }
-    if(day < 10){
+    if (day < 10) {
       day = '0' + day;
     }
     let birthday = date.getFullYear() + '-' + month + '-' + day;
@@ -218,21 +218,25 @@ export class RegisterComponent implements OnInit {
     this.registerInfos.birthday = birthday;
   }
 
-  chooseCity(val){
-    for(let item of this.getProvinces){
-      if(val === item[1]){
+  chooseCity(val) {
+    for (let item of this.getProvinces) {
+      if (val === item[1]) {
         this.registerInfos.province = item[0];
         break;
       }
     }
-    this.HttpRequest.getCities(this.registerInfos.province).subscribe( res => {
-     this.getCities = JSON.parse(res.data);
-    })
+
+    if (this.registerInfos.province != '110000' && this.registerInfos.province != '310000' && this.registerInfos.province != '120000' && this.registerInfos.province != '500000') {
+      this.HttpRequest.getCities(this.registerInfos.province).subscribe(res => {
+        this.getCities = JSON.parse(res.data);
+        this.registerInfos.city = this.getCities[0][0];
+      });
+    }
   }
 
-  formatCity(val){
-    for (let item of this.getCities){
-      if(val === item[1]){
+  formatCity(val) {
+    for (let item of this.getCities) {
+      if (val === item[1]) {
         this.registerInfos.city = item[0];
         break;
       }

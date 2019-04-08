@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginInfos).subscribe(res => {
       console.log(res);
       localStorage.setItem('token', res.token); // 保存token
-      localStorage.setItem('userName', this.loginInfos.username);
+      localStorage.setItem('userInfos', res.data);
       // console.log(localStorage.getItem('userInfos'));
       this.router.navigate(['/frame/index']);
     }, error => {
