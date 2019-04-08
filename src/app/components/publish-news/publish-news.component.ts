@@ -35,7 +35,8 @@ export class PublishNewsComponent implements OnInit {
     findGoodsAnswer1: '',
     findGoodsAnswer2: '',
     findGoodsAnswer3: '',
-    thankWay: null // 0-当面支付  1-平台交易
+    thankWay: null, // 0-当面支付  1-平台交易
+    file: null // 上传图片
   };
 
   headers = {
@@ -104,5 +105,23 @@ export class PublishNewsComponent implements OnInit {
     this.HttpRequest.publishNews(this.saveInfos).subscribe( res => {
       console.log(res);
     });
+  }
+
+  /*上传图片*/
+  uploadImg() {
+    console.log(2222);
+    let iMaxFilesize = 2097152; //2M
+    let oFile = document.getElementById('uploadImg1').files[0]; // 读取文件
+    let rFilter = /^(image\/bmp|image\/gif|image\/jpeg|image\/png|image\/tiff)$/i;
+    if(!rFilter.test(oFile.type)){
+      console.log("文件格式必须为图片");
+      return;
+    }
+
+    if(oFile.size > iMaxFilesize){
+      console.log('图片大小不能超过2M');
+      return;
+    }
+    this.saveInfos.file = new FormData(document.getElementById('uploadImg1'));
   }
 }

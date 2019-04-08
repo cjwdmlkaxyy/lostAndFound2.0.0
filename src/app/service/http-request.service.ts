@@ -58,7 +58,7 @@ export class HttpRequestService{
   publishNews(data): Observable<any> {
     return this.http.post(this.urlFront + 'goods/img/upload', data, {
       headers: new HttpHeaders({
-        'token': this.header.token
+        'Content-Type':  'application/octet-stream',
       })
     });
   }
