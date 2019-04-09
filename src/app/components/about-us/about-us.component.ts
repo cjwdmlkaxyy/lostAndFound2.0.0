@@ -10,6 +10,12 @@ export class AboutUsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // let test = document.getElementsByClassName('glyphicon-apple');
+    let test = document.getElementById('test');
+    console.log(test);
+    /*test[0].onclick = function () {
+      console.log(2222222);
+    };*/
   }
 
 }

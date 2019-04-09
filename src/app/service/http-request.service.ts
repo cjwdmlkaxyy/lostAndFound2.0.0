@@ -56,9 +56,15 @@ export class HttpRequestService{
   * 发布消息
   * */
   publishNews(data): Observable<any> {
-    return this.http.post(this.urlFront + 'goods/img/upload', data, {
+    /*return this.http.post(this.urlFront + 'goods/img/upload', data, {
       headers: new HttpHeaders({
-        'Content-Type':  'application/octet-stream',
+        'Content-Type': 'multipart/form-data'
+      })
+    });*/
+    return this.http.post('http://192.168.2.28:8082/goods/img/upload', data, {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*'
       })
     });
   }

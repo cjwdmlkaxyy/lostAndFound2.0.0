@@ -20,23 +20,28 @@ export class PublishNewsComponent implements OnInit {
   saveInfos = {
     goodsWay: 0, // 发布信息标志 0:失物招领  1:失物发布
     username: '', // 用户的登录名
-    typeOfGoods: '',
-    infoTittle: '',
-    decription: '',
-    lostPlace: '',
+    typeOfGoods: '', // 必传
+    infoTittle: '', // 必传
+    description: '', // 必传
+    lostPlace: '', // 丢失地点字符串行-必传
     lostTime: '',
     concPlace: '',
     concPersion: '',
-    phoneNo: '',
-    qq: '',
-    findGoodsQuestion1: '',
+    telPhoneNo: '', // 联系电话-必传
+    qq: '', // 可选
+    findGoodsQuestion1: '', // 必传
     findGoodsQuestion2: '',
     findGoodsQuestion3: '',
-    findGoodsAnswer1: '',
+    findGoodsAnswer1: '', // 必传
     findGoodsAnswer2: '',
     findGoodsAnswer3: '',
     thankWay: null, // 0-当面支付  1-平台交易
-    file: null // 上传图片
+    file1: null, // 上传图片,必传
+    file2: null,
+    file3: null,
+    province: '510000', // 省id-必传
+    city: '510900', // 城市id-必传
+    district: '510902', // 区id-必传
   };
 
   headers = {
@@ -80,16 +85,7 @@ export class PublishNewsComponent implements OnInit {
   }
 
   getDate(e) {
-    let date: any = new Date(e);
-    let month: any = date.getMonth() + 1;
-    let day: any = date.getDate();
-    if (month < 10) {
-      month = '0' + month;
-    }
-    if (day < 10) {
-      day = '0' + day;
-    }
-    this.saveInfos.lostTime = date.getFullYear() + '-' + month + '-' + day;
+    this.saveInfos.lostTime = e.getTime();
   }
 
   getGoodsType(val) {
@@ -104,24 +100,26 @@ export class PublishNewsComponent implements OnInit {
     }
     this.HttpRequest.publishNews(this.saveInfos).subscribe( res => {
       console.log(res);
+    }, err => {
+      console.log(err);
     });
   }
 
   /*上传图片*/
   uploadImg() {
-    console.log(2222);
-    let iMaxFilesize = 2097152; //2M
+    // console.log(2222);
+    let iMaxFilesize = 2097152; // 2M
     let oFile = document.getElementById('uploadImg1').files[0]; // 读取文件
     let rFilter = /^(image\/bmp|image\/gif|image\/jpeg|image\/png|image\/tiff)$/i;
-    if(!rFilter.test(oFile.type)){
-      console.log("文件格式必须为图片");
+    if (!rFilter.test(oFile.type)) {
+      console.log('文件格式必须为图片');
       return;
     }
 
-    if(oFile.size > iMaxFilesize){
+    if (oFile.size > iMaxFilesize) {
       console.log('图片大小不能超过2M');
       return;
     }
-    this.saveInfos.file = new FormData(document.getElementById('uploadImg1'));
+    this.saveInfos.file1 = new FormData(document.getElementById('uploadImg1'));
   }
 }
