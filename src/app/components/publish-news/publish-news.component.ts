@@ -110,6 +110,7 @@ export class PublishNewsComponent implements OnInit {
     // console.log(2222);
     let iMaxFilesize = 2097152; // 2M
     let oFile = document.getElementById('uploadImg1').files[0]; // 读取文件
+    console.log(oFile);
     let rFilter = /^(image\/bmp|image\/gif|image\/jpeg|image\/png|image\/tiff)$/i;
     if (!rFilter.test(oFile.type)) {
       console.log('文件格式必须为图片');
@@ -120,6 +121,7 @@ export class PublishNewsComponent implements OnInit {
       console.log('图片大小不能超过2M');
       return;
     }
-    this.saveInfos.file1 = new FormData(document.getElementById('uploadImg1'));
+    this.saveInfos.file1 = new FormData(document.getElementById('uploadImg1').files[0]);
+    console.log(this.saveInfos.file1);
   }
 }
