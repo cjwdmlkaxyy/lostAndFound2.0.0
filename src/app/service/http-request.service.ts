@@ -10,18 +10,11 @@ export class HttpRequestService{
   header = {
     token: localStorage.getItem('token')
   };
-  // urlFront = 'http://192.168.2.28:8085/';//本地服务
+  // urlFront = 'http://192.168.2.28:8085/'; // 本地服务
   urlFront = 'http://47.102.139.16:8082/';
 
   constructor(public http: HttpClient) {}
 
-
-  /*
-  * get the district by cityId
-  * */
-  getArea(val): Observable<any> {
-    return this.http.get(this.urlFront + 'goods/findAreaByCity/' + val);
-  }
 
   /*
   * search goods
@@ -53,15 +46,17 @@ export class HttpRequestService{
   }
 
   /*
+  * get the district by cityId
+  * */
+  getArea(val): Observable<any> {
+    return this.http.get(this.urlFront + 'goods/findAreaByCity/' + val);
+  }
+
+  /*
   * 发布消息
   * */
   publishNews(data): Observable<any> {
-    /*return this.http.post(this.urlFront + 'goods/img/upload', data, {
-      headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data'
-      })
-    });*/
-    return this.http.post('http://192.168.2.28:8082/goods/img/upload', data, {
+    return this.http.post(this.urlFront + 'goods/img/upload', data, {
       headers: new HttpHeaders({
         'Content-Type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*'

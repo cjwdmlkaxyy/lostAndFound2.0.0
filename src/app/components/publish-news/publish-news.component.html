@@ -46,10 +46,27 @@
             </div>
             <div class="row">
               <label><span class="must">*</span>丢失地点:</label>
-              <input type="text" name="lostPlace"
-                     [(ngModel)]="saveInfos.lostPlace">
+              <!--<input type="text" name="lostPlace"
+                     [(ngModel)]="saveInfos.lostPlace">-->
+              <select (change)="selectedProvince($event.target.value)">
+                <option *ngFor="let item of provinceList">{{item[1]}}</option>
+              </select>
+              <select style="margin: 0 10px;"
+                      *ngIf="cityList.length !== 0"
+                      (change)="selectedCity($event.target.value)">
+                <option *ngFor="let item of cityList">{{item[1]}}</option>
+              </select>
+              <select *ngIf="districtList.length !== 0"
+                      (change)="selectedArea($event.target.value)">
+                <option *ngFor="let item of districtList">{{item[1]}}</option>
+              </select>
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
-              <span>请输入丢失地点</span>
+              <span>请选择丢失地点</span>
+            </div>
+            <div class="row">
+              <label>&nbsp;&nbsp;详细地址:</label>
+              <input type="text" name="detailAddress"
+                     [(ngModel)]="detailAddress">
             </div>
             <div class="row">
               <label><span class="must">*</span>丢失时间:</label>
@@ -107,7 +124,7 @@
               <label style="margin-left:50px;">答案:</label>
               <input type="text" name="answer3" [(ngModel)]="saveInfos.findGoodsAnswer3">
             </div>
-            <div class="row text-center">
+            <div class="row text-center" style="padding-top:50px !important;">
               <button class="btn btn-success" (click)="publishNews()">立即发布</button>
             </div>
           </form>
