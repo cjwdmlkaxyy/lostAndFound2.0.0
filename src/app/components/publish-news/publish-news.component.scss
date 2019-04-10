@@ -137,3 +137,12 @@ $color:$basicColor-deepgreen;
   color: red;
 }
 
+// 提示信息
+.alter-message{
+  position:absolute;
+  margin-left: 50px;
+  i{
+    margin: 0 10px;
+  }
+}
+

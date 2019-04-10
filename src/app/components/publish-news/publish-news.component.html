@@ -27,13 +27,25 @@
                   </span>
                 </div>
               </div>
+              <div class="inline-block alter-message" style="padding-top: 20px;"
+                   *ngIf="saveInfosFlags.goodsType && saveInfos.typeOfGoods === ''">
+                <i class="glyphicon glyphicon-alert icon-danger"></i>
+                <span>请选择物品种类</span>
+              </div>
             </div>
             <div class="row">
               <label><span class="must">*</span>信息标题:</label>
               <input type="text" class="" style="width: 45%;padding-left:10px;" name="title"
                      [(ngModel)]="saveInfos.infoTittle">
-              <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
-              <span>15个字符内</span>
+              <span class="glyphicon glyphicon-info-sign icon" 
+                    [ngClass]="saveInfos.infoTittle.length > 15 ? 'icon-danger' : 'icon-remind'"></span>
+              <span *ngIf="saveInfos.infoTittle.length > 15">信息标题不能超过15个字符</span>
+              <span *ngIf="saveInfos.infoTittle.length <= 15">15个字符内</span>
+              <div class="inline-block alter-message"
+                   *ngIf="saveInfosFlags.infoTittle && saveInfos.infoTittle === ''">
+                <i class="glyphicon glyphicon-alert icon-danger"></i>
+                <span>请输入信息标题</span>
+              </div>
             </div>
             <div class="row">
               <label><span class="must">*</span>描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</label>

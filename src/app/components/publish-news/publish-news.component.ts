@@ -3,6 +3,7 @@ import 'jquery';
 import { PublicDateService } from '../../service/public-date.service';
 import { HttpRequestService } from '../../service/http-request.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-publish-news',
@@ -59,6 +60,12 @@ export class PublishNewsComponent implements OnInit {
   userInfos: any; // 用户信息
   isLogined = false; // 判断用户是否登录或是否存在用户登录信息
 
+  // 发布信息flags
+  saveInfosFlags = {
+    goodsType: false,
+    infoTittle: false,
+  }
+
   ngOnInit() {
     let goodType = this.PublicDate.goodsType.concat();
     goodType.splice(0, 1);
@@ -113,6 +120,11 @@ export class PublishNewsComponent implements OnInit {
       this.NzMessage.info('亲,请先登录哟！');
       return;
     }
+    
+    if(this.checkInfos()){
+      return ;
+    }
+
     this.HttpRequest.publishNews(this.saveInfos).subscribe( res => {
       console.log(res);
     }, err => {
@@ -174,5 +186,27 @@ export class PublishNewsComponent implements OnInit {
     }
   }
 
+  // 检查要发布的信息是否输入正确
+  checkInfos() {
+    let flag = false;
+    if(this.saveInfos.typeOfGoods === ''){
+      this.saveInfosFlags.goodsType = true;
+      flag = true;
+    }
+    if(this.saveInfos.infoTittle === ''){
+      this.saveInfosFlags.infoTittle = true;
+      flag = true;
+    }
+
+    $('.icon-danger').each(function(e){
+        flag = true;
+    });
+
+    if(flag){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
 }
