@@ -51,6 +51,12 @@
               <label><span class="must">*</span>描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</label>
               <textarea rows="6" class="width-40" name="description"
                         [(ngModel)]="saveInfos.description"></textarea>
+              <div class="inline-block alter-message"
+                   *ngIf="saveInfosFlags.description">
+                <i class="glyphicon glyphicon-alert icon-danger"></i>
+                <span *ngIf="saveInfos.description === ''">请输入描述信息</span>
+                <span *ngIf="saveInfos.description.length > 255 || saveInfos.description.length < 15">请输入15-255个字符</span>
+              </div>
             </div>
             <div class="row">
               <label class="left">上传图片:</label>

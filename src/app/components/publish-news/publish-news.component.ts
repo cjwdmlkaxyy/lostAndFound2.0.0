@@ -64,7 +64,8 @@ export class PublishNewsComponent implements OnInit {
   saveInfosFlags = {
     goodsType: false,
     infoTittle: false,
-  }
+    description: false,
+  };
 
   ngOnInit() {
     let goodType = this.PublicDate.goodsType.concat();
@@ -120,9 +121,10 @@ export class PublishNewsComponent implements OnInit {
       this.NzMessage.info('亲,请先登录哟！');
       return;
     }
-    
-    if(this.checkInfos()){
-      return ;
+
+    /*校验发布的信息是否输入正确*/
+    if (this.checkInfos()) {
+      return;
     }
 
     this.HttpRequest.publishNews(this.saveInfos).subscribe( res => {
@@ -189,22 +191,26 @@ export class PublishNewsComponent implements OnInit {
   // 检查要发布的信息是否输入正确
   checkInfos() {
     let flag = false;
-    if(this.saveInfos.typeOfGoods === ''){
+    if (this.saveInfos.typeOfGoods === '') {
       this.saveInfosFlags.goodsType = true;
       flag = true;
     }
-    if(this.saveInfos.infoTittle === ''){
+    if (this.saveInfos.infoTittle === '') {
       this.saveInfosFlags.infoTittle = true;
       flag = true;
     }
+    if (this.saveInfos.description === '' || this.saveInfos.description.length >255 || this.saveInfos.description.length < 15) {
+      this.saveInfosFlags.description = true;
+      flag = true;
+    }
 
-    $('.icon-danger').each(function(e){
-        flag = true;
+    $('.icon-danger').each(function (e) {
+      flag = true;
     });
 
-    if(flag){
+    if (flag) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
