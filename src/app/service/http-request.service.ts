@@ -59,7 +59,7 @@ export class HttpRequestService{
     return this.http.post(this.urlFront + 'goods/img/upload', data, {
       headers: new HttpHeaders({
         'Content-Type': 'multipart/form-data',
-        'Access-Control-Allow-Origin': '*'
+        // 'Access-Control-Allow-Origin': '*'
       })
     });
   }

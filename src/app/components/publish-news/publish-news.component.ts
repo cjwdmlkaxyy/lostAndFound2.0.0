@@ -17,6 +17,7 @@ export class PublishNewsComponent implements OnInit {
               private NzMessage: NzMessageService) { }
 
   goodsClass: any = [];
+  urlFront = 'http://47.102.139.16:8082/';
 
   saveInfos = {
     goodsWay: 0, // 发布信息标志 0:失物招领  1:失物发布
@@ -36,13 +37,13 @@ export class PublishNewsComponent implements OnInit {
     findGoodsAnswer1: '', // 必传
     findGoodsAnswer2: '',
     findGoodsAnswer3: '',
-    thankWay: null, // 0-当面支付  1-平台交易
+    thankWay: 0, // 0-当面支付  1-平台交易
     file1: null, // 上传图片,必传
     file2: null,
     file3: null,
-    province: '510000', // 省id-必传
-    city: '510900', // 城市id-必传
-    district: '510902', // 区id-必传
+    province: '', // 省id-必传
+    city: '', // 城市id-必传
+    district: '', // 区id-必传
   };
 
   provinceList = []; // 获得所有省
@@ -65,6 +66,7 @@ export class PublishNewsComponent implements OnInit {
     goodsType: false,
     infoTittle: false,
     description: false,
+    lostTime: false
   };
 
   ngOnInit() {
@@ -127,11 +129,50 @@ export class PublishNewsComponent implements OnInit {
       return;
     }
 
+    // 将数据封装成FormData
+    let data: any = new FormData();
+    data.append('goodsWay', this.saveInfos.goodsWay);
+    data.append('username', this.saveInfos.username);
+    data.append('typeOfGoods', this.saveInfos.typeOfGoods);
+    data.append('infoTittle', this.saveInfos.infoTittle);
+    data.append('description', this.saveInfos.description);
+    data.append('lostPlace', this.saveInfos.lostPlace);
+    data.append('lostTime', this.saveInfos.lostTime);
+    data.append('concPlace', this.saveInfos.concPlace);
+    data.append('concPersion', this.saveInfos.concPersion);
+    data.append('telPhoneNo', this.saveInfos.telPhoneNo);
+    data.append('qq', this.saveInfos.qq);
+    data.append('findGoodsQuestion1', this.saveInfos.findGoodsQuestion1);
+    data.append('findGoodsQuestion2', this.saveInfos.findGoodsQuestion2);
+    data.append('findGoodsQuestion3', this.saveInfos.findGoodsQuestion3);
+    data.append('findGoodsAnswer1', this.saveInfos.findGoodsAnswer1);
+    data.append('findGoodsAnswer2', this.saveInfos.findGoodsAnswer2);
+    data.append('findGoodsAnswer3', this.saveInfos.findGoodsAnswer3);
+    data.append('thankWay', this.saveInfos.thankWay);
+    data.append('file1', this.saveInfos.file1);
+    data.append('file2', this.saveInfos.file2);
+    data.append('file3', this.saveInfos.file3);
+    data.append('province', this.saveInfos.province);
+    data.append('city', this.saveInfos.city);
+    data.append('district', this.saveInfos.district);
+
     this.HttpRequest.publishNews(this.saveInfos).subscribe( res => {
       console.log(res);
     }, err => {
       console.log(err);
     });
+
+
+    // $.ajax({
+    //   url: this.urlFront + 'goods/img/upload',
+    //   type: 'POST',
+    //   data: data,
+    //   contentType: false,
+    //   processData: false,
+    //   success: function(res){
+    //     console.log(res);
+    //   }
+    // });
   }
 
   /*上传图片*/
@@ -170,12 +211,12 @@ export class PublishNewsComponent implements OnInit {
   selectedCity(val) {
     for (let item of this.cityList) {
       if (item[1] === val) {
-        this.saveInfos.district = item[0];
+        this.saveInfos.city = item[0];
         this.cityName = item[1];
         break;
       }
     }
-    this.HttpRequest.getArea(this.saveInfos.district).subscribe( (res: any) =>{
+    this.HttpRequest.getArea(this.saveInfos.city).subscribe( (res: any) =>{
       this.districtList = JSON.parse(res.data);
     });
   }
@@ -201,6 +242,10 @@ export class PublishNewsComponent implements OnInit {
     }
     if (this.saveInfos.description === '' || this.saveInfos.description.length >255 || this.saveInfos.description.length < 15) {
       this.saveInfosFlags.description = true;
+      flag = true;
+    }
+    if(this.saveInfos.lostTime === '' || this.saveInfos.lostTime === null){
+      this.saveInfosFlags.lostTime = true;
       flag = true;
     }
 
