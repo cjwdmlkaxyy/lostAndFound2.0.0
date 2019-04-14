@@ -52,7 +52,7 @@
               <textarea rows="6" class="width-40" name="description"
                         [(ngModel)]="saveInfos.description"></textarea>
               <div class="inline-block alter-message"
-                   *ngIf="saveInfosFlags.description">
+                   *ngIf="saveInfosFlags.description && (saveInfos.description.length > 255 || saveInfos.description.length < 15)">
                 <i class="glyphicon glyphicon-alert icon-danger"></i>
                 <span *ngIf="saveInfos.description === ''">请输入描述信息</span>
                 <span *ngIf="saveInfos.description.length > 255 || saveInfos.description.length < 15">请输入15-255个字符</span>
@@ -91,30 +91,45 @@
               <nz-demo-date-picker-start-end [isShowEndPicker]="false" (startDateVal)="getDate($event)"></nz-demo-date-picker-start-end>
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入丢失时间</span>
-            </div>
-            <div class="row">
-              <label>&nbsp;&nbsp;联系地址:</label>
-              <input type="text" name="concPlace" [(ngModel)]="saveInfos.concPlace">
-              <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
-              <span>请输入联系地址</span>
+              <div class="inline-block alter-message"
+                   *ngIf="saveInfosFlags.lostTime">
+                <i class="glyphicon glyphicon-alert icon-danger"></i>
+                <span *ngIf="saveInfos.lostTime === ''">请选择丢失时间</span>
+              </div>
             </div>
             <div class="row">
               <label><span class="must">*</span>&nbsp;&nbsp;&nbsp;联系人:</label>
               <input type="text" name="concactor" [(ngModel)]="saveInfos.concPersion">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入联系人姓名</span>
+              <div class="inline-block alter-message"
+                   *ngIf="saveInfosFlags.conPersion">
+                <i class="glyphicon glyphicon-alert icon-danger"></i>
+                <span *ngIf="saveInfos.conPersion === ''">请输入联系人姓名</span>
+              </div>
             </div>
             <div class="row">
               <label><span class="must"><span class="must">*</span></span>联系电话:</label>
               <input type="text" name="phoneNum" [(ngModel)]="saveInfos.telPhoneNo">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
-              <span>请输入联系人姓名</span>
+              <span>请输入联系电话</span>
+              <div class="inline-block alter-message"
+                   *ngIf="saveInfosFlags.conPhone">
+                <i class="glyphicon glyphicon-alert icon-danger"></i>
+                <span *ngIf="saveInfos.conPhone === ''">请输入联系电话</span>
+              </div>
             </div>
             <div class="row">
               <label>&nbsp;&nbsp;&nbsp;&nbsp;Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q:</label>
               <input type="text" name="qq" [(ngModel)]="saveInfos.qq">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
-              <span>请输入联系人姓名</span>
+              <span>请输入联系QQ号码</span>
+            </div>
+            <div class="row">
+              <label>&nbsp;&nbsp;联系地址:</label>
+              <input type="text" name="concPlace" [(ngModel)]="saveInfos.concPlace">
+              <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
+              <span>请输入联系地址</span>
             </div>
             <!--感谢信暂时不做-->
             <!--<div class="row">

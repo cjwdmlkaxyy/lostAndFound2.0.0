@@ -66,7 +66,9 @@ export class PublishNewsComponent implements OnInit {
     goodsType: false,
     infoTittle: false,
     description: false,
-    lostTime: false
+    lostTime: false,
+    conPerson: false,
+    conPhone: false,
   };
 
   ngOnInit() {
@@ -246,6 +248,14 @@ export class PublishNewsComponent implements OnInit {
     }
     if(this.saveInfos.lostTime === '' || this.saveInfos.lostTime === null){
       this.saveInfosFlags.lostTime = true;
+      flag = true;
+    }
+    if (this.saveInfos.concPersion === '' || this.saveInfos.concPersion === null) {
+      this.saveInfosFlags.conPerson = true;
+      flag = true;
+    }
+    if (this.saveInfos.telPhoneNo === '' || this.saveInfos.telPhoneNo === null) {
+      this.saveInfosFlags.conPhone = true;
       flag = true;
     }
 
