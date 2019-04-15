@@ -19,32 +19,7 @@ export class PublishNewsComponent implements OnInit {
   goodsClass: any = [];
   urlFront = 'http://47.102.139.16:8082/';
 
-  saveInfos = {
-    goodsWay: 0, // 发布信息标志 0:失物招领  1:失物发布
-    username: '', // 用户的登录名
-    typeOfGoods: '', // 必传
-    infoTittle: '', // 必传
-    description: '', // 必传
-    lostPlace: '', // 丢失地点字符串行-必传
-    lostTime: '',
-    concPlace: '',
-    concPersion: '',
-    telPhoneNo: '', // 联系电话-必传
-    qq: '', // 可选
-    findGoodsQuestion1: '', // 必传
-    findGoodsQuestion2: '',
-    findGoodsQuestion3: '',
-    findGoodsAnswer1: '', // 必传
-    findGoodsAnswer2: '',
-    findGoodsAnswer3: '',
-    thankWay: 0, // 0-当面支付  1-平台交易
-    file1: null, // 上传图片,必传
-    file2: null,
-    file3: null,
-    province: '', // 省id-必传
-    city: '', // 城市id-必传
-    district: '', // 区id-必传
-  };
+  saveInfos: any; // 存储信息的
 
   provinceList = []; // 获得所有省
   cityList = []; // 城市
@@ -71,7 +46,39 @@ export class PublishNewsComponent implements OnInit {
     conPhone: false,
   };
 
+  clearSaveInfos() {
+   this.saveInfos = {
+      goodsWay: 1, // 发布信息标志 0:失物招领-招领  1:失物发布-寻物
+      username: '', // 用户的登录名
+      typeOfGoods: '', // 必传
+      infoTittle: '', // 必传
+      description: '', // 必传
+      lostPlace: '', // 丢失地点字符串行-必传
+      lostTime: '',
+      concPlace: '',
+      concPersion: '',
+      telPhoneNo: '', // 联系电话-必传
+      qq: '', // 可选
+      findGoodsQuestion1: '', // 必传
+      findGoodsQuestion2: '',
+      findGoodsQuestion3: '',
+      findGoodsAnswer1: '', // 必传
+      findGoodsAnswer2: '',
+      findGoodsAnswer3: '',
+      thankWay: 0, // 0-当面支付  1-平台交易
+      file1: null, // 上传图片,必传
+      file2: null,
+      file3: null,
+      province: '', // 省id-必传
+      city: '', // 城市id-必传
+      district: '', // 区id-必传
+    };
+    this.detailAddress = '';
+    $('#timePicker').val('');
+  }
+
   ngOnInit() {
+    this.clearSaveInfos();
     let goodType = this.PublicDate.goodsType.concat();
     goodType.splice(0, 1);
     for (let i = 0, k = -1; i < goodType.length; i++) {
@@ -88,17 +95,27 @@ export class PublishNewsComponent implements OnInit {
       this.saveInfos.username = this.userInfos.username;
     }
 
-    /*拿到所有的省*/
+    /*拿到所有的省、城市、区-默认为四川省-成都市-市辖区*/
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.provinceList = JSON.parse(res.data);
-      this.saveInfos.province = this.provinceList[0][0];
+      this.saveInfos.province = '510000';
     });
+    this.HttpRequest.getCities('510000').subscribe( (res: any) =>{
+      this.cityList = JSON.parse(res.data);
+      this.saveInfos.city = '510100';
+    });
+    this.HttpRequest.getArea('510100').subscribe( (res: any) => {
+      this.districtList = JSON.parse(res.data);
+      this.saveInfos.district = this.districtList[0][0];
+    })
+
   }
 
   /*寻物*/
   lost() {
     $('.nav-tabs').css('border-bottom', '1px rgb(225, 129, 48) solid');
     $('#myTabContent').css('border-color', 'rgb(225, 129, 48)');
+    this.clearSaveInfos();
     this.saveInfos.goodsWay = 1;
   }
 
@@ -106,6 +123,7 @@ export class PublishNewsComponent implements OnInit {
   found() {
     $('.nav-tabs').css('border-bottom', '1px rgb(10, 110, 72) solid');
     $('#myTabContent').css('border-color', 'rgb(10, 110, 72)');
+    this.clearSaveInfos();
     this.saveInfos.goodsWay = 0;
   }
 
@@ -158,23 +176,23 @@ export class PublishNewsComponent implements OnInit {
     data.append('city', this.saveInfos.city);
     data.append('district', this.saveInfos.district);
 
-    this.HttpRequest.publishNews(this.saveInfos).subscribe( res => {
-      console.log(res);
-    }, err => {
-      console.log(err);
-    });
-
-
-    // $.ajax({
-    //   url: this.urlFront + 'goods/img/upload',
-    //   type: 'POST',
-    //   data: data,
-    //   contentType: false,
-    //   processData: false,
-    //   success: function(res){
-    //     console.log(res);
-    //   }
+    // this.HttpRequest.publishNews(this.saveInfos).subscribe( res => {
+    //   console.log(res);
+    // }, err => {
+    //   console.log(err);
     // });
+
+    // 用ajax请求实现上传图片
+    $.ajax({
+      url: this.urlFront + 'goods/img/upload',
+      type: 'POST',
+      data: data,
+      contentType: false,
+      processData: false,
+      success: function(res){
+        console.log(res);
+      }
+    });
   }
 
   /*上传图片*/
@@ -206,8 +224,15 @@ export class PublishNewsComponent implements OnInit {
         break;
       }
     }
+    // 实现省市区联动
     this.HttpRequest.getCities(this.saveInfos.province).subscribe( (res: any) => {
       this.cityList = JSON.parse(res.data);
+      this.saveInfos.city = this.cityList[0][0];
+
+      this.HttpRequest.getArea(this.saveInfos.city).subscribe( (res: any) =>{
+        this.districtList = JSON.parse(res.data);
+        this.saveInfos.district = this.districtList[0][0];
+      });
     });
   }
   selectedCity(val) {
@@ -220,6 +245,7 @@ export class PublishNewsComponent implements OnInit {
     }
     this.HttpRequest.getArea(this.saveInfos.city).subscribe( (res: any) =>{
       this.districtList = JSON.parse(res.data);
+      this.saveInfos.district = this.districtList[0][0];
     });
   }
   selectedArea(val) {
