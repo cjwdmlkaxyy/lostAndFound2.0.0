@@ -12,43 +12,42 @@
           <label>热门搜索:</label>
           <span class="font-color-blue"
                 *ngFor="let i of hotSearch"
-                (click)="search(i.key)">{{i.val}}</span>
+                (click)="search('goodsType',i.key)">{{i.val}}</span>
         </div>
       </div>
-      <div class="row">
-        <div>
+      <div class="row" style="padding-top: 10px !important;">
+        <div style="line-height: 14px;">
           <label>所属区域:</label>
-          <span class="font-color-cyan">本市</span>
+          <span class="font-color-blue" (click)="search('area','')">不限</span>
+          <span class="font-color-cyan" (click)="search('area', localCity)">本市</span>
           <span class="font-color-cyan"
                 *ngFor="let i of district"
-                (click)="search(i[0])">{{i[1]}}</span>
+                (click)="search('area', i[0])">{{i[1]}}</span>
         </div>
       </div>
-      <div class="row">
+      <div class="row" style="padding-top: 10px !important;">
         <label>物品种类:</label>
         <div class="inline-block">
           <span class="font-color-cyan font-margin-10"
                 *ngFor="let i of goodsType"
-                (click)="search(i.key)">{{i.val}}</span>
+                (click)="search('goodsType',i.key)">{{i.val}}</span>
         </div>
       </div>
-      <div class="row">
+      <div class="row" style="padding-top: 10px !important;">
         <label>丢失时间:</label>
-        <nz-date-picker nzPlaceHolder="开始时间" name="startTime"
-                        [(ngModel)]="startTime"
-                        (ngModelChange)="getTimestamp($event,'start')"></nz-date-picker>
-        <nz-date-picker nzPlaceHolder="结束时间"  name="endTime" style="margin-left:20px;"
-                        [(ngModel)]="endTime"
-                        (ngModelChange)="getTimestamp($event,'end')"></nz-date-picker>
+        <nz-demo-date-picker-start-end [isShowEndPicker]="true"
+                  (startDateVal)="getSearchTime($event, 'start')"
+                  (endDateVal)="getSearchTime($event, 'end')">
+        </nz-demo-date-picker-start-end>
       </div>
-      <div class="row">
+      <!-- <div class="row" style="padding-top: 10px;">
         <label>感谢方式:</label>
         <div class="inline-block">
           <span class="font-color-cyan"
                 *ngFor="let i of thankWay"
                 (click)="search(i.key)">{{i.val}}</span>
         </div>
-      </div>
+      </div> -->
     </form>
   </div>
   <div class="news-block">
@@ -85,7 +84,7 @@
         </div>
       </div>
     </div>
-    <div class="pageComponent text-right" style="padding-top:60px;margin-right:-100px;">
+    <div class="pageComponent text-right" style="padding-top:60px;">
       <app-common-page [pageSize]="pageSize" [totalNum]="totalNum" (currentIndex)="changePage($event)"></app-common-page>
     </div>
   </div>

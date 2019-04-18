@@ -46,6 +46,9 @@ export class LostSthComponent implements OnInit {
     city: ''
   };
 
+  localCity: any; // 本市
+  getProviceId: any; // 获得省id
+
   ngOnInit() {
     this.tags = [
       {id: 0, category: 1},
@@ -64,27 +67,48 @@ export class LostSthComponent implements OnInit {
     this.hotSearch = this.Source.hotSearch;
     this.thankWay = this.Source.thankWay;
 
-    /*this.communicateWithHeader.getMessages().subscribe( res => {
-      this.getArea(res.city[0]);
-    });
-    console.log(this.communicateWithHeader.messagesVal);*/
-    if(this.communicateWithHeader.messagesVal) {
-      this.getArea(this.communicateWithHeader.messagesVal.city[0]);
+    if (this.communicateWithHeader.messagesVal) {
+      this.localCity = this.communicateWithHeader.messagesVal.city[0];
+      if (this.localCity == '110100') { // 北京市
+            this.getProviceId = '110000';
+      } else if (this.localCity == '310100') { // 上海市
+        this.getProviceId = '310000';
+      } else if (this.localCity == '120100') { // 天津市
+        this.getProviceId = '120000';
+      } else if (this.localCity == '500100') { // 重庆市
+        this.getProviceId = '500000';
+      } else {
+      this.getProviceId = this.communicateWithHeader.messagesVal.province;
+      }
+      this.getArea(this.localCity);
     } else {
+      this.getProviceId = '510000';
+      this.localCity = '510100';
       this.getArea('510100'); // 给默认的区域是成都
     }
   }
 
-  search(val) {
-    console.log(val);
-    if (typeof val === 'number') {
+  search(flag: string, val: any) {
+    console.log(flag, val);
+    
+    /*根据传过来的值封装数据*/
+    if (flag === 'goodsType') {
       this.searchInfos.typeOfGoods = val;
-    } else if (typeof val === 'string') {
-
-    } else if (typeof val === 'object') {
-
+    } else if (flag === 'startTime') {
+      this.searchInfos.fromTime = val;
+    } else if(flag === 'endTime') {
+      this.searchInfos.toTime = val;
+    } else if (flag === 'area' && val === '') {
+      this.searchInfos.province = '';
+      this.searchInfos.city = '';
+      this.searchInfos.district = '';
+    } else if (flag === 'area' && val !== '') {
+      this.searchInfos.province = this.getProviceId;
+      this.searchInfos.city = this.localCity;
+      this.searchInfos.district = val;
     }
-
+    
+    console.log(this.searchInfos);
     this.HttpService.searchGoods(this.searchInfos).subscribe(res => {
       console.log(res);
     }, err => {
@@ -119,6 +143,17 @@ export class LostSthComponent implements OnInit {
 
   changePage(e){
     console.log(e);
+  }
+
+  /*获取搜索的开始时间和结束时间*/
+  getSearchTime(val, flag) {
+    if(flag === 'start') {
+      let start = new Date(val.getFullYear(), val.getMonth(), val.getDate(), 0, 0, 0).getTime();
+      this.search('startTime', start);
+    } else {
+      let end = new Date(val.getFullYear(), val.getMonth(), val.getDate(), 23, 59, 59).getTime();
+      this.search('endTime', end);
+    }
   }
 }
 

@@ -53,10 +53,10 @@ export class PublicDateService {
    ];
 
   directlyCity = [
-    {key: '110000', val: '北京市'},
-    {key: '310000', val: '上海市'},
-    {key: '120000', val: '天津市'},
-    {key: '500000', val: '重庆市'},
+    {key: '110100', val: '北京市'},
+    {key: '310100', val: '上海市'},
+    {key: '120100', val: '天津市'},
+    {key: '500100', val: '重庆市'},
   ];
 
   directlyCities = ['北京市', '上海市', '天津市', '重庆市'];
