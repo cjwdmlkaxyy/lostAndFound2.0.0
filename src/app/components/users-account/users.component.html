@@ -47,4 +47,51 @@
       </div>
     </div>
   </div>
+  <div class="update-user-infos">
+    <div class="update-main">
+      
+      <span class="text-tilt">修改个人信息</span>
+      <!--上传头像功能暂时不做-->
+      <!-- <div style="white-space: nowrap;">
+        <label>上传头像:</label>
+        <input type="file" style="display: inline-block !important;">
+      </div> -->
+      <div style="padding-top: 20px;">
+        <div class="danger-text-color"
+             *ngIf="userInfosStyle.netName && userInfos.netName.length > 15">
+          <i class="glyphicon glyphicon-warning-sign icon-danger"></i>
+          <span>网名不能超过15个字符</span>
+        </div>
+        <label>网名:</label>
+        <input type="text" name="netName"
+               [(ngModel)]="userInfos.netName">
+      </div>
+      <div>
+        <div *ngIf="userInfosStyle.phone" class="danger-text-color">
+            <i class="glyphicon glyphicon-warning-sign icon-danger"></i>
+            <span>请输入正确的电话号码</span>
+        </div>
+        <label>电话号码:</label>
+        <input type="text" name="phoneNum"
+               (blur)="checkPhone(userInfos.phone)"
+               [(ngModel)]="userInfos.phone">
+      </div>
+      <div>
+        <label>出生日期:</label>
+        <input type="text">
+      </div>
+      <div>
+        <label>邮箱:</label>
+        <input type="text">
+      </div>
+      <div>
+        <label>所在地区:</label>
+        <input type="text">
+      </div>
+      <div style="width: 100%; display: flex;justify-content: space-around;padding: 20px 40px 0">
+        <button class="btn btn-success" (click)="updateUsersInfos()">保存</button>
+        <button class="btn btn-danger" (click)="cancleUpdateUsersInfos">取消</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -35,3 +35,32 @@
   }
 }
 
+/*选中搜索的样式*/
+@mixin selectedSearch {
+  border-radius: 5px;
+  padding: 0 3px;
+  color: #fff;
+}
+.hot-search{
+  @include selectedSearch();
+  background: orange;
+}
+.goodsType-search{
+  @include selectedSearch();
+  background: green;
+}
+.area-search{
+  @include selectedSearch();
+  background: rgb(243, 5, 152);
+}
+.clear-input{
+  vertical-align: middle;
+  margin: 0 32px 0 -50px;
+  color: #eceaea;
+  font-size: 18px;
+  cursor: pointer;
+}
+.clear-input:hover{
+  color: #d4d4d4
+}
+

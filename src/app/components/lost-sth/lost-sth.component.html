@@ -5,22 +5,30 @@
   <div class="seach-block text-left">
     <form class="form-inline">
       <div class="row">
-        <input type="text" class="form-control width-40" placeholder="物品搜索" name="goodsSearch"
+        <input type="text" class="form-control width-40" placeholder="物品搜索" name="goodsSearch" autocomplete="off"
                [(ngModel)]="goodsSearch">
-        <button class="btn btn-success" (click)="search(goodsSearch)">搜索</button>
+        <i class='glyphicon glyphicon-remove-circle clear-input' 
+           *ngIf="goodsSearch != ''"
+           (click)="search('clearInput')"></i>
+        <button class="btn btn-success" style="outline: none !important;"
+                (click)="search('fuzzySearch-input', goodsSearch)">搜索</button>
         <div class="inline-block">
           <label>热门搜索:</label>
           <span class="font-color-blue"
+                [ngClass]="searchStyle.hotSearch === i.val ? 'hot-search' : ''"
                 *ngFor="let i of hotSearch"
-                (click)="search('goodsType',i.key)">{{i.val}}</span>
+                (click)="search('fuzzySearch-hot',i.val)">{{i.val}}</span>
         </div>
       </div>
       <div class="row" style="padding-top: 10px !important;">
         <div style="line-height: 14px;">
           <label>所属区域:</label>
-          <span class="font-color-blue" (click)="search('area','')">不限</span>
-          <span class="font-color-cyan" (click)="search('area', localCity)">本市</span>
+          <span class="font-color-cyan" (click)="search('area','')"
+                [ngClass]="searchStyle.areaSearch === '' ? 'area-search' : ''">不限</span>
+          <span class="font-color-cyan" (click)="search('area', localCity)"
+                [ngClass]="searchStyle.areaSearch === localCity ? 'area-search' : ''">本市</span>
           <span class="font-color-cyan"
+                [ngClass]="searchStyle.areaSearch === i[0] ? 'area-search' : ''"
                 *ngFor="let i of district"
                 (click)="search('area', i[0])">{{i[1]}}</span>
         </div>
@@ -29,6 +37,7 @@
         <label>物品种类:</label>
         <div class="inline-block">
           <span class="font-color-cyan font-margin-10"
+                [ngClass]="i.key === searchStyle.goodsTypeSearch ? 'goodsType-search' : ''"
                 *ngFor="let i of goodsType"
                 (click)="search('goodsType',i.key)">{{i.val}}</span>
         </div>

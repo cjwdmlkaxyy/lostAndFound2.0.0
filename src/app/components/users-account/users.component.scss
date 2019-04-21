@@ -117,3 +117,50 @@
   }
 }
 
+/*修改用户信息样式*/
+.update-user-infos{
+  width: 400px;
+  min-width: 380px;
+  padding: 20px;
+}
+.update-main{
+  border: 1px solid #00816e;
+  border-radius: 3px;
+  padding: 20px;
+  overflow: hidden;
+}
+.update-main>div{
+  padding:5px 0;
+  & label{
+    width: 75px;
+  }
+  & input[type=text]{
+    border: 1px solid #00816e;
+    border-radius: 195px;
+    height: 32px;
+    padding:0 20px;
+  }
+  & input[type=text]:focus{
+    box-shadow: 0 0 3px #00816e;
+  }
+}
+.text-tilt{
+  display: inline-block;
+  width: 192px;
+  background-color: #e18130;
+  -webkit-transform: rotate(20deg);
+  transform: rotate(20deg);
+  float: right;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: -7px;
+  margin-right: -69px;
+  color: #fff;
+}
+
+.danger-text-color{
+  color: red;
+  & i{
+    margin-right: 10px;
+  }
+}

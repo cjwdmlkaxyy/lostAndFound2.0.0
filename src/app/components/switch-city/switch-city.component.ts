@@ -31,6 +31,7 @@ export class SwitchCityComponent implements OnInit{
     }
     this.hotCity = this.publicDate.hotCity;
     this.directlyCity = this.publicDate.directlyCity;
+    console.log(this.directlyCity);
     this.cities = this.publicDate.getAllCities;
   }
 
@@ -38,7 +39,7 @@ export class SwitchCityComponent implements OnInit{
   * select city
   * */
   selectCity(city, province) {
-    let cityObj = {
+    let cityObj: any = {
       province: province,
       city: city
     };

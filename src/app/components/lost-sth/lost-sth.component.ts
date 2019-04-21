@@ -27,7 +27,7 @@ export class LostSthComponent implements OnInit {
   goodsType: Array<any>;  // 物品种类
   thankWay: Array<any>;
   hotSearch: Array<any>;
-  goodsSearch: any; // input框搜索
+  goodsSearch = ''; // input框搜索
   district: Array<any>;
   startTime: any;
   endTime: any;
@@ -44,6 +44,13 @@ export class LostSthComponent implements OnInit {
     province: '',
     district: '',
     city: ''
+  };
+
+  /*索搜时的样式*/
+  searchStyle = {
+    hotSearch: '',
+    areaSearch: '',
+    goodsTypeSearch: ''
   };
 
   localCity: any; // 本市
@@ -94,18 +101,35 @@ export class LostSthComponent implements OnInit {
     /*根据传过来的值封装数据*/
     if (flag === 'goodsType') {
       this.searchInfos.typeOfGoods = val;
+      this.searchStyle.goodsTypeSearch = val;
     } else if (flag === 'startTime') {
       this.searchInfos.fromTime = val;
     } else if(flag === 'endTime') {
       this.searchInfos.toTime = val;
-    } else if (flag === 'area' && val === '') {
+    } else if (flag === 'area' && val === '') { // 区域选择-不限
       this.searchInfos.province = '';
       this.searchInfos.city = '';
       this.searchInfos.district = '';
-    } else if (flag === 'area' && val !== '') {
+      this.searchStyle.areaSearch = '';
+    } else if (flag === 'area' && val == this.localCity) { // 区域选择-本市
+      this.searchInfos.province = this.getProviceId;
+      this.searchInfos.city = this.localCity;
+      this.searchInfos.district = '';
+      this.searchStyle.areaSearch = val;
+    } else if (flag === 'area' && val !== '') { // 区域选择-区
       this.searchInfos.province = this.getProviceId;
       this.searchInfos.city = this.localCity;
       this.searchInfos.district = val;
+      this.searchStyle.areaSearch = val;
+    } else if ( flag === 'fuzzySearch-hot') {
+      this.goodsSearch = val;
+      this.searchStyle.hotSearch = val;
+    } else if ( flag === 'fuzzySearch-input') {
+      this.goodsSearch = val;
+      this.searchStyle.hotSearch = '';
+    } else if ( flag === 'clearInput') {
+      this.goodsSearch = '';
+      this.searchStyle.hotSearch = '';
     }
     
     console.log(this.searchInfos);
@@ -125,20 +149,6 @@ export class LostSthComponent implements OnInit {
       console.log(error);
     });
 
-  }
-
-  /*
- * format time
- * function: get timestamp
- * */
-  getTimestamp(val, flag) {
-    if (flag === 'start') {
-      let startDate = new Date(val.getFullYear(), val.getMonth(), val.getDate(), 0, 0, 0);
-      this.searchInfos.fromTime = startDate.getTime();
-    } else {
-      let endDate = new Date(val.getFullYear(), val.getMonth(), val.getDate(), 23, 59, 59);
-      this.searchInfos.toTime = endDate.getTime();
-    }
   }
 
   changePage(e){

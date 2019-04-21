@@ -21,7 +21,8 @@
         </div>
         <ul>
           <li *ngFor="let item of directlyCity"
-              (click)="selectCity(item.key)">{{item.val}}</li>
+              [ngClass]="item[0] == currentCity ? 'currentCity' : ''"
+              (click)="selectCity(item)">{{item[1]}}</li>
         </ul>
       </div>
       <!--load cities-->
