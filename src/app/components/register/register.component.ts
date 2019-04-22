@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit() {
-    this.PublicDate.getProvince();
+    // this.PublicDate.getProvince();
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.getProvinces = JSON.parse(res.data);
       this.registerInfos.province = this.getProvinces[0][0];

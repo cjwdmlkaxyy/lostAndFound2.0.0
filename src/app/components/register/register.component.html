@@ -124,18 +124,18 @@
 
             <div class="row" [className]="none">
                 <label><span class="starColor">*</span>所在区域:</label>
-              <select class="form-control" (change)="chooseCity($event.target.value)">
-                <option name="province"
-                        *ngFor="let item of getProvinces">{{item[1]}}</option>
-              </select>
-              <select class="form-control"
-                    *ngIf="getCities.length !== 0 && (registerInfos.province != '110000' &&
-                             registerInfos.province != '310000' && registerInfos.province != '120000'
-                             && registerInfos.province != '500000')"
-                      (change)="formatCity($event.target.value)">
-                <option name="province"
-                        *ngFor="let item of getCities">{{item[1]}}</option>
-              </select>
+                <select class="form-control" (change)="chooseCity($event.target.value)">
+                    <option name="province"
+                          *ngFor="let item of getProvinces">{{item[1]}}</option>
+                </select>
+                <select class="form-control"
+                      *ngIf="getCities.length !== 0 && (registerInfos.province != '110000' &&
+                               registerInfos.province != '310000' && registerInfos.province != '120000'
+                               && registerInfos.province != '500000')"
+                        (change)="formatCity($event.target.value)">
+                    <option name="province"
+                          *ngFor="let item of getCities">{{item[1]}}</option>
+                </select>
             </div>
 
 

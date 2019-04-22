@@ -3,7 +3,7 @@
     <div class="user-tab">
       <span>你好！</span>
       <span>小小白兔</span>
-      <span style="color: #2aa387;cursor:pointer;">修改个人信息</span>
+      <span style="color: #2aa387;cursor:pointer;" (click)="showUserInfos()">修改个人信息</span>
     </div>
     <div class="user-messages">
       <div class="messages-line">
@@ -47,7 +47,7 @@
       </div>
     </div>
   </div>
-  <div class="update-user-infos">
+  <div class="update-user-infos" style="display: none;">
     <div class="update-main">
       
       <span class="text-tilt">修改个人信息</span>
@@ -60,37 +60,50 @@
         <div class="danger-text-color"
              *ngIf="userInfosStyle.netName && userInfos.netName.length > 15">
           <i class="glyphicon glyphicon-warning-sign icon-danger"></i>
-          <span>网名不能超过15个字符</span>
+          <span *ngIf="userInfosStyle.netName">网名不能超过15个字符</span>
         </div>
         <label>网名:</label>
         <input type="text" name="netName"
                [(ngModel)]="userInfos.netName">
       </div>
       <div>
-        <div *ngIf="userInfosStyle.phone" class="danger-text-color">
+        <div *ngIf="userInfosStyle.phone || userInfosStyle.phoneRepeat" class="danger-text-color">
             <i class="glyphicon glyphicon-warning-sign icon-danger"></i>
-            <span>请输入正确的电话号码</span>
+            <span *ngIf="userInfosStyle.phone">请输入正确的电话号码</span>
+            <span *ngIf="userInfosStyle.phoneRepeat">该电话号码已存在</span>
         </div>
         <label>电话号码:</label>
-        <input type="text" name="phoneNum"
+        <input type="text" name="phoneNum" autocomplete="off"
                (blur)="checkPhone(userInfos.phone)"
                [(ngModel)]="userInfos.phone">
-      </div>
-      <div>
-        <label>出生日期:</label>
-        <input type="text">
       </div>
       <div>
         <label>邮箱:</label>
         <input type="text">
       </div>
       <div>
+        <label>出生日期:</label>
+        <nz-demo-date-picker-start-end style="display: inline-block; margin-bottom: -8px"
+                                       [isShowEndPicker]="false"></nz-demo-date-picker-start-end>
+      </div>
+      <div>
         <label>所在地区:</label>
-        <input type="text">
+        <select (change)="chooseCity($event.target.value)">
+          <option name="province"
+                  *ngFor="let item of getProvinces">{{item[1]}}</option>
+        </select>
+        <select style="margin: 10px 0 0 75px"
+                *ngIf="getCities.length !== 0 && (userInfos.province != '110000' &&
+                               userInfos.province != '310000' && userInfos.province != '120000'
+                               && userInfos.province != '500000')"
+                (change)="formatCity($event.target.value)">
+          <option name="province"
+                  *ngFor="let item of getCities">{{item[1]}}</option>
+        </select>
       </div>
       <div style="width: 100%; display: flex;justify-content: space-around;padding: 20px 40px 0">
         <button class="btn btn-success" (click)="updateUsersInfos()">保存</button>
-        <button class="btn btn-danger" (click)="cancleUpdateUsersInfos">取消</button>
+        <button class="btn btn-danger" (click)="cancelUpdateUsersInfos()">取消</button>
       </div>
     </div>
   </div>
