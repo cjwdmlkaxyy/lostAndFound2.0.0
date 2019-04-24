@@ -25,22 +25,65 @@ export class UsersComponent implements OnInit {
     city: '',
     area: '',
   };
-  userInfosStyle = {
+  userInfosStyle = { // 判断用户信息是否输入正确
     netName: false,
     phone: false,
     phoneRepeat: false,
     email: false,
     emailRepeat: false
   };
+  // searchInfos = {
+  //   userId: '31', // 用户id
+  //   fromTime: null, // startTime
+  //   toTime: null,  // endTime
+  //   typeOfGoods: null,
+  //   thankWay: null,
+  //   pageNo: 1,
+  //   pageSize: 10,
+  //   id: '',  // 物品id
+  //   province: '',
+  //   district: '',
+  //   city: ''
+  // };
   getProvinces: any;
   getCities: any;
   
+  searchInfos: any; // 搜索条件
+  pagesConfig: any;
+  renderData: any;
   ngOnInit() {
+    this.pagesInfos();
+    this.searchCondition();
+    this.getData();
+    /*更新用户信息时用的*/
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.getProvinces = JSON.parse(res.data);
       this.userInfos.province = this.getProvinces[0][0];
     });
     this.getCities = [];
+  }
+
+  /*获取用户数据*/
+  getData() {
+    this.HttpRequest.searchGoods(this.searchInfos).subscribe( (res: any) => {
+      console.log(res);
+      this.renderData = JSON.parse(res.data.goods);
+      console.log(this.renderData);
+    });
+  }
+  pagesInfos() {
+    this.pagesConfig = {
+      pageSize: 10,
+      pageNum: 1
+    };
+  }
+
+  searchCondition() {
+    this.searchInfos = { // 查找用户数据
+      userId: '31',
+      pageNo: this.pagesConfig.pageNum,
+      pageSize: this.pagesConfig.pageSize,
+    };
   }
 
   checkPhone(val) {
