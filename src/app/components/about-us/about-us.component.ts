@@ -16,6 +16,9 @@ export class AboutUsComponent implements OnInit {
     /*test[0].onclick = function () {
       console.log(2222222);
     };*/
+    let obj = document.getElementById('test11111');
+    obj.innerHTML = '323452352';
+
   }
 
 }

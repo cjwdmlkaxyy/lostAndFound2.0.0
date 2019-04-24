@@ -21,7 +21,7 @@ export class HttpRequestService{
   * */
   searchGoods(data): Observable<any> {
     console.log(this.header);
-    return this.http.post(this.urlFront + 'goods/getGoodsInfo', data, {
+    return this.http.post('http://192.168.2.57:8082/' + 'goods/getGoodsInfo', data, {
       headers: new HttpHeaders({
         // 'Content-Type':  'application/json',
         // 'Authorization': 'my-auth-token',

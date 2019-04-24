@@ -33,7 +33,7 @@ export class LostSthComponent implements OnInit {
   endTime: any;
 
   searchInfos = {
-    userId: '', // 用户id
+    userId: '31', // 用户id
     fromTime: null, // startTime
     toTime: null,  // endTime
     typeOfGoods: null,
