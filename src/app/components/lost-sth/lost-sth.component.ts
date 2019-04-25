@@ -19,31 +19,36 @@ export class LostSthComponent implements OnInit {
   /*
   * pagesInformation
   * */
-  totalNum = 500;
-  pageSize = 10;
-
   tags: any;
 
   goodsType: Array<any>;  // 物品种类
   thankWay: Array<any>;
   hotSearch: Array<any>;
-  goodsSearch = ''; // input框搜索
   district: Array<any>;
   startTime: any;
   endTime: any;
 
+  /*页码信息*/
+  pageConfig = {
+    pageNum: 1,
+    pageSize: 10,
+    totalNum: null // 总条数
+  };
+
+  /*搜索条件*/
   searchInfos = {
-    userId: '31', // 用户id
+    userId: '', // 用户id
     fromTime: null, // startTime
     toTime: null,  // endTime
     typeOfGoods: null,
     thankWay: null,
-    pageNo: '',
-    pageSize: '',
+    pageNo: this.pageConfig.pageNum,
+    pageSize: this.pageConfig.pageSize,
     id: '',  // 物品id
     province: '',
     district: '',
-    city: ''
+    city: '',
+    infoTittle: '' // input框搜索
   };
 
   /*索搜时的样式*/
@@ -55,6 +60,7 @@ export class LostSthComponent implements OnInit {
 
   localCity: any; // 本市
   getProviceId: any; // 获得省id
+  renderData: any; // 存储数据的
 
   ngOnInit() {
     this.tags = [
@@ -93,6 +99,8 @@ export class LostSthComponent implements OnInit {
       this.localCity = '510100';
       this.getArea('510100'); // 给默认的区域是成都
     }
+
+    this.search('', '');
   }
 
   search(flag: string, val: any) {
@@ -122,19 +130,21 @@ export class LostSthComponent implements OnInit {
       this.searchInfos.district = val;
       this.searchStyle.areaSearch = val;
     } else if ( flag === 'fuzzySearch-hot') {
-      this.goodsSearch = val;
+      this.searchInfos.infoTittle = val;
       this.searchStyle.hotSearch = val;
     } else if ( flag === 'fuzzySearch-input') {
-      this.goodsSearch = val;
+      this.searchInfos.infoTittle = val;
       this.searchStyle.hotSearch = '';
     } else if ( flag === 'clearInput') {
-      this.goodsSearch = '';
+      this.searchInfos.infoTittle = '';
       this.searchStyle.hotSearch = '';
     }
     
     console.log(this.searchInfos);
     this.HttpService.searchGoods(this.searchInfos).subscribe(res => {
-      console.log(res);
+       this.renderData = JSON.parse(res.data.goods);
+       this.pageConfig.totalNum = res.data.pageCount;
+       console.log(this.renderData);
     }, err => {
       console.log(err);
     });
@@ -153,6 +163,8 @@ export class LostSthComponent implements OnInit {
 
   changePage(e){
     console.log(e);
+    this.searchInfos.pageNo = e;
+    this.search('', '');
   }
 
   /*获取搜索的开始时间和结束时间*/

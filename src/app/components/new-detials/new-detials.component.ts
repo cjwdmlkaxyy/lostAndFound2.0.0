@@ -25,7 +25,7 @@ export class NewDetialsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
         console.log(params);
         this.id = params.id;
-    })
+    });
   }
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export class NewDetialsComponent implements OnInit {
     this.leaveWordFlag = 'publishWords';
   }
   /*发表留言*/
-  publishWords(){
+  publishWords() {
     $('#leaveWords').fadeOut(200);
     this.leaveWordFlag = 'leaveWords';
   }

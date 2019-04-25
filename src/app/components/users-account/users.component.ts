@@ -32,22 +32,9 @@ export class UsersComponent implements OnInit {
     email: false,
     emailRepeat: false
   };
-  // searchInfos = {
-  //   userId: '31', // 用户id
-  //   fromTime: null, // startTime
-  //   toTime: null,  // endTime
-  //   typeOfGoods: null,
-  //   thankWay: null,
-  //   pageNo: 1,
-  //   pageSize: 10,
-  //   id: '',  // 物品id
-  //   province: '',
-  //   district: '',
-  //   city: ''
-  // };
+
   getProvinces: any;
   getCities: any;
-  
   searchInfos: any; // 搜索条件
   pagesConfig: any;
   renderData: any;
@@ -65,16 +52,19 @@ export class UsersComponent implements OnInit {
 
   /*获取用户数据*/
   getData() {
+    console.log(this.searchInfos);
     this.HttpRequest.searchGoods(this.searchInfos).subscribe( (res: any) => {
-      console.log(res);
       this.renderData = JSON.parse(res.data.goods);
-      console.log(this.renderData);
+      this.pagesConfig.totalPages = res.data.pageCount;
+      this.pagesConfig.totalNum = res.data.recordCount;
     });
   }
   pagesInfos() {
     this.pagesConfig = {
       pageSize: 10,
-      pageNum: 1
+      pageNum: 1,
+      totalPages: '', // 总页数
+      totalNum: null, // 总条数
     };
   }
 
@@ -125,11 +115,17 @@ export class UsersComponent implements OnInit {
     }
 
     console.log(this.userInfos);
-    $('.update-user-infos').fadeOut(500);
+    this.registerService.updateUsersInfos(this.userInfos).subscribe( (res: any) => {
+      console.log(res);
+      $('.update-user-infos').fadeOut(500);
+    }, (err: any) => {
+      console.log('系统错误，请稍候重试');
+    });
+
   }
 
   /*更新用户信息-取消*/
-  cancelUpdateUsersInfos(){
+  cancelUpdateUsersInfos() {
     $('.update-user-infos').fadeOut(500);
   }
 
@@ -160,6 +156,12 @@ export class UsersComponent implements OnInit {
 
   showUserInfos() {
     $('.update-user-infos').fadeIn(500);
+  }
+
+  /*翻页*/
+  changePage(e) {
+    this.searchInfos.pageNo = e;
+    this.getData();
   }
 
 }

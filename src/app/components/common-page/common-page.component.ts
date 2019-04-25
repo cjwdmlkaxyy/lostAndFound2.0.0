@@ -19,12 +19,12 @@ export class CommonPageComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.getPages(this.totalNum, this.pageSize, this.visibleNum);
+    // this.getPages(this.totalNum, this.pageSize, this.visibleNum);  //自己写的
 
-    console.log(this.totalNum)
+    console.log(this.totalNum);
   }
 
-  changeData(e){
+  changeData(e) {
     this.pageIndex = e;
     this.currentIndex.emit(e);
   }

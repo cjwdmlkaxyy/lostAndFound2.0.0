@@ -42,7 +42,6 @@ export class HttpRequestService{
  * */
   getCities(val): Observable<any> {
      return this.http.get(this.urlFront + 'goods/findCityByProvince/' + val);
-     // return this.http.get(this.urlFront + 'goods/findAreaByCity/' + '510100');
   }
 
   /*
@@ -59,9 +58,7 @@ export class HttpRequestService{
     return this.http.post(this.urlFront + 'goods/img/upload', data, {
       headers: new HttpHeaders({
         'Content-Type': 'multipart/form-data',
-        // 'Access-Control-Allow-Origin': '*'
       })
     });
   }
-
 }

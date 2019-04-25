@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 export class RegisterService {
 
   // urlFront:string = 'http://192.168.2.28:8085';
-  urlFront = 'http://47.102.139.16:8081';
+  urlFront = 'http://47.102.139.16:8081/';
 
   constructor(
     private http: HttpClient
@@ -32,7 +32,17 @@ export class RegisterService {
     return this.http.get(this.urlFront + url + info);
   }
 
+  /*
+  * register
+  * */
   register(userInfos): Observable<any> {
-    return this.http.post<any>(this.urlFront + '/user/signup', userInfos);
+    return this.http.post<any>(this.urlFront + 'user/signup', userInfos);
+  }
+
+  /*
+  * update userInfos
+  * */
+  updateUsersInfos(val): Observable<any> {
+    return this.http.post(this.urlFront + 'user/update', val);
   }
 }

@@ -72,7 +72,6 @@ export class PublicDateService {
   getProvince() {
     this.httpRequest.getProvence().subscribe(res => {
       let province = JSON.parse(res.data);
-      console.log(province);
       for (let i = 0; i < province.length; i++) {
         if (this.directlyCities.indexOf(province[i][1]) === -1) {
           this.getCities(province[i]);
