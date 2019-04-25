@@ -6,7 +6,7 @@
     <form class="form-inline">
       <div class="row">
         <input type="text" class="form-control width-40" placeholder="物品搜索" name="goodsSearch" autocomplete="off"
-               [(ngModel)]="goodsSearch">
+               [(ngModel)]="searchInfos.infoTittle">
         <i class='glyphicon glyphicon-remove-circle clear-input' 
            *ngIf="goodsSearch != ''"
            (click)="search('clearInput')"></i>
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="row" style="padding-top: 10px !important;">
-        <label>拾物时间:</label>
+        <label>丢失时间:</label>
         <nz-demo-date-picker-start-end [isShowEndPicker]="true"
                   (startDateVal)="getSearchTime($event, 'start')"
                   (endDateVal)="getSearchTime($event, 'end')">
@@ -61,31 +61,46 @@
   </div>
   <div class="news-block">
     <div class="news">
-      <div class="messages" *ngFor="let x of tags">
+      <div class="messages" *ngFor="let item of renderData" [routerLink]="item.id">
         <div class="message-content">
           <div class="m-img">
             <img src="http://temp.im/212x150">
           </div>
           <div class="m-right">
             <div class="m-tag">
-              <div [ngClass]="x.category == 1 ? 'find' : 'lost'">
-                <span *ngIf="x.category == 1">寻物</span>
-                <span *ngIf="x.category == 2">招领</span>
+              <div [ngClass]="item.goodsWay == 1 ? 'find' : 'lost'">
+                <span *ngIf="item.goodsWay == 1">寻物</span>
+                <span *ngIf="item.goodsWay == 2">招领</span>
               </div>
             </div>
             <div class="m-main-information">
-              <div class="m-title"><span>身份证丢了</span></div>
+              <div class="m-title"><span>{{item.infoTittle}}</span></div>
               <div class="line"><span class="sr-only">这是一根线</span></div>
-              <div class="m-margin-bottom"><span>丢失类型:</span><span>证件类</span></div>
-              <div class="m-margin-bottom"><span>丢失地点:</span><span>四川省成都市天府广场附近</span></div>
-              <div class="m-margin-bottom"><span>丢失时间:</span><span>2019-02-12</span></div>
-              <div class="m-margin-bottom"><span>发布者:</span><span>小白兔好好吃</span></div>
+              <div class="m-margin-bottom">
+                <span *ngIf="item.goodsWay == 1">丢失类型:</span>
+                <span *ngIf="item.goodsWay == 2">拾物类型:</span>
+                <span>{{ 3 | conversionValue}}</span>
+              </div>
+              <div class="m-margin-bottom">
+                <span *ngIf="item.goodsWay == 1">丢失地点:</span>
+                <span *ngIf="item.goodsWay == 2">拾物地点:</span>
+                <span>{{item.lostPlace}}</span>
+              </div>
+              <div class="m-margin-bottom">
+                <span *ngIf="item.goodsWay == 1">丢失时间:</span>
+                <span *ngIf="item.goodsWay == 2">拾物时间:</span>
+                <span>{{item.lostTime | date: 'yyyy-MM-dd'}}</span>
+              </div>
+              <div class="m-margin-bottom">
+                <span>发布者:</span><span>小白兔好好吃</span>
+              </div>
             </div>
           </div>
         </div>
         <div class="m-footer">
           <div>
-            <span style="font-weight: bold;">描述:</span><span style="line-height: 22px;">地方计费hi偶尔费偶尔无人地方快结束了时间是让人触不及防的东西，分解费访问对对对对对对多多</span>
+            <span style="font-weight: bold;">描述:</span>
+            <span style="line-height: 22px;">{{item.description}}</span>
           </div>
           <div style="padding-right:5px;">
             <span>发布时间:</span><span>2019-02-12 18:00:03</span>
@@ -93,8 +108,11 @@
         </div>
       </div>
     </div>
-    <div class="pageComponent text-right" style="padding-top:60px;">
-      <app-common-page [pageSize]="pageSize" [totalNum]="totalNum" (currentIndex)="changePage($event)"></app-common-page>
+    <div class="no-date"
+         *ngIf="pageConfig.totalNum == 0">没有找到相关数据</div>
+    <div class="pageComponent text-right" style="padding-top:60px;"
+         *ngIf="pageConfig.totalNum != 0">
+      <app-common-page [pageSize]="pageConfig.pageSize" [totalNum]="pageConfig.totalNum" (currentIndex)="changePage($event)"></app-common-page>
     </div>
   </div>
 
