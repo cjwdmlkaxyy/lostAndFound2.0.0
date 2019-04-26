@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'frame', component: FrameComponent,
   children: [
-    {path:'', redirectTo: 'index', pathMatch: 'full'},
+    {path: '', redirectTo: 'index', pathMatch: 'full'},
     {path: 'index', component: HomeComponent},
     {path: 'index/:id', component: NewDetialsComponent},
     {path: 'findSth', component: FindSthComponent},
@@ -31,6 +31,7 @@ const routes: Routes = [
     {path: 'statement', component: StatementComponent},
     {path: 'switchCity', component: SwitchCityComponent},
     {path: 'users', component: UsersComponent},
+    {path: 'users/:id', component: NewDetialsComponent},
   ]},
 ];
 

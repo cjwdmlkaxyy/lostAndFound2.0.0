@@ -101,3 +101,33 @@ html{
 .user-head-portrait{
   border-radius: 50%;
 }
+/*加载动画*/
+.ant-spin{
+  color: #00816e !important;
+}
+.ant-spin-dot i{
+  background-color: #00816e !important;
+}
+
+/*页码组件*/
+a {
+  text-decoration: none;
+}
+.ant-pagination-item-active a {
+  color: #e18130 !important;
+}
+.ant-pagination-item a {
+  color: #00816e;
+}
+.ant-pagination-item-active:focus a, .ant-pagination-item-active:hover a {
+  color: #00816e !important;
+}
+.ant-pagination-item-active:hover{
+  border-color: #00816e !important;
+}
+
+/*图片-展示*/
+.show-img{
+  width: 212px;
+  height:150px;
+}

@@ -61,6 +61,7 @@ export class LostSthComponent implements OnInit {
   localCity: any; // 本市
   getProviceId: any; // 获得省id
   renderData: any; // 存储数据的
+  showLoading = true; // 是否展示loading
 
   ngOnInit() {
     this.district = [];
@@ -132,6 +133,7 @@ export class LostSthComponent implements OnInit {
     this.HttpService.searchGoods(this.searchInfos).subscribe(res => {
        this.renderData = JSON.parse(res.data.goods);
        this.pageConfig.totalNum = res.data.pageCount;
+       this.showLoading = false;
        console.log(this.renderData);
     }, err => {
       console.log(err);
@@ -142,15 +144,13 @@ export class LostSthComponent implements OnInit {
   getArea(val) {
     this.HttpService.getArea(val).subscribe(res =>  {
       this.district = JSON.parse(res.data);
-      console.log(this.district);
     }, error => {
       console.log(error);
     });
 
   }
 
-  changePage(e){
-    console.log(e);
+  changePage(e) {
     this.searchInfos.pageNo = e;
     this.search('', '');
   }

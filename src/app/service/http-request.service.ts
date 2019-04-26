@@ -61,4 +61,10 @@ export class HttpRequestService{
       })
     });
   }
+  /*
+  * delete goods by id
+  * */
+  deletegoods(val): Observable<any> {
+    return this.http.post( this.urlFront + 'goods/delGoods', {id: ['31']});
+  }
 }

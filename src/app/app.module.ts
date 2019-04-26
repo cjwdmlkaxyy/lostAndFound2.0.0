@@ -15,7 +15,6 @@ import { PublishNewsComponent } from './components/publish-news/publish-news.com
 import { FrameComponent } from './components/frame/frame.component';
 import {HighlightDirective} from './directive/highlight.directive';
 import {UnlessDirective} from './directive/unless.directiva';
-import {ExponentialStrengthPipe} from './pipe/exponential-strength.pipe';
 import { NewDetialsComponent } from './components/new-detials/new-detials.component';
 import {CheckValueDirective} from './directive/check-value.directive';
 import { StatementComponent } from './components/statement/statement.component';
@@ -48,7 +47,6 @@ registerLocaleData(zh);
     FrameComponent,
     HighlightDirective,
     UnlessDirective,
-    ExponentialStrengthPipe,
     NewDetialsComponent,
     CheckValueDirective,
     StatementComponent,

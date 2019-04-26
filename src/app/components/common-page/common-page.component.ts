@@ -20,8 +20,6 @@ export class CommonPageComponent implements OnInit {
   ngOnInit() {
 
     // this.getPages(this.totalNum, this.pageSize, this.visibleNum);  //自己写的
-
-    console.log(this.totalNum);
   }
 
   changeData(e) {

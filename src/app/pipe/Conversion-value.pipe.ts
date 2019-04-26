@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { PublicDateService } from '../service/public-date.service';
-import { HttpClient } from '@angular/common/http';
 
 @Pipe({
   name: 'conversionValue'

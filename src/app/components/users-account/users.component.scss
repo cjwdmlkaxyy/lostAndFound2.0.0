@@ -71,7 +71,7 @@
     width:50px;
     justify-content: center;
     color: #fff;
-    background-color:$basicColor-orange
+    //background-color:$basicColor-orange
   }
 }
 
@@ -171,4 +171,45 @@
   display: flex;
   justify-content: flex-end;
   padding: 0 40px 38px;
+}
+
+.lost{
+  background-color:$basicColor-orange;
+}
+.found{
+  background-color:$basicColor-green;
+}
+
+/*delete-layer*/
+.delete-layer{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.delete-main{
+  width: 300px;
+  padding: 20px;
+  border: 1px $basicColor-orange solid;
+  border-radius: 5px;
+  background: #fff;
+  text-align: center;
+  i{
+    color: #d9534f;
+    margin-right: 15px;
+    font-size: 20px;
+  }
+  span{
+    font-size: 18px;
+  }
+}
+.delete-btn{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding-top: 35px;
 }

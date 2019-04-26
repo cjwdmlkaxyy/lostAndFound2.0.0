@@ -5,7 +5,8 @@
       <span>小小白兔</span>
       <span style="color: #2aa387;cursor:pointer;" (click)="showUserInfos()">修改个人信息</span>
     </div>
-    <div class="user-messages">
+    <div class="user-messages"
+         *ngFor="let item of renderData">
       <div class="messages-line">
         <div class="head-portrait">
           <img src="../../../assets/img/user.jpg" class="user-head-portrait">
@@ -13,33 +14,52 @@
         </div>
       </div>
       <div class="messages">
-        <div class="message-content">
+        <div class="message-content" [routerLink]="item.id">
           <div class="m-img">
-            <img src="http://temp.im/212x150">
+            <img class="show-img"
+                 [src]="item.picUrlEntityList[0].goodsPicUrl">
           </div>
           <div class="m-right">
             <div class="m-tag">
-              <div>失物</div>
+              <div [ngClass]="item.goodsWay == 1 ? 'lost' : 'found'">
+                <span *ngIf="item.goodsWay == 1">寻物</span>
+                <span *ngIf="item.goodsWay == 0">招领</span>
+              </div>
             </div>
             <div class="m-main-information">
-              <div class="m-title"><span>身份证丢了</span></div>
+              <div class="m-title"><span>{{item.infoTittle}}</span></div>
               <div class="line"><span class="sr-only">这是一根线</span></div>
-              <div class="m-margin-bottom"><span>丢失类型:</span><span>证件类</span></div>
-              <div class="m-margin-bottom"><span>丢失地点:</span><span>四川省成都市天府广场附近</span></div>
-              <div class="m-margin-bottom"><span>丢失时间:</span><span>2019-02-12</span></div>
-              <div class="m-margin-bottom"><span>发布者:</span><span>小白兔好好吃</span></div>
+              <div class="m-margin-bottom">
+                <span *ngIf="item.goodsWay == 0">拾物类型:</span>
+                <span *ngIf="item.goodsWay == 1">丢失类型:</span>
+                <span>{{item.typeOfGoods | conversionValue}}</span>
+              </div>
+              <div class="m-margin-bottom">
+                <span *ngIf="item.goodsWay == 0">拾物地点:</span>
+                <span *ngIf="item.goodsWay == 1">丢失地点:</span>
+                <span>{{item.lostPlace}}</span>
+              </div>
+              <div class="m-margin-bottom">
+                <span *ngIf="item.goodsWay == 0">拾物时间:</span>
+                <span *ngIf="item.goodsWay == 1">丢失时间:</span>
+                <span>{{item.lostTime | date: 'yyyy-MM-dd'}}</span>
+              </div>
+              <div class="m-margin-bottom">
+                <span>发布者:</span><span>小白兔好好吃</span>
+              </div>
             </div>
           </div>
         </div>
         <div class="m-footer">
           <div>
-            <span style="font-weight: bold;">描述:</span><span style="line-height: 22px;">地方计费hi偶尔费偶尔无人地方快结束了时间是让人触不及防的东西，分解费访问对对对对对对多多</span>
+            <span style="font-weight: bold;">描述:</span>
+            <span style="line-height: 22px;">{{item.description}}</span>
           </div>
           <div>
             <div class="operation">
-              <span>编辑</span>
+              <!--<span>编辑</span>-->
               <span>留言(5)</span>
-              <span>删除</span>
+              <span (click)="deleteData(item.id)">删除</span>
             </div>
             <div style="padding-right:5px;"><span>发布时间:</span><span>2019-02-12 18:00:03</span></div>
           </div>
@@ -109,4 +129,15 @@
       </div>
     </div>
   </div>
+  <div class="delete-layer" style="display: none;" (click)="closeDeleteLayer()">
+    <div class="delete-main">
+      <i class="glyphicon glyphicon-warning-sign"></i>
+      <span>真的要删除这条信息吗？</span>
+      <div class="delete-btn">
+        <button class="btn btn-success" (click)="confirmDel()">确定</button>
+        <button class="btn btn-danger" (click)="cancelDel()">取消</button>
+      </div>
+    </div>
+  </div>
 </div>
+

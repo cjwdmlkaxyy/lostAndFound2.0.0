@@ -38,16 +38,27 @@ export class UsersComponent implements OnInit {
   searchInfos: any; // 搜索条件
   pagesConfig: any;
   renderData: any;
+  deleteItemId = [];
+
   ngOnInit() {
     this.pagesInfos();
     this.searchCondition();
     this.getData();
-    /*更新用户信息时用的*/
+    this.getProvince();
+    this.getCities = [];
+  }
+
+  /*get province*/
+  getProvince() {
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.getProvinces = JSON.parse(res.data);
       this.userInfos.province = this.getProvinces[0][0];
     });
-    this.getCities = [];
+  }
+
+  /*获得用户信息*/
+  getUserInfos() {
+  //  后台还没有做该功能
   }
 
   /*获取用户数据*/
@@ -57,6 +68,7 @@ export class UsersComponent implements OnInit {
       this.renderData = JSON.parse(res.data.goods);
       this.pagesConfig.totalPages = res.data.pageCount;
       this.pagesConfig.totalNum = res.data.recordCount;
+      console.log(this.renderData);
     });
   }
   pagesInfos() {
@@ -104,7 +116,6 @@ export class UsersComponent implements OnInit {
       this.userInfosStyle.phone = true;
       flag = true;
     }
-    // if(this.userInfos.phone)
     $('.icon-danger').each(function(){
       // console.log(222222222222);
       return;
@@ -162,6 +173,30 @@ export class UsersComponent implements OnInit {
   changePage(e) {
     this.searchInfos.pageNo = e;
     this.getData();
+  }
+
+  /*删除数据*/
+  deleteData(val) {
+    this.deleteItemId = [];
+    this.deleteItemId.push(val);
+    $('.delete-layer').fadeIn(200);
+  }
+  /*删除-确定、取消*/
+  confirmDel() {
+    this.HttpRequest.deletegoods(this.deleteItemId).subscribe((res: any) => {
+      console.log(res);
+      if (res.code !== '999999') {
+        $('.delete-layer').fadeOut(200);
+      }
+    }, (err: any) => {
+      console.log(err);
+    });
+  }
+  cancelDel() {
+    $('.delete-layer').fadeOut(200);
+  }
+  closeDeleteLayer() {
+    // $('.delete-layer').fadeOut(200);
   }
 
 }

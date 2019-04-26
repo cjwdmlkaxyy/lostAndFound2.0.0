@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { ViewChild, AfterViewInit } from '@angular/core';
+import { HttpRequestService } from '../../service/http-request.service';
 
 import { PublishLeaveWordsComponent } from '../publish-leave-words/publish-leave-words.component';
 
@@ -18,20 +19,27 @@ export class NewDetialsComponent implements OnInit {
 
   id: any;
   leaveWordFlag: string;
+  searchCondition = {
+    id: null
+  };
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public httpRequest: HttpRequestService
   ) {
     this.route.params.subscribe((params: Params) => {
-        console.log(params);
-        this.id = params.id;
+        localStorage.setItem('goodsId', params.id);
+        this.searchCondition.id = localStorage.getItem('goodsId');
     });
   }
+
+  renderData: any;
 
   ngOnInit() {
 
     $('#leaveWords').hide();
     this.leaveWordFlag = 'leaveWords';
+    this.getData();
   }
   /*我要留言*/
   leaveWords() {
@@ -45,5 +53,22 @@ export class NewDetialsComponent implements OnInit {
   }
   answerLayer() {
     $('#answer').fadeIn(200);
+  }
+  getData() {
+    this.httpRequest.searchGoods(this.searchCondition).subscribe( (res: any) => {
+      console.log(res);
+      this.renderData = JSON.parse(res.data.goods);
+      console.log(this.renderData);
+    }, (err: any) => {
+      console.log(err);
+    });
+  }
+
+  /*回答问题-确定，取消*/
+  confirmAnswer() {
+    $('#answer').fadeOut(200);
+  }
+  cancleAnswer() {
+    $('#answer').fadeOut(200);
   }
 }

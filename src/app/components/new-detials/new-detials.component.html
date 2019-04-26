@@ -2,18 +2,19 @@
   <div id="topImg">
     <img src="http://static.runoob.com/images/mix/img_fjords_wide.jpg" class="img-top">
   </div>
-  <div class="main row" style="margin-top: 100px !important;padding: 50px !important;">
+  <div class="main row" style="margin-top: 100px !important;padding: 50px !important;"
+       *ngFor="let item of renderData">
     <div class="row text-center">
-      <span class="title">天府广场丢了一张身份证</span>
+      <span class="title">{{item.infoTittle}}</span>
     </div>
     <div class="row">
       <span>物品种类:</span>
-      <span>证件类</span>
+      <span>{{item.typeOfGoods | conversionValue}}</span>
     </div>
     <div class="row">
       <span>描述:</span>
       <div class="inline-block width-40">
-        <span>好滴哈佛dddddds二恶烷拖无翁二二二二二二二二房间诶哦附件为偶家GIF肯定发了发哈拉分的发的垃圾费IE凤凰网IE个地方垃圾费</span>
+        <span>{{item.description}}</span>
       </div>
     </div>
     <div class="row">
@@ -33,8 +34,8 @@
       <span style="background-color: #ff4500ab">四川省成都市锦江区仁恒置地广场周围</span>
     </div>
     <div class="row">
-      <span>丢失时间:</span>
-      <span style="background-color: yellow;">2019-02-5 18:21:11</span>
+      <span *ngIf="item.goodsWay == 1">丢失时间:</span>
+      <span style="background-color: yellow;">{{item.lostTime | date: 'yyyy-MM-dd'}}</span>
     </div>
     <div class="row">
       <span>联系人:</span>
@@ -84,10 +85,10 @@
         </div>
         <div class="row text-center" style="padding-bottom: 15px !important;">
           <button class="btn btn-success">更多留言</button>
-          <button class="btn btn-warning" 
+          <button class="btn btn-warning"
                   *ngIf="leaveWordFlag === 'leaveWords'"
                   (click)="leaveWords()">我要留言</button>
-          <button class="btn btn-warning" 
+          <button class="btn btn-warning"
                   *ngIf="leaveWordFlag === 'publishWords'"
                   (click)="publishWords()">发表留言</button>
         </div>
@@ -111,8 +112,8 @@
         </div>
       </div>
       <div class="btn-line">
-        <button class="btn btn-success">确定</button>
-        <button class="btn btn-danger">取消</button>
+        <button class="btn btn-success" (click)="confirmAnswer()">确定</button>
+        <button class="btn btn-danger" (click)="cancleAnswer()">取消</button>
       </div>
     </div>
   </div>
