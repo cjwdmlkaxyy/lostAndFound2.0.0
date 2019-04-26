@@ -111,19 +111,23 @@ html{
 
 /*页码组件*/
 a {
-  text-decoration: none;
+  text-decoration-line: none;
 }
-.ant-pagination-item-active a {
+.ant-pagination-item-active{
+  border-color: #e18130 !important;
+}
+.ant-pagination-item, .ant-pagination-item-active:hover{
+  border-color: #00816e;
+}
+.ant-pagination-item-active a{
   color: #e18130 !important;
 }
-.ant-pagination-item a {
+.ant-pagination-item a{
   color: #00816e;
 }
 .ant-pagination-item-active:focus a, .ant-pagination-item-active:hover a {
   color: #00816e !important;
-}
-.ant-pagination-item-active:hover{
-  border-color: #00816e !important;
+  text-decoration-line: none !important;
 }
 
 /*图片-展示*/

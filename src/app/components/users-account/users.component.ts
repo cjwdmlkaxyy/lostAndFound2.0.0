@@ -3,6 +3,7 @@ import { CheckValueService } from '../../service/check-value.service';
 import * as $ from 'jquery';
 import {RegisterService} from '../../service/register.service';
 import { HttpRequestService } from '../../service/http-request.service';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-users',
@@ -67,7 +68,7 @@ export class UsersComponent implements OnInit {
     this.HttpRequest.searchGoods(this.searchInfos).subscribe( (res: any) => {
       this.renderData = JSON.parse(res.data.goods);
       this.pagesConfig.totalPages = res.data.pageCount;
-      this.pagesConfig.totalNum = res.data.recordCount;
+      this.pagesConfig.totalNum = 40;
       console.log(this.renderData);
     });
   }
@@ -177,8 +178,9 @@ export class UsersComponent implements OnInit {
 
   /*删除数据*/
   deleteData(val) {
+    let data = stringify(val);
     this.deleteItemId = [];
-    this.deleteItemId.push(val);
+    this.deleteItemId.push(data);
     $('.delete-layer').fadeIn(200);
   }
   /*删除-确定、取消*/
