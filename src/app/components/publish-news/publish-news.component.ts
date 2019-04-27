@@ -92,7 +92,7 @@ export class PublishNewsComponent implements OnInit {
       this.isLogined = true;
     } else {
       this.userInfos = JSON.parse(localStorage.getItem('userInfos'));
-      this.saveInfos.username = this.userInfos.username;
+      this.saveInfos.username = this.userInfos.id;
     }
 
     /*拿到所有的省、城市、区-默认为四川省-成都市-市辖区*/
@@ -100,14 +100,14 @@ export class PublishNewsComponent implements OnInit {
       this.provinceList = JSON.parse(res.data);
       this.saveInfos.province = '510000';
     });
-    this.HttpRequest.getCities('510000').subscribe( (res: any) =>{
+    this.HttpRequest.getCities('510000').subscribe( (res: any) => {
       this.cityList = JSON.parse(res.data);
       this.saveInfos.city = '510100';
     });
     this.HttpRequest.getArea('510100').subscribe( (res: any) => {
       this.districtList = JSON.parse(res.data);
       this.saveInfos.district = this.districtList[0][0];
-    })
+    });
 
   }
 

@@ -9,8 +9,8 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
 
-  // urlFront = 'http://192.168.2.28:8081';//本地服务
-  urlFront = 'http://47.102.139.16:8081';
+  urlFront = 'http://192.168.2.57:8081'; // 本地服务
+  // urlFront = 'http://47.102.139.16:8081';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': undefined
@@ -18,13 +18,7 @@ export class LoginService {
   };
 
   /*用户登录*/
-  login(logins): Observable<any>{
+  login(logins): Observable<any> {
     return this.http.post(this.urlFront + '/login', logins);
-  }
-
-  /*上传图片*/
-  upload(value): Observable<any> {
-    return this.http.post('http://192.168.2.28:8082/goods/img/upload', value, {
-    });
   }
 }

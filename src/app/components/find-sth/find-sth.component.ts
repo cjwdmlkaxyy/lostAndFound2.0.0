@@ -61,6 +61,7 @@ export class FindSthComponent implements OnInit {
   localCity: any; // 本市
   getProviceId: any; // 获得省id
   renderData: any; // 存储数据的
+  showLoading = true; // loading动画
 
   ngOnInit() {
     this.district = [];
@@ -133,6 +134,7 @@ export class FindSthComponent implements OnInit {
        this.renderData = JSON.parse(res.data.goods);
        this.pageConfig.totalNum = res.data.pageCount;
        console.log(this.renderData);
+       this.showLoading = false;
     }, err => {
       console.log(err);
     });

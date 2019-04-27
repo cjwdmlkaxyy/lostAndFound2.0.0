@@ -111,7 +111,7 @@ html{
 
 /*页码组件*/
 a {
-  text-decoration-line: none;
+  text-decoration-line: none !important;
 }
 .ant-pagination-item-active{
   border-color: #e18130 !important;
@@ -126,8 +126,7 @@ a {
   color: #00816e;
 }
 .ant-pagination-item-active:focus a, .ant-pagination-item-active:hover a {
-  color: #00816e !important;
-  text-decoration-line: none !important;
+  color: #00816e;
 }
 
 /*图片-展示*/

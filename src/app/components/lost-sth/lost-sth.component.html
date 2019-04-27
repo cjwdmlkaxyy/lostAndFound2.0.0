@@ -8,10 +8,10 @@
         <input type="text" class="form-control width-40" placeholder="物品搜索" name="goodsSearch" autocomplete="off"
                [(ngModel)]="searchInfos.infoTittle">
         <i class='glyphicon glyphicon-remove-circle clear-input' 
-           *ngIf="goodsSearch != ''"
-           (click)="search('clearInput')"></i>
+           *ngIf="searchInfos.infoTittle != ''"
+           (click)="search('clearInput', '')"></i>
         <button class="btn btn-success" style="outline: none !important;"
-                (click)="search('fuzzySearch-input', goodsSearch)">搜索</button>
+                (click)="search('fuzzySearch-input', searchInfos.infoTittle)">搜索</button>
         <div class="inline-block">
           <label>热门搜索:</label>
           <span class="font-color-blue"

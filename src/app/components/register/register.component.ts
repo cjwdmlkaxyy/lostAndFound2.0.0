@@ -60,8 +60,9 @@ export class RegisterComponent implements OnInit {
   phoneNumRepeat = false;
   emailRepeat = false;
 
-  getProvinces: any;
-  getCities: any;
+  getProvinces: any; // 省
+  getCities: any; // 市
+  getArea: any; // 区
 
 
   ngOnInit() {
@@ -69,7 +70,9 @@ export class RegisterComponent implements OnInit {
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.getProvinces = JSON.parse(res.data);
       this.registerInfos.province = this.getProvinces[0][0];
+      this.associatedCtiyArea(); // 省市区联动
     });
+
     this.getCities = [];
   }
 
@@ -155,7 +158,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-
   checkEmail(value) {
     let flag = this.CheckValue.checkEmail(value);
     if (value === '' || value == null || !flag) {
@@ -218,26 +220,47 @@ export class RegisterComponent implements OnInit {
     this.registerInfos.birthday = birthday;
   }
 
-  chooseCity(val) {
+  /*市区联动*/
+  associatedCtiyArea() {
+    /*获取城市*/
+    this.HttpRequest.getCities(this.registerInfos.province).subscribe((resNext: any) => {
+      this.getCities = JSON.parse(resNext.data);
+      this.registerInfos.city = this.getCities[0][0];
+      /*获取区域*/
+      this.HttpRequest.getArea(this.registerInfos.city).subscribe( (res: any) => {
+        this.getArea = JSON.parse(res.data);
+        this.registerInfos.district = this.getArea[0][0];
+      });
+    });
+  }
+
+  changeProvince(val) {
     for (let item of this.getProvinces) {
       if (val === item[1]) {
         this.registerInfos.province = item[0];
         break;
       }
     }
-
-    if (this.registerInfos.province != '110000' && this.registerInfos.province != '310000' && this.registerInfos.province != '120000' && this.registerInfos.province != '500000') {
-      this.HttpRequest.getCities(this.registerInfos.province).subscribe(res => {
-        this.getCities = JSON.parse(res.data);
-        this.registerInfos.city = this.getCities[0][0];
-      });
-    }
+    this.associatedCtiyArea();
   }
 
-  formatCity(val) {
+  changeCity(val) {
     for (let item of this.getCities) {
       if (val === item[1]) {
         this.registerInfos.city = item[0];
+        break;
+      }
+    }
+    this.HttpRequest.getArea(this.registerInfos.city).subscribe( (res: any) => {
+      this.getArea = JSON.parse(res.data);
+      this.registerInfos.district = this.getArea[0][0];
+    });
+  }
+
+  changeArea(val) {
+    for (let item of this.getArea) {
+      if (val === item[1]) {
+        this.registerInfos.district = item[0];
         break;
       }
     }

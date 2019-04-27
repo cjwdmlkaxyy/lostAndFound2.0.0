@@ -59,7 +59,7 @@
               </div>
             </div>
             <div class="row">
-              <label class="left">上传图片:</label>
+              <label class="left"><span class="must">*</span>上传图片:</label>
               <input type="file" id="uploadImg1" class="left" (change)="uploadImg()">
             </div>
             <div class="row">
@@ -90,10 +90,10 @@
               <label *ngIf="saveInfos.goodsWay === 0"><span class="must">*</span>拾物时间:</label>
               <nz-demo-date-picker-start-end id="timePicker" [isShowEndPicker]="false" (startDateVal)="getDate($event)"></nz-demo-date-picker-start-end>
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
-              <span *ngIf="saveInfos.goodsWay === 1">请输入丢失时间</span>
-              <span *ngIf="saveInfos.goodsWay === 0">请输入拾物时间</span>
+              <span *ngIf="saveInfos.goodsWay === 1">请选择丢失时间</span>
+              <span *ngIf="saveInfos.goodsWay === 0">请选择拾物时间</span>
               <div class="inline-block alter-message"
-                   *ngIf="saveInfosFlags.lostTime">
+                   *ngIf="saveInfosFlags.lostTime && !saveInfos.lostTime">
                 <i class="glyphicon glyphicon-alert icon-danger"></i>
                 <span *ngIf="saveInfos.lostTime === '' && saveInfos.goodsWay === 1">请选择丢失时间</span>
                 <span *ngIf="saveInfos.lostTime === '' && saveInfos.goodsWay === 0">请选择拾物时间</span>
@@ -116,9 +116,9 @@
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入联系电话</span>
               <div class="inline-block alter-message"
-                   *ngIf="saveInfosFlags.conPhone">
+                   *ngIf="saveInfosFlags.conPhone && !saveInfos.telPhoneNo">
                 <i class="glyphicon glyphicon-alert icon-danger"></i>
-                <span *ngIf="saveInfos.conPhone === ''">请输入联系电话</span>
+                <span>请输入联系电话</span>
               </div>
             </div>
             <div class="row">

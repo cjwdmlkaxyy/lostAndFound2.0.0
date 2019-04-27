@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
   ) {}
 
   userInfos = { // 用户信息
-    netName: '',
+    netName: JSON.parse(localStorage.getItem('userInfos')).id,
     phone: '',
     birthday: '',
     province: '',
@@ -68,7 +68,7 @@ export class UsersComponent implements OnInit {
     this.HttpRequest.searchGoods(this.searchInfos).subscribe( (res: any) => {
       this.renderData = JSON.parse(res.data.goods);
       this.pagesConfig.totalPages = res.data.pageCount;
-      this.pagesConfig.totalNum = 40;
+      this.pagesConfig.totalNum = res.data.recordCount;
       console.log(this.renderData);
     });
   }
@@ -148,13 +148,10 @@ export class UsersComponent implements OnInit {
         break;
       }
     }
-
-    if (this.userInfos.province != '110000' && this.userInfos.province != '310000' && this.userInfos.province != '120000' && this.userInfos.province != '500000') {
-      this.HttpRequest.getCities(this.userInfos.province).subscribe(res => {
-        this.getCities = JSON.parse(res.data);
-        this.userInfos.city = this.getCities[0][0];
-      });
-    }
+    this.HttpRequest.getCities(this.userInfos.province).subscribe(res => {
+      this.getCities = JSON.parse(res.data);
+      this.userInfos.city = this.getCities[0][0];
+    });
   }
 
   formatCity(val) {
@@ -167,7 +164,7 @@ export class UsersComponent implements OnInit {
   }
 
   showUserInfos() {
-    $('.update-user-infos').fadeIn(500);
+    $('.update-user-infos').fadeIn(200);
   }
 
   /*翻页*/
@@ -186,9 +183,9 @@ export class UsersComponent implements OnInit {
   /*删除-确定、取消*/
   confirmDel() {
     this.HttpRequest.deletegoods(this.deleteItemId).subscribe((res: any) => {
-      console.log(res);
       if (res.code !== '999999') {
         $('.delete-layer').fadeOut(200);
+        this.getData();
       }
     }, (err: any) => {
       console.log(err);

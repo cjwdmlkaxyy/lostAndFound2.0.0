@@ -60,6 +60,12 @@
     </form>
   </div>
   <div class="news-block">
+    <div class="-loading" style="text-align: center;" *ngIf="showLoading">
+      <nz-spin nzSimple [nzSize]="'large'" nzTip="Loading...">
+        <nz-alert></nz-alert>
+      </nz-spin>
+      <!--<span>正在努力加载数据...</span>-->
+    </div>
     <div class="news">
       <div class="messages" *ngFor="let item of renderData" [routerLink]="item.id">
         <div class="message-content">

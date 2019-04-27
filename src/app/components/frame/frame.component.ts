@@ -10,7 +10,9 @@ import { CommunicateWithHeaderService } from '../../service/communicateWithHeade
 export class FrameComponent implements OnInit {
 
   userName = null;
-  loction: any; // 所在地
+  location = {
+    city: [1] // 由于懒得改，所以就随便写个值
+  }; // 所在地
   currentCityObj: any;
 
   userInfosFlag = localStorage.getItem('userInfos');
@@ -39,12 +41,16 @@ export class FrameComponent implements OnInit {
       } else {
         this.userName = this.userInfos.name;
       }
+      if (this.userInfos.cityName === '市辖区') {
+        this.location.city.push(this.userInfos.provinceName);
+      } else {
+        this.location.city.push(this.userInfos.cityName);
+      }
       console.log(this.userInfos);
     }
-    console.log(this.loction);
     this.communicateWithHeader.getMessages().subscribe( res => {
       console.log(res);
-      this.loction = res;
+      this.location = res;
       this.currentCityObj = res.city;
     });
   }

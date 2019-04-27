@@ -122,6 +122,9 @@
           <option name="province"
                   *ngFor="let item of getCities">{{item[1]}}</option>
         </select>
+        <select>
+          <option></option>
+        </select>
       </div>
       <div style="width: 100%; display: flex;justify-content: space-around;padding: 20px 40px 0">
         <button class="btn btn-success" (click)="updateUsersInfos()">保存</button>
