@@ -213,3 +213,11 @@
   justify-content: space-around;
   padding-top: 35px;
 }
+
+.location{
+  display: flex;
+  flex-direction: column;
+  select{
+    margin-top: 10px;
+  }
+}

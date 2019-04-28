@@ -19,12 +19,14 @@ export class UsersComponent implements OnInit {
   ) {}
 
   userInfos = { // 用户信息
-    netName: JSON.parse(localStorage.getItem('userInfos')).id,
+    id: JSON.parse(localStorage.getItem('userInfos')).id,
+    netName: '',
     phone: '',
+    email: '',
     birthday: '',
     province: '',
     city: '',
-    area: '',
+    discrict: '',
   };
   userInfosStyle = { // 判断用户信息是否输入正确
     netName: false,
@@ -36,6 +38,7 @@ export class UsersComponent implements OnInit {
 
   getProvinces: any;
   getCities: any;
+  getDistricts: any;
   searchInfos: any; // 搜索条件
   pagesConfig: any;
   renderData: any;
@@ -54,6 +57,17 @@ export class UsersComponent implements OnInit {
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.getProvinces = JSON.parse(res.data);
       this.userInfos.province = this.getProvinces[0][0];
+      
+      this.HttpRequest.getCities(this.userInfos.province).subscribe(res => {
+        this.getCities = JSON.parse(res.data);
+        this.userInfos.city = this.getCities[0][0];
+  
+        this.HttpRequest.getArea(this.userInfos.city).subscribe( (res: any) => {
+          this.getDistricts = JSON.parse(res.data);
+          this.userInfos.area = this.getDistricts[0][0];
+        });
+      });
+      
     });
   }
 
@@ -99,10 +113,34 @@ export class UsersComponent implements OnInit {
           this.userInfosStyle.phone = false;
           this.userInfosStyle.phoneRepeat = false;
         }
+      }, (err: any) => {
+        this.userInfosStyle.phone = false;
+          this.userInfosStyle.phoneRepeat = false;
       });
     } else {
       this.userInfosStyle.phone = true;
       this.userInfosStyle.phoneRepeat = false;
+    }
+  }
+
+  checkEmail(val) {
+    console.log(val);
+    if (this.CheckValue.checkEmail(val)) {
+      this.registerService.checkInformation('email', val).subscribe((res: any) => {
+        if (res.code === '000005') {
+          this.userInfosStyle.email = false; // 不显示
+          this.userInfosStyle.emailRepeat = true; // 显示
+        } else {
+          this.userInfosStyle.email = false;
+          this.userInfosStyle.emailRepeat = false;
+        }
+      }, (err: any) => {
+          this.userInfosStyle.email = false;
+          this.userInfosStyle.emailRepeat = false;
+      });
+    } else {
+      this.userInfosStyle.email = true;
+      this.userInfosStyle.emailRepeat = false;
     }
   }
 
@@ -118,7 +156,6 @@ export class UsersComponent implements OnInit {
       flag = true;
     }
     $('.icon-danger').each(function(){
-      // console.log(222222222222);
       return;
     });
 
@@ -141,7 +178,7 @@ export class UsersComponent implements OnInit {
     $('.update-user-infos').fadeOut(500);
   }
 
-  chooseCity(val) {
+  changeProvince(val) {
     for (let item of this.getProvinces) {
       if (val === item[1]) {
         this.userInfos.province = item[0];
@@ -151,10 +188,15 @@ export class UsersComponent implements OnInit {
     this.HttpRequest.getCities(this.userInfos.province).subscribe(res => {
       this.getCities = JSON.parse(res.data);
       this.userInfos.city = this.getCities[0][0];
+
+      this.HttpRequest.getArea(this.userInfos.city).subscribe( (res: any) => {
+        this.getDistricts = JSON.parse(res.data);
+        this.userInfos.area = this.getDistricts[0][0];
+      });
     });
   }
 
-  formatCity(val) {
+  changeCity(val) {
     for (let item of this.getCities) {
       if (val === item[1]) {
         this.userInfos.city = item[0];
