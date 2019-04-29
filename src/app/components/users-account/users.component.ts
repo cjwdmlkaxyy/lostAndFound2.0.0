@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import {RegisterService} from '../../service/register.service';
 import { HttpRequestService } from '../../service/http-request.service';
 import { stringify } from '@angular/compiler/src/util';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +16,8 @@ export class UsersComponent implements OnInit {
   constructor(
     private CheckValue: CheckValueService,
     public registerService: RegisterService,
-    public HttpRequest: HttpRequestService
+    public HttpRequest: HttpRequestService,
+    private nzMessage: NzMessageService
   ) {}
 
   userInfos = { // 用户信息
@@ -26,7 +28,7 @@ export class UsersComponent implements OnInit {
     birthday: '',
     province: '',
     city: '',
-    discrict: '',
+    district: '',
   };
   userInfosStyle = { // 判断用户信息是否输入正确
     netName: false,
@@ -43,6 +45,7 @@ export class UsersComponent implements OnInit {
   pagesConfig: any;
   renderData: any;
   deleteItemId = [];
+  showLoading = false;
 
   ngOnInit() {
     this.pagesInfos();
@@ -57,17 +60,16 @@ export class UsersComponent implements OnInit {
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.getProvinces = JSON.parse(res.data);
       this.userInfos.province = this.getProvinces[0][0];
-      
+      /*获取城市*/
       this.HttpRequest.getCities(this.userInfos.province).subscribe(res => {
         this.getCities = JSON.parse(res.data);
         this.userInfos.city = this.getCities[0][0];
-  
+        /*获取区域*/
         this.HttpRequest.getArea(this.userInfos.city).subscribe( (res: any) => {
           this.getDistricts = JSON.parse(res.data);
-          this.userInfos.area = this.getDistricts[0][0];
+          this.userInfos.district = this.getDistricts[0][0];
         });
       });
-      
     });
   }
 
@@ -83,7 +85,7 @@ export class UsersComponent implements OnInit {
       this.renderData = JSON.parse(res.data.goods);
       this.pagesConfig.totalPages = res.data.pageCount;
       this.pagesConfig.totalNum = res.data.recordCount;
-      console.log(this.renderData);
+      this.showLoading = false;
     });
   }
   pagesInfos() {
@@ -155,7 +157,7 @@ export class UsersComponent implements OnInit {
       this.userInfosStyle.phone = true;
       flag = true;
     }
-    $('.icon-danger').each(function(){
+    $('.icon-danger').each(function() {
       return;
     });
 
@@ -166,9 +168,14 @@ export class UsersComponent implements OnInit {
     console.log(this.userInfos);
     this.registerService.updateUsersInfos(this.userInfos).subscribe( (res: any) => {
       console.log(res);
-      $('.update-user-infos').fadeOut(500);
+      if (res.code === '000000') {
+        $('.update-user-infos').fadeOut(500);
+        this.nzMessage.create('success', '修改成功');
+      }
+
     }, (err: any) => {
       console.log('系统错误，请稍候重试');
+      this.nzMessage.create('error', '修改失败');
     });
 
   }
@@ -189,9 +196,9 @@ export class UsersComponent implements OnInit {
       this.getCities = JSON.parse(res.data);
       this.userInfos.city = this.getCities[0][0];
 
-      this.HttpRequest.getArea(this.userInfos.city).subscribe( (res: any) => {
+      this.HttpRequest.getArea(this.userInfos.city).subscribe((res: any) => {
         this.getDistricts = JSON.parse(res.data);
-        this.userInfos.area = this.getDistricts[0][0];
+        this.userInfos.district = this.getDistricts[0][0];
       });
     });
   }
@@ -200,6 +207,20 @@ export class UsersComponent implements OnInit {
     for (let item of this.getCities) {
       if (val === item[1]) {
         this.userInfos.city = item[0];
+        break;
+      }
+    }
+
+    this.HttpRequest.getArea(this.userInfos.city).subscribe((res: any) => {
+      this.getDistricts = JSON.parse(res.data);
+      this.userInfos.district = this.getDistricts[0][0];
+    });
+  }
+
+  changeArea(val) {
+    for (let item of this.getDistricts) {
+      if (val === item[1]){
+        this.userInfos.district = item[0];
         break;
       }
     }

@@ -49,7 +49,7 @@ export class PublishNewsComponent implements OnInit {
   clearSaveInfos() {
    this.saveInfos = {
       goodsWay: 1, // 发布信息标志 0:失物招领-招领  1:失物发布-寻物
-      username: '', // 用户的登录名
+      id: '', // 用户的登录名
       typeOfGoods: '', // 必传
       infoTittle: '', // 必传
       description: '', // 必传
@@ -92,7 +92,7 @@ export class PublishNewsComponent implements OnInit {
       this.isLogined = true;
     } else {
       this.userInfos = JSON.parse(localStorage.getItem('userInfos'));
-      this.saveInfos.username = this.userInfos.id;
+      this.saveInfos.id = this.userInfos.id;
     }
 
     /*拿到所有的省、城市、区-默认为四川省-成都市-市辖区*/
@@ -152,7 +152,7 @@ export class PublishNewsComponent implements OnInit {
     // 将数据封装成FormData
     let data: any = new FormData();
     data.append('goodsWay', this.saveInfos.goodsWay);
-    data.append('username', this.saveInfos.username);
+    data.append('id', this.saveInfos.id);
     data.append('typeOfGoods', this.saveInfos.typeOfGoods);
     data.append('infoTittle', this.saveInfos.infoTittle);
     data.append('description', this.saveInfos.description);
@@ -184,8 +184,8 @@ export class PublishNewsComponent implements OnInit {
 
     // 用ajax请求实现上传图片
     $.ajax({
-      // url: this.urlFront + 'goods/img/upload',
-      url: 'http://192.168.2.57:8082/' + 'goods/img/upload',
+      url: this.urlFront + 'goods/img/upload',
+      // url: 'http://192.168.2.57:8082/' + 'goods/img/upload',
       type: 'POST',
       data: data,
       contentType: false,

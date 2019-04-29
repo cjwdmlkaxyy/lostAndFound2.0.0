@@ -84,9 +84,14 @@ export class FindSthComponent implements OnInit {
       }
       this.getArea(this.localCity);
     } else {
-      this.getProviceId = '510000';
-      this.localCity = '510100';
-      this.getArea('510100'); // 给默认的区域是成都
+      if (localStorage.getItem('userInfos')) {
+        let city = JSON.parse(localStorage.getItem('userInfos')).city;
+        this.getArea(city);
+      } else {
+        // this.getProviceId = '510000';
+        this.localCity = '510100';
+        this.getArea('510100'); // 给默认的区域是成都
+      }
     }
 
     this.search('', '');
@@ -132,7 +137,7 @@ export class FindSthComponent implements OnInit {
     console.log(this.searchInfos);
     this.HttpService.searchGoods(this.searchInfos).subscribe(res => {
        this.renderData = JSON.parse(res.data.goods);
-       this.pageConfig.totalNum = res.data.pageCount;
+       this.pageConfig.totalNum = res.data.recordCount;
        console.log(this.renderData);
        this.showLoading = false;
     }, err => {

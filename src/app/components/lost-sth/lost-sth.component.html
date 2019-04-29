@@ -60,11 +60,13 @@
     </form>
   </div>
   <div class="news-block">
-    <div class="-loading" style="text-align: center;" *ngIf="showLoading">
+    <div class="-loading" *ngIf="showLoading">
       <nz-spin nzSimple [nzSize]="'large'" nzTip="Loading...">
         <nz-alert></nz-alert>
       </nz-spin>
-      <!--<span>正在努力加载数据...</span>-->
+    </div>
+    <div class="none_data" *ngIf="pageConfig.totalNum == 0">
+      <nz-empty [nzNotFoundContent]="'没有找到相关数据'"></nz-empty>
     </div>
     <div class="news">
       <div class="messages" *ngFor="let item of renderData" [routerLink]="item.id">
@@ -114,8 +116,6 @@
         </div>
       </div>
     </div>
-    <div class="no-date"
-         *ngIf="pageConfig.totalNum == 0">没有找到相关数据</div>
     <div class="pageComponent text-right" style="padding-top:60px;"
          *ngIf="pageConfig.totalNum != 0">
       <app-common-page [pageSize]="pageConfig.pageSize" [totalNum]="pageConfig.totalNum" (currentIndex)="changePage($event)"></app-common-page>

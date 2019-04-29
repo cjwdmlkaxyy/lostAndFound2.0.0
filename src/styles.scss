@@ -134,3 +134,16 @@ a {
   width: 212px;
   height:150px;
 }
+/*没有数据时*/
+.none_data{
+  text-align: center;
+  span{
+    color: #cac9c9;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+/*loading*/
+.-loading{
+  text-align: center;
+}

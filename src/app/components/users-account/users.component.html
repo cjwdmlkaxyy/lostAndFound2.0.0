@@ -66,8 +66,17 @@
         </div>
       </div>
     </div>
+    <div class="-loading" *ngIf="showLoading">
+      <nz-spin nzSimple [nzSize]="'large'" nzTip="Loading...">
+        <nz-alert></nz-alert>
+      </nz-spin>
+      <!--<span>正在努力加载数据...</span>-->
+    </div>
     <div class="pages" *ngIf="pagesConfig.totalPages == 1">
       <app-common-page [pageSize]="pagesConfig.pageSize" [totalNum]="pagesConfig.totalNum" (currentIndex)="changePage($event)"></app-common-page>
+    </div>
+    <div class="none_data" *ngIf="pagesConfig.totalNum == 0">
+      <nz-empty></nz-empty>
     </div>
   </div>
   <div class="update-user-infos" style="display: none;">
@@ -133,7 +142,7 @@
         
       </div>
       <div style="width: 100%; display: flex;justify-content: space-around;padding: 20px 40px 0">
-        <button class="btn btn-success" (click)="updateUsersInfos()">保存</button>
+        <button class="btn btn-success" nz-button (click)="updateUsersInfos()">保存</button>
         <button class="btn btn-danger" (click)="cancelUpdateUsersInfos()">取消</button>
       </div>
     </div>
