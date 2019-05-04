@@ -20,9 +20,9 @@ export class UsersComponent implements OnInit {
     private nzMessage: NzMessageService
   ) {}
 
-  userInfos = { // 用户信息
+  userInfos = { // 更新用户信息
     id: JSON.parse(localStorage.getItem('userInfos')).id,
-    netName: '',
+    netName: '343',
     phone: '',
     email: '',
     birthday: '',
@@ -46,6 +46,8 @@ export class UsersComponent implements OnInit {
   renderData: any;
   deleteItemId = [];
   showLoading = false;
+  beforeUpdatePhone = '';
+  beforeUpdateEmail =  '';
 
   ngOnInit() {
     this.pagesInfos();
@@ -61,26 +63,20 @@ export class UsersComponent implements OnInit {
       this.getProvinces = JSON.parse(res.data);
       this.userInfos.province = this.getProvinces[0][0];
       /*获取城市*/
-      this.HttpRequest.getCities(this.userInfos.province).subscribe(res => {
-        this.getCities = JSON.parse(res.data);
+      this.HttpRequest.getCities(this.userInfos.province).subscribe(res1 => {
+        this.getCities = JSON.parse(res1.data);
         this.userInfos.city = this.getCities[0][0];
         /*获取区域*/
-        this.HttpRequest.getArea(this.userInfos.city).subscribe( (res: any) => {
-          this.getDistricts = JSON.parse(res.data);
+        this.HttpRequest.getArea(this.userInfos.city).subscribe( (res2: any) => {
+          this.getDistricts = JSON.parse(res2.data);
           this.userInfos.district = this.getDistricts[0][0];
         });
       });
     });
   }
 
-  /*获得用户信息*/
-  getUserInfos() {
-  //  后台还没有做该功能
-  }
-
   /*获取用户数据*/
   getData() {
-    console.log(this.searchInfos);
     this.HttpRequest.searchGoods(this.searchInfos).subscribe( (res: any) => {
       this.renderData = JSON.parse(res.data.goods);
       this.pagesConfig.totalPages = res.data.pageCount;
@@ -106,6 +102,11 @@ export class UsersComponent implements OnInit {
   }
 
   checkPhone(val) {
+    if (val === this.beforeUpdatePhone) {
+        this.userInfosStyle.phone = false;
+        this.userInfosStyle.phoneRepeat = false;
+        return;
+    }
     if (this.CheckValue.checkPhoneNum(val)) {
       this.registerService.checkInformation('phone', val).subscribe( (res: any) => {
         if (res.code === '000005') {
@@ -126,7 +127,11 @@ export class UsersComponent implements OnInit {
   }
 
   checkEmail(val) {
-    console.log(val);
+    if (val === this.beforeUpdateEmail) {
+          this.userInfosStyle.email = false;
+          this.userInfosStyle.emailRepeat = false;
+          return;
+    }
     if (this.CheckValue.checkEmail(val)) {
       this.registerService.checkInformation('email', val).subscribe((res: any) => {
         if (res.code === '000005') {
@@ -144,6 +149,24 @@ export class UsersComponent implements OnInit {
       this.userInfosStyle.email = true;
       this.userInfosStyle.emailRepeat = false;
     }
+  }
+
+  /*获取用户数据*/
+  getUserInfos() {
+    this.registerService.getUserInfos(this.userInfos.id).subscribe((res: any) => {
+      console.log(res);
+      let data = JSON.parse(res.data);
+      this.beforeUpdateEmail = data[0].email;
+      this.beforeUpdatePhone = data[0].phone;
+      this.userInfos.netName = data[0].netName;
+      this.userInfos.phone = data[0].phone;
+      this.userInfos.birthday = data[0].birthday;
+      this.userInfos.email = data[0].email;
+      // this.userInfos.city =
+      console.log(data);
+    }, (err: any) => {
+      console.log(err);
+    });
   }
 
   /*更新用户信息-确定*/
@@ -227,6 +250,7 @@ export class UsersComponent implements OnInit {
   }
 
   showUserInfos() {
+    this.getUserInfos();
     $('.update-user-infos').fadeIn(200);
   }
 

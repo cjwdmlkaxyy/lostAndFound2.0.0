@@ -45,4 +45,11 @@ export class RegisterService {
   updateUsersInfos(val): Observable<any> {
     return this.http.post(this.urlFront + 'user/update', val);
   }
+
+  /**
+   * get userInfos
+   */
+  getUserInfos(val): Observable<any> {
+    return this.http.get<any>(this.urlFront + 'user/getUserInfo/' + val);
+  }
 }
