@@ -38,16 +38,16 @@
       <span style="background-color: yellow;">{{item.lostTime | date: 'yyyy-MM-dd'}}</span>
     </div>
     <div class="row">
-      <span>联系人:</span>
-      <span>陈女士</span>
+      <span>发布者:</span>
+      <span>{{item.netName}}</span>
     </div>
     <div class="row">
-      <span>联系方式:</span>
-      <span (click)="answerLayer()">188XXXXXXX</span>
+      <span>联系电话:</span>
+      <a (click)="answerLayer()" style="cursor:pointer;color: blue;" title="获取联系方式">{{'18808224013' | filterInfosValue: 'phone'}}</a>
     </div>
     <div class="row">
       <span>联系地址:</span>
-      <span>四川省成都市……</span>
+      <span>{{item.concPlace | filterInfosValue: 'place'}}</span>
     </div>
   </div>
   <div class="row">

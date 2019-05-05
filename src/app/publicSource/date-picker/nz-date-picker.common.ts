@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'nz-demo-date-picker-start-end',
@@ -33,13 +34,18 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     `
   ]
 })
-export class NzDemoDatePickerStartEndComponent {
-  @Input() isShowEndPicker: any;
+export class NzDemoDatePickerStartEndComponent implements OnInit {
+  @Input() isShowEndPicker: Boolean;
+  @Input() birthday: Date;
   @Output() startDateVal = new EventEmitter<Date>();
   @Output() endDateVal = new EventEmitter<Date>();
 
   startValue: Date | null = null;
   endValue: Date | null = null;
+
+  ngOnInit() {
+    this.startValue = this.birthday;
+  }
 
   disabledStartDate = (startValue: Date): boolean => {
     let date = new Date();
@@ -58,6 +64,7 @@ export class NzDemoDatePickerStartEndComponent {
   };
 
   onStartChange(date: Date): void {
+    console.log(this.birthday);
     this.startValue = date;
     this.startDateVal.emit(date);
   }

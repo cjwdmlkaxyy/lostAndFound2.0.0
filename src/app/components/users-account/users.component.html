@@ -2,7 +2,7 @@
   <div class="main">
     <div class="user-tab">
       <span>你好！</span>
-      <span>小小白兔</span>
+      <span>{{userInfos.netName}}</span>
       <span style="color: #2aa387;cursor:pointer;" (click)="showUserInfos()">修改个人信息</span>
     </div>
     <div class="user-messages"
@@ -122,21 +122,25 @@
       <div>
         <label>出生日期:</label>
         <nz-demo-date-picker-start-end style="display: inline-block; margin-bottom: -8px"
-                                       [isShowEndPicker]="false"></nz-demo-date-picker-start-end>
+                                       [isShowEndPicker]="false"
+                                       [birthday]="userInfos.birthday"></nz-demo-date-picker-start-end>
       </div>
       <div style="display: flex;">
         <label>所在地区:</label>
         <div class="location">
           <select (change)="changeProvince($event.target.value)">
             <option name="province"
+                    [selected]="item[0] == userInfos.province"
                     *ngFor="let item of getProvinces">{{item[1]}}</option>
           </select>
           <select (change)="changeCity($event.target.value)">
             <option name="province"
+                    [selected]="item[0] == userInfos.city"
                     *ngFor="let item of getCities">{{item[1]}}</option>
           </select>
           <select (change)="changeArea($event.target.value)">
-            <option *ngFor="let item of getDistricts">{{item[1]}}</option>
+            <option *ngFor="let item of getDistricts"
+                    [selected]="item[0] == userInfos.district">{{item[1]}}</option>
           </select>
         </div>
         

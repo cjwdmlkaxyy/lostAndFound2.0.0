@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
     netName: '343',
     phone: '',
     email: '',
-    birthday: '',
+    birthday: null,
     province: '',
     city: '',
     district: '',
@@ -48,30 +48,31 @@ export class UsersComponent implements OnInit {
   showLoading = false;
   beforeUpdatePhone = '';
   beforeUpdateEmail =  '';
+  test123: boolean;
 
   ngOnInit() {
     this.pagesInfos();
     this.searchCondition();
+    this.getUserInfos();
     this.getData();
-    this.getProvince();
     this.getCities = [];
   }
 
-  /*get province*/
-  getProvince() {
+  /*get province city district*/
+  getInitArea() {
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.getProvinces = JSON.parse(res.data);
-      this.userInfos.province = this.getProvinces[0][0];
-      /*获取城市*/
-      this.HttpRequest.getCities(this.userInfos.province).subscribe(res1 => {
-        this.getCities = JSON.parse(res1.data);
-        this.userInfos.city = this.getCities[0][0];
-        /*获取区域*/
-        this.HttpRequest.getArea(this.userInfos.city).subscribe( (res2: any) => {
-          this.getDistricts = JSON.parse(res2.data);
-          this.userInfos.district = this.getDistricts[0][0];
-        });
-      });
+      // this.userInfos.province = this.getProvinces[0][0];
+    });
+    /*获取城市*/
+    this.HttpRequest.getCities(this.userInfos.province).subscribe(res1 => {
+      this.getCities = JSON.parse(res1.data);
+      // this.userInfos.city = this.getCities[0][0];
+    });
+    /*获取区域*/
+    this.HttpRequest.getArea(this.userInfos.city).subscribe( (res2: any) => {
+      this.getDistricts = JSON.parse(res2.data);
+      // this.userInfos.district = this.getDistricts[0][0];
     });
   }
 
@@ -160,9 +161,12 @@ export class UsersComponent implements OnInit {
       this.beforeUpdatePhone = data[0].phone;
       this.userInfos.netName = data[0].netName;
       this.userInfos.phone = data[0].phone;
-      this.userInfos.birthday = data[0].birthday;
+      this.userInfos.birthday = new Date(data[0].birthday);
       this.userInfos.email = data[0].email;
-      // this.userInfos.city =
+      this.userInfos.province = data[0].province;
+      this.userInfos.city = data[0].city;
+      this.userInfos.district = data[0].district;
+      this.getInitArea();
       console.log(data);
     }, (err: any) => {
       console.log(err);
@@ -194,6 +198,9 @@ export class UsersComponent implements OnInit {
       if (res.code === '000000') {
         $('.update-user-infos').fadeOut(500);
         this.nzMessage.create('success', '修改成功');
+        this.ngOnInit();
+      } else if (res.code === '999999') {
+        this.nzMessage.create('error', '系统错误请稍后重试');
       }
 
     }, (err: any) => {
