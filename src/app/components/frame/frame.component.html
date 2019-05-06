@@ -15,7 +15,7 @@
     <img src="../../../assets/img/user.jpg" style="border-radius:50%;width:60px;height:60px;" [routerLink]="'users'">
     <div>
       <div *ngIf="userName === '' || userName === null"><span routerLink="/login" style="color:#ffa730;font-weight: bold;">点击登录</span></div>
-      <div *ngIf="userName !== ''">
+      <div *ngIf="userName !== null">
         <nz-dropdown [nzTrigger]="'click'">
           <span nz-dropdown style="color:#fff;cursor:pointer;margin-left: 5px;">{{userName}}</span>
           <ul nz-menu style="z-index:1000;">
@@ -30,7 +30,7 @@
       </div>
     </div>
     <span style="color:#fff;text-overflow:ellipsis;overflow: hidden;"
-          *ngIf="location">所在城市：{{location.city[1]}}</span>
+          *ngIf="location">当前城市：{{location.city[1]}}</span>
     <span routerLink="./switchCity" style="color:#9decff;cursor:pointer;">[切换城市]</span>
   </div>
 </header>
