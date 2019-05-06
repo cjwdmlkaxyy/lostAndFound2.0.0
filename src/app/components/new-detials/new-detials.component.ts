@@ -22,6 +22,7 @@ export class NewDetialsComponent implements OnInit {
   searchCondition = {
     id: null
   };
+  questionLists = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -59,6 +60,27 @@ export class NewDetialsComponent implements OnInit {
       console.log(res);
       this.renderData = JSON.parse(res.data.goods);
       console.log(this.renderData);
+      if (this.renderData.findGoodsQuestion1 !== '') {
+          let obj = {
+            key: '问题一',
+            val: this.renderData[0].findGoodsQuestion1
+          };
+          this.questionLists.push(obj);
+      }
+      if (this.renderData.findGoodsQuestion2 !== '') {
+          let obj = {
+            key: '问题二',
+            val: this.renderData[0].findGoodsQuestion2
+          }
+          this.questionLists.push(obj);
+      }
+      if (this.renderData.findGoodsQuestion3 !== '') {
+          let obj = {
+            key: '问题三',
+            val: this.renderData[0].findGoodsQuestion3
+          }
+          this.questionLists.push(obj);
+      } 
     }, (err: any) => {
       console.log(err);
     });

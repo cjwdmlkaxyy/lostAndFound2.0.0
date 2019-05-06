@@ -52,8 +52,8 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.pagesInfos();
-    this.searchCondition();
     this.getUserInfos();
+    this.searchCondition();
     this.getData();
     this.getCities = [];
   }
@@ -96,7 +96,7 @@ export class UsersComponent implements OnInit {
 
   searchCondition() {
     this.searchInfos = { // 查找用户数据
-      userId: '31',
+      userId: JSON.parse(localStorage.getItem('userInfos')).id,
       pageNo: this.pagesConfig.pageNum,
       pageSize: this.pagesConfig.pageSize,
     };
@@ -290,6 +290,12 @@ export class UsersComponent implements OnInit {
   }
   closeDeleteLayer() {
     // $('.delete-layer').fadeOut(200);
+  }
+
+  formatDate(e) {
+    let date = new Date(e);
+    console.log(date);
+    this.userInfos.birthday = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
   }
 
 }

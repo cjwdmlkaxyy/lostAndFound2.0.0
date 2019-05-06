@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
+  failToLogin = false; // 登陆失败
+
   ngOnInit() {
     $('#login').fadeIn(200);
   }
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/frame/index']);
     }, error => {
         console.log(error);
+        this.failToLogin = true;
       });
 
   }

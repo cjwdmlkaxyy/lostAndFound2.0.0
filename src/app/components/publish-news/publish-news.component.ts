@@ -49,7 +49,8 @@ export class PublishNewsComponent implements OnInit {
   clearSaveInfos() {
    this.saveInfos = {
       goodsWay: 1, // 发布信息标志 0:失物招领-招领  1:失物发布-寻物
-      id: '', // 用户的登录名
+      id: '', // 用户id,必传
+      username: '', // 登陆账号名，必传
       typeOfGoods: '', // 必传
       infoTittle: '', // 必传
       description: '', // 必传
@@ -93,6 +94,7 @@ export class PublishNewsComponent implements OnInit {
     } else {
       this.userInfos = JSON.parse(localStorage.getItem('userInfos'));
       this.saveInfos.id = this.userInfos.id;
+      this.saveInfos.username = this.userInfos.username;
     }
 
     /*拿到所有的省、城市、区-默认为四川省-成都市-市辖区*/
@@ -153,6 +155,7 @@ export class PublishNewsComponent implements OnInit {
     let data: any = new FormData();
     data.append('goodsWay', this.saveInfos.goodsWay);
     data.append('id', this.saveInfos.id);
+    data.append('username', this.saveInfos.username);
     data.append('typeOfGoods', this.saveInfos.typeOfGoods);
     data.append('infoTittle', this.saveInfos.infoTittle);
     data.append('description', this.saveInfos.description);

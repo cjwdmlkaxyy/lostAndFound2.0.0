@@ -104,9 +104,10 @@
       <div class="title">
         <span>请回答下面的问题</span>
       </div>
-      <div class="question">
-        <label>问题一:</label>
-        <span>我的书包是什么颜色的?</span>
+      <div class="question"
+           *ngFor="let item of questionLists">
+        <label>{{item.key}}:</label>
+        <span>{{item.val}}</span>
         <div>
           <input type='text'>
         </div>

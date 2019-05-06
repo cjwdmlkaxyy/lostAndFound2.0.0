@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpRequestService } from '../../service/http-request.service'
 
 interface Tag {
   id: number,
@@ -12,24 +13,26 @@ interface Tag {
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private httpRequest: HttpRequestService) { }
 
-  tags: Tag[];
+  searchInfos = {
+    id: '',  // 物品id
+  };
+  renderData = [];
+  showLoading = true;
 
   ngOnInit() {
+    this.getData();
+  }
 
-    this.tags = [
-      {id: 0, category: 1},
-      {id: 1, category: 2},
-      {id: 2, category: 1},
-      {id: 3, category: 1},
-      {id: 4, category: 2},
-      {id: 5, category: 1},
-      {id: 6, category: 2},
-      {id: 7, category: 1},
-      {id: 8, category: 1},
-      {id: 9, category: 1}
-    ];
+  getData() {
+    this.httpRequest.searchGoods(this.searchInfos).subscribe((res: any) => {
+      console.log(res);
+      this.renderData = JSON.parse(res.data.goods);
+      this.showLoading = false;
+    }, (err: any) => {
+      console.log(err);
+    })
   }
 
 }

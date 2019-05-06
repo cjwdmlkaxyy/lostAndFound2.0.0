@@ -41,6 +41,7 @@ export class FrameComponent implements OnInit {
       } else {
         this.userName = this.userInfos.name;
       }
+      this.location.city = [''];
       if (this.userInfos.cityName === '市辖区') {
         this.location.city.push(this.userInfos.provinceName);
       } else {

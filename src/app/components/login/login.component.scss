@@ -6,23 +6,9 @@
   height:100%;
 }
 .bg-img{
-  //height:100%;
-  /*渐变色背景*/
-  //background:-webkit-gradient(linear, 0 0, 0 100%, from($basicColor), to($basicColor-deepgreen));
-  //background: url("../../../assets/img/bg3.jpg");
   background: url("../../../assets/img/bg6.jpg");
   background-size:100% 110%;
-  /*opacity: 1;
-  animation-delay:0s;
-  animation-duration:1s;
-  animation-fill-mode:forwards;
-  animation-timing-function: ease;*/
 }
-
-/*@keyframes fadeIn {
-  0%{opacity: 1}
-  100%{opacity:0.5}
-}*/
 
 /*The css for Login*/
 .row{
@@ -39,7 +25,6 @@
   top:50%;
   left:60%;
   margin-top:-200px;
-  //filter:alpha(opacity=60);-moz-opacity:0.6;opacity:0.60;
   .title{
     padding:10px;
     font-size:30px;
@@ -66,8 +51,6 @@
       }
       .btn-warning{
         left:15px;
-        //background-color: $basicColor-orange;
-        //border:1px $basicColor-orange solid;
       }
     }
     .register{
@@ -77,4 +60,20 @@
       cursor:pointer;
     }
   }
+}
+.row input[type=text], .row input[type=password]{
+  border: 1px #87af82 solid;
+  height: 35px !important;
+  border-radius: 7px;
+}
+.row input[type=text]:focus, .row input[type=password]:focus{
+  box-shadow:0 0 3px #87af82;
+}
+
+.alert-warning{
+  color: #c5545d;
+  border: 0;
+}
+.alert{
+  padding: 8px;
 }
