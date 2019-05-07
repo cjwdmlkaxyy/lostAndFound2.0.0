@@ -81,7 +81,9 @@
           <div class="right">2019-02-22 18:00:11</div>
         </div>
         <div class="row" id="leaveWords" style="padding: 20px 0 20px 50px !important; display: none;">
-          <textarea class="publish-leave-words" placeholder="请输入留言" style="height: 100px;width:90%;resize:none;"></textarea>
+          <textarea class="publish-leave-words" placeholder="请输入留言" 
+                    style="height: 100px;width:90%;resize:none;"
+                    [(ngModel)]="leaveWordsInfos.message"></textarea>
         </div>
         <div class="row text-center" style="padding-bottom: 15px !important;">
           <button class="btn btn-success">更多留言</button>
@@ -105,11 +107,11 @@
         <span>请回答下面的问题</span>
       </div>
       <div class="question"
-           *ngFor="let item of questionLists">
+           *ngFor="let item of questionLists, let idx = index">
         <label>{{item.key}}:</label>
         <span>{{item.val}}</span>
         <div>
-          <input type='text'>
+          <input type='text' [attr.idx] = "idx">
         </div>
       </div>
       <div class="btn-line">

@@ -33,7 +33,10 @@ export class PublishNewsComponent implements OnInit {
     token: localStorage.getItem('token')
   };
 
-  userInfos: any; // 用户信息
+  userInfos = {
+    id: '',
+    username: ''
+  }; // 用户信息
   isLogined = false; // 判断用户是否登录或是否存在用户登录信息
 
   // 发布信息flags
@@ -49,8 +52,8 @@ export class PublishNewsComponent implements OnInit {
   clearSaveInfos() {
    this.saveInfos = {
       goodsWay: 1, // 发布信息标志 0:失物招领-招领  1:失物发布-寻物
-      id: '', // 用户id,必传
-      username: '', // 登陆账号名，必传
+      id: this.userInfos.id, // 用户id,必传
+      username: this.userInfos.username, // 登陆账号名，必传
       typeOfGoods: '', // 必传
       infoTittle: '', // 必传
       description: '', // 必传
@@ -96,7 +99,10 @@ export class PublishNewsComponent implements OnInit {
       this.saveInfos.id = this.userInfos.id;
       this.saveInfos.username = this.userInfos.username;
     }
+    this.getInitArea();
+  }
 
+  getInitArea() {
     /*拿到所有的省、城市、区-默认为四川省-成都市-市辖区*/
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.provinceList = JSON.parse(res.data);
@@ -118,6 +124,9 @@ export class PublishNewsComponent implements OnInit {
     $('.nav-tabs').css('border-bottom', '1px rgb(225, 129, 48) solid');
     $('#myTabContent').css('border-color', 'rgb(225, 129, 48)');
     this.clearSaveInfos();
+    this.getInitArea();
+    // this.saveInfos.id = this.userInfos.id;
+    // this.saveInfos.username = this.userInfos.username;
     this.saveInfos.goodsWay = 1;
   }
 
@@ -126,6 +135,9 @@ export class PublishNewsComponent implements OnInit {
     $('.nav-tabs').css('border-bottom', '1px rgb(10, 110, 72) solid');
     $('#myTabContent').css('border-color', 'rgb(10, 110, 72)');
     this.clearSaveInfos();
+    this.getInitArea();
+    // this.saveInfos.id = this.userInfos.id;
+    // this.saveInfos.username = this.userInfos.username;
     this.saveInfos.goodsWay = 0;
   }
 
@@ -187,8 +199,8 @@ export class PublishNewsComponent implements OnInit {
 
     // 用ajax请求实现上传图片
     $.ajax({
-      // url: this.urlFront + 'goods/img/upload',
-      url: 'http://192.168.2.57:8082/' + 'goods/img/upload',
+      url: this.urlFront + 'goods/img/upload',
+      // url: 'http://192.168.2.57:8082/' + 'goods/img/upload',
       type: 'POST',
       data: data,
       contentType: false,
@@ -214,7 +226,8 @@ export class PublishNewsComponent implements OnInit {
       console.log('图片大小不能超过2M');
       return;
     }
-    this.saveInfos.file1 = new FormData(oFile);
+    // this.saveInfos.file1 = new FormData(oFile);
+    this.saveInfos.file1 = oFileVal;
     console.log(this.saveInfos.file1);
   }
 

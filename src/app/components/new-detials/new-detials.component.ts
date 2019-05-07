@@ -38,7 +38,7 @@ export class NewDetialsComponent implements OnInit {
   renderData: any;
 
   leaveWordsInfos = {
-    goodsId: this.searchCondition.id,
+    goodsId: localStorage.getItem('goodsId'),
     message: '',
     userId: null
   };
@@ -51,7 +51,7 @@ export class NewDetialsComponent implements OnInit {
     this.getData();
     console.log(this.userInfos);
     if (this.userInfos) {
-      this.leaveWordsInfos.userId = JSON.parse(this.userInfos);
+      this.leaveWordsInfos.userId = JSON.parse(this.userInfos).id;
     }
   }
   /*我要留言*/
@@ -63,6 +63,9 @@ export class NewDetialsComponent implements OnInit {
   publishWords() {
     $('#leaveWords').fadeOut(200);
     this.leaveWordFlag = 'leaveWords';
+    this.httpRequest.publishLeaveWords(this.leaveWordsInfos).subscribe(res => {
+      console.log(res);
+    })
   }
   answerLayer() {
     $('#answer').fadeIn(200);

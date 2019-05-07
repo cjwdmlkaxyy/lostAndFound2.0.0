@@ -10,8 +10,8 @@ export class HttpRequestService{
   header = {
     token: localStorage.getItem('token')
   };
-  urlFront = 'http://192.168.2.57:8082/'; // 本地服务
-  // urlFront = 'http://47.102.139.16:8082/';
+  // urlFront = 'http://192.168.2.57:8082/'; // 本地服务
+  urlFront = 'http://47.102.139.16:8082/';
 
   constructor(public http: HttpClient) {}
 
@@ -71,7 +71,7 @@ export class HttpRequestService{
   /*
   * publish leave words
   * */
-  publishLeaveWords(): Observable<any> {
-    return this.http.post(this.urlFront + 'goods/leaveMessage', '');
+  publishLeaveWords(val): Observable<any> {
+    return this.http.post(this.urlFront + 'goods/leaveMessage', val);
   }
 }
