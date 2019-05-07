@@ -187,8 +187,8 @@ export class PublishNewsComponent implements OnInit {
 
     // 用ajax请求实现上传图片
     $.ajax({
-      url: this.urlFront + 'goods/img/upload',
-      // url: 'http://192.168.2.57:8082/' + 'goods/img/upload',
+      // url: this.urlFront + 'goods/img/upload',
+      url: 'http://192.168.2.57:8082/' + 'goods/img/upload',
       type: 'POST',
       data: data,
       contentType: false,

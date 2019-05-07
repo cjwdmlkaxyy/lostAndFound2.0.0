@@ -23,6 +23,7 @@ export class NewDetialsComponent implements OnInit {
     id: null
   };
   questionLists = [];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -36,11 +37,22 @@ export class NewDetialsComponent implements OnInit {
 
   renderData: any;
 
+  leaveWordsInfos = {
+    goodsId: this.searchCondition.id,
+    message: '',
+    userId: null
+  };
+  userInfos = localStorage.getItem('userInfos');
+
   ngOnInit() {
 
     $('#leaveWords').hide();
     this.leaveWordFlag = 'leaveWords';
     this.getData();
+    console.log(this.userInfos);
+    if (this.userInfos) {
+      this.leaveWordsInfos.userId = JSON.parse(this.userInfos);
+    }
   }
   /*我要留言*/
   leaveWords() {
