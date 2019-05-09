@@ -4,6 +4,7 @@ import { PublicDateService } from '../../service/public-date.service';
 import { HttpRequestService } from '../../service/http-request.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import * as $ from 'jquery';
+import { PublicService } from '../../service/public.service';
 
 @Component({
   selector: 'app-publish-news',
@@ -14,7 +15,8 @@ export class PublishNewsComponent implements OnInit {
 
   constructor(private PublicDate: PublicDateService,
               public HttpRequest: HttpRequestService,
-              private NzMessage: NzMessageService) { }
+              private NzMessage: NzMessageService,
+              private publiceServe: PublicService) { }
 
   goodsClass: any = [];
   urlFront = 'http://47.102.139.16:8082/';
@@ -28,17 +30,17 @@ export class PublishNewsComponent implements OnInit {
   cityName = '';
   districtName = '';
   detailAddress = ''; // 详细地址
+  isLogined = false; // 判断用户是否登录或是否存在用户登录信息
+  showLoading = false;
 
   headers = {
     token: localStorage.getItem('token')
   };
 
-  userInfos = {
+  userInfos = {// 用户信息
     id: '',
     username: ''
-  }; // 用户信息
-  isLogined = false; // 判断用户是否登录或是否存在用户登录信息
-
+  };
   // 发布信息flags
   saveInfosFlags = {
     goodsType: false,
@@ -152,9 +154,12 @@ export class PublishNewsComponent implements OnInit {
   publishNews() {
     this.saveInfos.lostPlace = this.provinceName + this.cityName + this.districtName + this.detailAddress;
     console.log(this.saveInfos);
-
     if (this.isLogined) {
-      this.NzMessage.info('亲,请先登录哟！');
+      this.NzMessage.info('请先登录');
+      return;
+    }
+    if (!this.saveInfos.file1) {
+      this.NzMessage.info('请选择一张图片');
       return;
     }
 
@@ -164,7 +169,7 @@ export class PublishNewsComponent implements OnInit {
     }
 
     // 将数据封装成FormData
-    let data: any = new FormData();
+    const data: any = new FormData();
     data.append('goodsWay', this.saveInfos.goodsWay);
     data.append('id', this.saveInfos.id);
     data.append('username', this.saveInfos.username);
@@ -191,12 +196,8 @@ export class PublishNewsComponent implements OnInit {
     data.append('city', this.saveInfos.city);
     data.append('district', this.saveInfos.district);
 
-    // this.HttpRequest.publishNews(this.saveInfos).subscribe( res => {
-    //   console.log(res);
-    // }, err => {
-    //   console.log(err);
-    // });
-
+    const _this = this;
+    this.showLoading = true;
     // 用ajax请求实现上传图片
     $.ajax({
       url: this.urlFront + 'goods/img/upload',
@@ -206,34 +207,42 @@ export class PublishNewsComponent implements OnInit {
       contentType: false,
       processData: false,
       success: function(res) {
-        console.log(res);
+        _this.showLoading = false;
+        _this.NzMessage.success('发布消息成功');
+        _this.clearSaveInfos();
+      },
+      error: function (err) {
+        console.log(err);
+        _this.showLoading = false;
+        _this.NzMessage.error('消息发布失败,请稍候重新发布');
       }
     });
   }
 
   /*上传图片*/
   uploadImg() {
-    let iMaxFilesize = 2097152; // 2M
-    let oFile: any = document.getElementById('uploadImg1'); // 读取文件
-    let oFileVal: any = oFile.files[0];
-    let rFilter = /^(image\/bmp|image\/gif|image\/jpeg|image\/png|image\/tiff)$/;
+    const iMaxFilesize = 2097152; // 2M
+    const oFile: any = document.getElementById('uploadImg1'); // 读取文件
+    const oFileVal: any = oFile.files[0];
+    const rFilter = /^(image\/bmp|image\/gif|image\/jpeg|image\/png|image\/tiff)$/;
     if (!rFilter.test(oFileVal.type)) {
-      console.log('文件格式必须为图片');
+      this.NzMessage.warning('请选图片');
+      $('#uploadImg1').val('');
+      this.saveInfos.file1 = null;
       return;
     }
 
     if (oFileVal.size > iMaxFilesize) {
-      console.log('图片大小不能超过2M');
+      $('#uploadImg1').val('');
+      this.NzMessage.warning('图片大小不能超过2M');
+      this.saveInfos.file1 = null;
       return;
     }
-    // this.saveInfos.file1 = new FormData(oFile);
     this.saveInfos.file1 = oFileVal;
-    console.log(this.saveInfos.file1);
   }
 
   /*选择了省、城市、区*/
   selectedProvince(val) {
-    console.log(val);
     for (let item of this.provinceList) {
       if (item[1] === val) {
         this.saveInfos.province = item[0];

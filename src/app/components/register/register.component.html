@@ -19,13 +19,11 @@
                 </ng-container>
                 <ng-container *ngIf="css.userName == 'has-error'">
                   <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
-                  <span *ngIf="userNameRepeat">亲，该账号已经被人注册了哦！</span>
-                  <span *ngIf="registerInfos.username == null || registerInfos.username ==''">亲，登录账号不能为空哦！</span>
-                  <span *ngIf="registerInfos.username != null && registerInfos.username !='' && !userNameRepeat">亲，输入有误哦！登录账号可由数组、字母或下划线组成（4-20）位字符</span>
+                  <span *ngIf="userNameRepeat">该账号已存在</span>
+                  <span *ngIf="registerInfos.username == null || registerInfos.username ==''">登录账号不能为空</span>
+                  <span *ngIf="registerInfos.username != null && registerInfos.username !='' && !userNameRepeat">输入有误！登录账号可由数组、字母或下划线组成（4-20）位字符</span>
                 </ng-container>
             </div>
-
-
             <div class="row" [className]="css.psd">
                 <label><span class="starColor">*</span>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
                 <input type="password" class="form-control" autocomplete="off"
@@ -40,12 +38,10 @@
                 </ng-container>
                 <ng-container *ngIf="css.psd == 'has-error'">
                   <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
-                  <span *ngIf="registerInfos.password == null || registerInfos.password ==''">亲，您还没有输入密码哦！</span>
-                  <span *ngIf="registerInfos.password != null && registerInfos.password !=''">亲，密码至少6位字符</span>
+                  <span *ngIf="registerInfos.password == null || registerInfos.password ==''">请输入输入密码</span>
+                  <span *ngIf="registerInfos.password != null && registerInfos.password !=''">密码至少6位字符</span>
                 </ng-container>
             </div>
-
-
             <div class="row" [className]="css.confirmPsd">
                 <label><span class="starColor">*</span>确认密码:</label>
                 <input type="password" class="form-control" autocomplete="off"
@@ -56,12 +52,10 @@
                 </ng-container>
                 <ng-container *ngIf="css.confirmPsd == 'has-error'">
                   <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
-                  <span *ngIf="registerInfos.confirmPsd == null || registerInfos.confirmPsd ==''">亲，请确认密码！</span>
-                  <span *ngIf="registerInfos.confirmPsd != registerInfos.password && registerInfos.confirmPsd">Oh,密码不一样欸！</span>
+                  <span *ngIf="registerInfos.confirmPsd == null || registerInfos.confirmPsd ==''">请确认密码！</span>
+                  <span *ngIf="registerInfos.confirmPsd != registerInfos.password && registerInfos.confirmPsd">密码不一样</span>
                 </ng-container>
             </div>
-
-
             <div class="row" [className]="css.netName">
                 <label>&nbsp;&nbsp;网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</label>
                 <input type="text" class="form-control" autocomplete="off"
@@ -76,11 +70,9 @@
               </ng-container>
               <ng-container *ngIf="css.netName == 'has-error' && registerInfos.netName.length>15">
                 <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
-                <span>亲，网名不能超过15位字符啦！</span>
+                <span>网名不能超过15位字符啦！</span>
               </ng-container>
             </div>
-
-
             <div class="row" [className]="css.phone">
                 <label><span class="starColor">*</span>电话号码:</label>
                 <input type="text" class="form-control" autocomplete="off"
@@ -91,13 +83,11 @@
               </ng-container>
               <ng-container *ngIf="css.phone == 'has-error'">
                 <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
-                <span *ngIf="phoneNumRepeat">亲，该号码已经被注册过了！</span>
-                <span *ngIf="registerInfos.phone == null || registerInfos.phone ==''">亲，电话号码怎么不填呢！</span>
-                <span *ngIf="registerInfos.phone != null && registerInfos.phone !='' && !phoneNumRepeat">亲，输入有误哦！</span>
+                <span *ngIf="phoneNumRepeat">该号码已存在</span>
+                <span *ngIf="registerInfos.phone == null || registerInfos.phone ==''">电话号码不能为空</span>
+                <span *ngIf="registerInfos.phone != null && registerInfos.phone !='' && !phoneNumRepeat">请输入正确的电话号码</span>
               </ng-container>
             </div>
-
-
             <div class="row" [className]="none">
                 <label>&nbsp;&nbsp;出生日期:</label>
                 <nz-demo-date-picker-start-end style="margin: 5px 10px;"
@@ -115,13 +105,11 @@
               </ng-container>
               <ng-container *ngIf="css.email == 'has-error'">
                 <span class="glyphicon glyphicon-remove-sign icon icon-danger"></span>
-                <span *ngIf="emailRepeat">该邮箱已经被注册过了！</span>
-                <span *ngIf="registerInfos.email == null || registerInfos.email ==''">人家怎么Email你呢！</span>
-                <span *ngIf="registerInfos.email != null && registerInfos.email !='' && !emailRepeat">亲，输入有误哦！</span>
+                <span *ngIf="emailRepeat">该邮箱已存在</span>
+                <span *ngIf="registerInfos.email == null || registerInfos.email ==''">邮箱不能为空</span>
+                <span *ngIf="registerInfos.email != null && registerInfos.email !='' && !emailRepeat">请输入正确邮箱</span>
               </ng-container>
             </div>
-
-
             <div class="row" [className]="none">
                 <label><span class="starColor">*</span>所在区域:</label>
                 <select class="form-control" (change)="changeProvince($event.target.value)">
@@ -138,18 +126,20 @@
                         *ngFor="let item of getArea">{{item[1]}}</option>
               </select>
             </div>
-
-
             <div class="row" [className]="none">
                 <label>&nbsp;&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</label>
                 <input type="text" class="form-control" autocomplete="off"
                      [(ngModel)]="registerInfos.name" name="realName">
             </div>
             <div class="row" style="margin-top:50px;">
-                <button class="btn btn-success col-md-4 col-md-offset-4" autocomplete="off"
+                <button nz-button class="btn btn-success col-md-4 col-md-offset-4"
                       (click)="registerConfirm()">立即注册</button>
             </div>
         </form>
+        <div class="-loading" style="position: fixed;top:50%;left:50%;"
+             *ngIf="showLoading">
+          <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+        </div>
     </div>
 </div>
 

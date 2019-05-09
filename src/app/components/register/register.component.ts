@@ -3,6 +3,7 @@ import { RegisterService} from '../../service/register.service';
 import 'rxjs';
 import {Router, ActivatedRoute} from '@angular/router';
 import { HttpRequestService } from '../../service/http-request.service';
+import { NzMessageService } from 'ng-zorro-antd';
 
 /*services*/
 import {CheckValueService} from '../../service/check-value.service';
@@ -32,7 +33,8 @@ export class RegisterComponent implements OnInit {
               private route: ActivatedRoute,
               private CheckValue: CheckValueService,
               private PublicDate: PublicDateService,
-              public HttpRequest: HttpRequestService) { }
+              public HttpRequest: HttpRequestService,
+              private NzMessage: NzMessageService) { }
   // name:string = '';
   css = {
     userName: '',
@@ -63,10 +65,10 @@ export class RegisterComponent implements OnInit {
   getProvinces: any; // 省
   getCities: any; // 市
   getArea: any; // 区
+  showLoading = false;
 
 
   ngOnInit() {
-    // this.PublicDate.getProvince();
     this.HttpRequest.getProvence().subscribe( (res: any) => {
       this.getProvinces = JSON.parse(res.data);
       this.registerInfos.province = this.getProvinces[0][0];
@@ -77,14 +79,17 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    // console.log(this.registerInfos);
+    this.showLoading = true;
     this.Registerhttp.register(this.registerInfos).subscribe( res => {
-      console.log(res);
       if (res.code === '000000') {
+        this.NzMessage.success('注册成功');
         this.router.navigate(['login']);
+        this.showLoading = false;
       }
     }, err => {
       console.log(err);
+      this.NzMessage.error('系统错误');
+      this.showLoading = false;
     });
   }
 

@@ -20,9 +20,8 @@ export class NewDetialsComponent implements OnInit {
   id: any;
   leaveWordFlag: string;
   searchCondition = {
-    id: null
+    id: localStorage.getItem('goodsId')
   };
-  questionLists = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -31,7 +30,7 @@ export class NewDetialsComponent implements OnInit {
   ) {
     this.route.params.subscribe((params: Params) => {
         localStorage.setItem('goodsId', params.id);
-        this.searchCondition.id = localStorage.getItem('goodsId');
+        // this.searchCondition.id = localStorage.getItem('goodsId');
     });
   }
 
@@ -43,9 +42,12 @@ export class NewDetialsComponent implements OnInit {
     userId: null
   };
   userInfos = localStorage.getItem('userInfos');
-
+  messageList = [];
+  questionLists = [];
+  answers: any;
+  test: any;
   ngOnInit() {
-
+    // this.clearAnswer();
     $('#leaveWords').hide();
     this.leaveWordFlag = 'leaveWords';
     this.getData();
@@ -65,45 +67,73 @@ export class NewDetialsComponent implements OnInit {
     this.leaveWordFlag = 'leaveWords';
     this.httpRequest.publishLeaveWords(this.leaveWordsInfos).subscribe(res => {
       console.log(res);
-    })
+    });
   }
-  answerLayer() {
-    $('#answer').fadeIn(200);
+
+  clearAnswer() {
+    this.answers = {
+      goodId: this.searchCondition.id,
+      findGoodsAnswer1: null,
+      findGoodsAnswer2: null,
+      findGoodsAnswer3: null
+    };
+    $('#answer input').each(function () {
+      console.log(this);
+      $(this).val(null);
+    });
   }
   getData() {
     this.httpRequest.searchGoods(this.searchCondition).subscribe( (res: any) => {
-      console.log(res);
       this.renderData = JSON.parse(res.data.goods);
+      this.messageList = this.renderData[0].message;
       console.log(this.renderData);
-      if (this.renderData.findGoodsQuestion1 !== '') {
-          let obj = {
+      let obj = null;
+      if (this.renderData[0].findGoodsQuestion1) {
+          obj = {
             key: '问题一',
-            val: this.renderData[0].findGoodsQuestion1
+            val: this.renderData[0].findGoodsQuestion1,
+            // ngModel: this.answers.findGoodsAnswer1
           };
           this.questionLists.push(obj);
       }
-      if (this.renderData.findGoodsQuestion2 !== '') {
-          let obj = {
+      if (this.renderData[0].findGoodsQuestion2) {
+          obj = {
             key: '问题二',
-            val: this.renderData[0].findGoodsQuestion2
-          }
+            val: this.renderData[0].findGoodsQuestion2,
+            // ngModel: this.answers.findGoodsAnswer2
+          };
           this.questionLists.push(obj);
       }
-      if (this.renderData.findGoodsQuestion3 !== '') {
-          let obj = {
+      if (this.renderData[0].findGoodsQuestion3) {
+          obj = {
             key: '问题三',
-            val: this.renderData[0].findGoodsQuestion3
-          }
+            val: this.renderData[0].findGoodsQuestion3,
+            // ngModel: this.answers.findGoodsAnswer3
+          };
           this.questionLists.push(obj);
-      } 
+      }
     }, (err: any) => {
       console.log(err);
     });
   }
 
   /*回答问题-确定，取消*/
+  answerLayer() {
+    this.clearAnswer();
+    $('#answer').fadeIn(200);
+  }
+
   confirmAnswer() {
-    $('#answer').fadeOut(200);
+    const _this = this;
+    $('#answer input').each(function (i) {
+      _this.answers['findGoodsAnswer' + (i + 1)] = $(this).val();
+    });
+    this.httpRequest.answerQuestion(this.answers).subscribe((res: any) => {
+      console.log(res);
+      $('#answer').fadeOut(200);
+    }, (err: any) => {
+      console.log(err);
+    });
   }
   cancleAnswer() {
     $('#answer').fadeOut(200);

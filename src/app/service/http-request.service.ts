@@ -74,4 +74,11 @@ export class HttpRequestService{
   publishLeaveWords(val): Observable<any> {
     return this.http.post(this.urlFront + 'goods/leaveMessage', val);
   }
+
+  /*
+  * answer question
+  * */
+  answerQuestion(val): Observable<any> {
+    return this.http.post(this.urlFront + '/goods/answerQuestion', val);
+  }
 }

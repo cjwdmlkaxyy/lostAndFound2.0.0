@@ -19,10 +19,8 @@
     </div>
     <div class="row">
       <span>图片:</span>
-      <div class="inline-block">
-        <img src="http://temp.im/200x200">
-        <img src="http://temp.im/200x200">
-        <img src="http://temp.im/200x200">
+      <div class="inline-block m_img" *ngFor="let x of item.picUrlEntityList">
+        <img [src]="x.goodsPicUrl">
       </div>
     </div>
     <!--<div class="row">
@@ -30,11 +28,13 @@
       <span>发表感谢信</span>
     </div>-->
     <div class="row">
-      <span>丢失地点:</span>
+      <span *ngIf="item.goodsWay == 1">丢失地点</span>
+      <span *ngIf="item.goodsWay == 0">拾物地点:</span>
       <span style="background-color: #ff4500ab">四川省成都市锦江区仁恒置地广场周围</span>
     </div>
     <div class="row">
       <span *ngIf="item.goodsWay == 1">丢失时间:</span>
+      <span *ngIf="item.goodsWay == 0">拾物时间:</span>
       <span style="background-color: yellow;">{{item.lostTime | date: 'yyyy-MM-dd'}}</span>
     </div>
     <div class="row">
@@ -56,29 +56,17 @@
         <div class="text-center">网友留言</div>
       </div>
       <div class="messages">
-        <div class="row">
-          <div>
-            <img src="http://temp.im/50x50" />
-            <span class="font-color-cyan">一致小白兔:</span>
-            <span>我好像看到有人在天府广场上捡到了张身份证，然后就交个了警察</span>
-          </div>
-          <div class="right">2019-02-22 18:00:11</div>
+        <div class="row" style="text-align: center;margin-bottom: 22px !important;color:#b3aeae;"
+             *ngIf="messageList.length === 0">
+          <span>暂无网友留言</span>
         </div>
-        <div class="row">
+        <div class="row" *ngFor="let item of messageList">
           <div>
             <img src="http://temp.im/50x50" />
-            <span class="font-color-cyan">一致小白兔:</span>
-            <span>我好像看到有人在天府广场上捡到了张身份证，然后就交个了警察</span>
+            <span class="font-color-cyan">{{item.name}}:</span>
+            <span>{{item.message}}</span>
           </div>
-          <div class="right">2019-02-22 18:00:11</div>
-        </div>
-        <div class="row">
-          <div>
-            <img src="http://temp.im/50x50" />
-            <span class="font-color-cyan">一致小白兔:</span>
-            <span>我好像看到有人在天府广场上捡到了张身份证，然后就交个了警察</span>
-          </div>
-          <div class="right">2019-02-22 18:00:11</div>
+          <div class="right">{{item.leaveTime | date: 'yyyy-MM-dd hh:mm:ss'}}</div>
         </div>
         <div class="row" id="leaveWords" style="padding: 20px 0 20px 50px !important; display: none;">
           <textarea class="publish-leave-words" placeholder="请输入留言" 

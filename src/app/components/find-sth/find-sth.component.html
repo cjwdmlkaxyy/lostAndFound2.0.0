@@ -25,7 +25,7 @@
           <label>所属区域:</label>
           <span class="font-color-cyan" (click)="search('area','')"
                 [ngClass]="searchStyle.areaSearch === '' ? 'area-search' : ''">不限</span>
-          <span class="font-color-cyan" (click)="search('area', localCity)"
+          <span class="font-color-cyan" (click)="search('localCity', localCity)"
                 [ngClass]="searchStyle.areaSearch === localCity ? 'area-search' : ''">本市</span>
           <span class="font-color-cyan"
                 [ngClass]="searchStyle.areaSearch === i[0] ? 'area-search' : ''"
@@ -72,13 +72,13 @@
       <div class="messages" *ngFor="let item of renderData" [routerLink]="item.id">
         <div class="message-content">
           <div class="m-img">
-            <img src="http://temp.im/212x150">
+            <img [src]="item.picUrlEntityList[0].goodsPicUrl">
           </div>
           <div class="m-right">
             <div class="m-tag">
               <div [ngClass]="item.goodsWay == 1 ? 'find' : 'lost'">
                 <span *ngIf="item.goodsWay == 1">寻物</span>
-                <span *ngIf="item.goodsWay == 2">招领</span>
+                <span *ngIf="item.goodsWay == 0">招领</span>
               </div>
             </div>
             <div class="m-main-information">
@@ -86,17 +86,17 @@
               <div class="line"><span class="sr-only">这是一根线</span></div>
               <div class="m-margin-bottom">
                 <span *ngIf="item.goodsWay == 1">丢失类型:</span>
-                <span *ngIf="item.goodsWay == 2">拾物类型:</span>
-                <span>{{ 3 | conversionValue}}</span>
+                <span *ngIf="item.goodsWay == 0">拾物类型:</span>
+                <span>{{ item.typeOfGoods | conversionValue}}</span>
               </div>
               <div class="m-margin-bottom">
                 <span *ngIf="item.goodsWay == 1">丢失地点:</span>
-                <span *ngIf="item.goodsWay == 2">拾物地点:</span>
+                <span *ngIf="item.goodsWay == 0">拾物地点:</span>
                 <span>{{item.lostPlace}}</span>
               </div>
               <div class="m-margin-bottom">
                 <span *ngIf="item.goodsWay == 1">丢失时间:</span>
-                <span *ngIf="item.goodsWay == 2">拾物时间:</span>
+                <span *ngIf="item.goodsWay == 0">拾物时间:</span>
                 <span>{{item.lostTime | date: 'yyyy-MM-dd'}}</span>
               </div>
               <div class="m-margin-bottom">
@@ -111,7 +111,7 @@
             <span style="line-height: 22px;">{{item.description}}</span>
           </div>
           <div style="padding-right:5px;">
-            <span>发布时间:</span><span>2019-02-12 18:00:03</span>
+            <span>发布时间:</span><span>{{item.createTime | date: 'yyyy-MM-dd hh:mm:ss'}}</span>
           </div>
         </div>
       </div>

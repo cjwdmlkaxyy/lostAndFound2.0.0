@@ -16,11 +16,6 @@ export class LostSthComponent implements OnInit {
               private Source: PublicDateService,
               private communicateWithHeader: CommunicateWithHeaderService) { }
 
-  /*
-  * pagesInformation
-  * */
-  tags: any;
-
   goodsType: Array<any>;  // 物品种类
   thankWay: Array<any>;
   hotSearch: Array<any>;
@@ -48,7 +43,8 @@ export class LostSthComponent implements OnInit {
     province: '',
     district: '',
     city: '',
-    infoTittle: '' // input框搜索
+    infoTittle: '', // input框搜索
+    goodsWay: 1 // 寻物
   };
 
   /*索搜时的样式*/
@@ -85,10 +81,9 @@ export class LostSthComponent implements OnInit {
       this.getArea(this.localCity);
     } else {
       if (localStorage.getItem('userInfos')) {
-        let city = JSON.parse(localStorage.getItem('userInfos')).city;
-        this.getArea(city);
+        this.localCity = JSON.parse(localStorage.getItem('userInfos')).city;
+        this.getArea(this.localCity);
       } else {
-        // this.getProviceId = '510000';
         this.localCity = '510100';
         this.getArea('510100'); // 给默认的区域是成都
       }
@@ -98,8 +93,6 @@ export class LostSthComponent implements OnInit {
   }
 
   search(flag: string, val: any) {
-    console.log(flag, val);
-    
     /*根据传过来的值封装数据*/
     if (flag === 'goodsType') {
       this.searchInfos.typeOfGoods = val;
@@ -113,7 +106,7 @@ export class LostSthComponent implements OnInit {
       this.searchInfos.city = '';
       this.searchInfos.district = '';
       this.searchStyle.areaSearch = '';
-    } else if (flag === 'area' && val == this.localCity) { // 区域选择-本市
+    } else if (flag === 'localCity') { // 区域选择-本市
       this.searchInfos.province = this.getProviceId;
       this.searchInfos.city = this.localCity;
       this.searchInfos.district = '';
@@ -133,14 +126,13 @@ export class LostSthComponent implements OnInit {
       this.searchInfos.infoTittle = '';
       this.searchStyle.hotSearch = '';
     }
-    
-    console.log(this.searchInfos);
     this.HttpService.searchGoods(this.searchInfos).subscribe(res => {
        this.renderData = JSON.parse(res.data.goods);
        this.pageConfig.totalNum = res.data.recordCount;
        this.showLoading = false;
        console.log(this.renderData);
     }, err => {
+      this.showLoading = false;
       console.log(err);
     });
 
@@ -162,11 +154,19 @@ export class LostSthComponent implements OnInit {
 
   /*获取搜索的开始时间和结束时间*/
   getSearchTime(val, flag) {
-    if(flag === 'start') {
-      let start = new Date(val.getFullYear(), val.getMonth(), val.getDate(), 0, 0, 0).getTime();
+    if (!val) {
+      if (flag === 'start') {
+        this.search('startTime', null);
+      } else {
+        this.search('endTime', null);
+      }
+      return;
+    }
+    if (flag === 'start') {
+      const start = new Date(val.getFullYear(), val.getMonth(), val.getDate(), 0, 0, 0).getTime();
       this.search('startTime', start);
     } else {
-      let end = new Date(val.getFullYear(), val.getMonth(), val.getDate(), 23, 59, 59).getTime();
+      const end = new Date(val.getFullYear(), val.getMonth(), val.getDate(), 23, 59, 59).getTime();
       this.search('endTime', end);
     }
   }

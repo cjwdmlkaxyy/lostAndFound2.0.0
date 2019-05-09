@@ -23,6 +23,7 @@ import { element } from '@angular/core/src/render3';
       (ngModelChange)="onEndChange($event)"
       [nzShowToday]="false"
       *ngIf="isShowEndPicker"
+      readonly="readonly"
     >
     </nz-date-picker>
   `,
@@ -64,7 +65,6 @@ export class NzDemoDatePickerStartEndComponent implements OnInit {
   };
 
   onStartChange(date: Date): void {
-    console.log(this.birthday);
     this.startValue = date;
     this.startDateVal.emit(date);
   }

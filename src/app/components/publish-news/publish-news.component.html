@@ -160,11 +160,15 @@
               <input type="text" name="answer3" [(ngModel)]="saveInfos.findGoodsAnswer3">
             </div>
             <div class="row text-center" style="padding-top:50px !important;">
-              <input type="submit" class="btn btn-success" (click)="publishNews()" value="立即发布">
+              <input type="submit" class="btn btn-success" (click)="publishNews()" nz-button value="立即发布">
             </div>
           </form>
         </div>
       </div>
     </div>
+  </div>
+  <div class="-loading" style="position:fixed;top:50%;left:50%;"
+       *ngIf="showLoading">
+    <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
   </div>
 </div>
