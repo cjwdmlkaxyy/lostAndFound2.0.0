@@ -27,7 +27,7 @@
                   </span>
                 </div>
               </div>
-              <div class="inline-block alter-message" style="padding-top: 20px;"
+              <div class="inline-block alter-message" style="position:absolute;padding-top: 20px;"
                    *ngIf="saveInfosFlags.goodsType && saveInfos.typeOfGoods === ''">
                 <i class="glyphicon glyphicon-alert icon-danger"></i>
                 <span>请选择物品种类</span>
@@ -51,7 +51,7 @@
               <label><span class="must">*</span>描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</label>
               <textarea rows="6" class="width-40" name="description"
                         [(ngModel)]="saveInfos.description"></textarea>
-              <div class="inline-block alter-message"
+              <div class="inline-block alter-message" style="position:absolute;padding-top:50px;"
                    *ngIf="saveInfosFlags.description && (saveInfos.description.length > 255 || saveInfos.description.length < 15)">
                 <i class="glyphicon glyphicon-alert icon-danger"></i>
                 <span *ngIf="saveInfos.description === ''">请输入描述信息</span>
@@ -61,6 +61,14 @@
             <div class="row">
               <label class="left"><span class="must">*</span>上传图片:</label>
               <input type="file" id="uploadImg1" class="left" (change)="uploadImg()">
+              <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
+              <span>图片不能大于2M</span>
+              <span *ngIf="saveInfos.infoTittle.length > 15">信息标题不能超过15个字符</span>
+              <div class="inline-block alter-message"
+                   *ngIf="saveInfosFlags.file && !saveInfos.file1">
+                <i class="glyphicon glyphicon-alert icon-danger"></i>
+                <span>请选择图片</span>
+              </div>
             </div>
             <div class="row">
               <label *ngIf="saveInfos.goodsWay === 1"><span class="must">*</span>丢失地点:</label>
@@ -112,7 +120,9 @@
             </div>
             <div class="row">
               <label><span class="must"><span class="must">*</span></span>联系电话:</label>
-              <input type="text" name="phoneNum" [(ngModel)]="saveInfos.telPhoneNo">
+              <input type="text" name="phoneNum"
+                     [(ngModel)]="saveInfos.telPhoneNo"
+                     (blur)="checkVal(saveInfos.telPhoneNo, 'phone')">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入联系电话</span>
               <div class="inline-block alter-message"
@@ -120,12 +130,24 @@
                 <i class="glyphicon glyphicon-alert icon-danger"></i>
                 <span>请输入联系电话</span>
               </div>
+              <div class="inline-block alter-message"
+                   *ngIf="saveInfosFlags.conPhoneErr">
+                <i class="glyphicon glyphicon-alert icon-danger"></i>
+                <span>请输入正确联系电话</span>
+              </div>
             </div>
             <div class="row">
               <label>&nbsp;&nbsp;&nbsp;&nbsp;Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q:</label>
-              <input type="text" name="qq" [(ngModel)]="saveInfos.qq">
+              <input type="text" name="qq"
+                     [(ngModel)]="saveInfos.qq"
+                     (blur)="checkVal(saveInfos.qq, 'qq')">
               <span class="glyphicon glyphicon-info-sign icon icon-remind"></span>
               <span>请输入联系QQ号码</span>
+              <div class="inline-block alter-message"
+                   *ngIf="saveInfosFlags.qqErr">
+                <i class="glyphicon glyphicon-alert icon-danger"></i>
+                <span>请输入正确的QQ号码</span>
+              </div>
             </div>
             <div class="row">
               <label>&nbsp;&nbsp;联系地址:</label>
@@ -144,6 +166,11 @@
                      [(ngModel)]="saveInfos.findGoodsQuestion1">
               <label style="margin-left:50px;"><span class="must"><span class="must">*</span></span>  答案:</label>
               <input type="text" name="answer1" [(ngModel)]="saveInfos.findGoodsAnswer1">
+              <div class="inline-block alter-message"
+                   *ngIf="saveInfosFlags.firstQuestion && (saveInfos.findGoodsQuestion1 === '' || saveInfos.findGoodsAnswer1 === '')">
+                <i class="glyphicon glyphicon-alert icon-danger"></i>
+                <span>请将第一个问题信息填写完整</span>
+              </div>
             </div>
             <div class="row">
               <label>&nbsp;&nbsp;&nbsp;&nbsp;问题二:</label>

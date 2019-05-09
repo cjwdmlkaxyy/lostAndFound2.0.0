@@ -60,10 +60,12 @@ $color:$basicColor-deepgreen;
       height:32px;
       border: 1px #b9b9b9 solid;
       border-radius: 5px;
+      padding-left: 8px;
     }
     textarea{
       border: 1px #b9b9b9 solid;
       border-radius: 5px;
+      padding-left: 8px;
     }
     input[type='text']:focus,textarea:focus,select:focus{
       border: 1px #11b98a solid;
@@ -139,7 +141,7 @@ $color:$basicColor-deepgreen;
 
 // 提示信息
 .alter-message{
-  position:absolute;
+  //position:absolute;
   margin-left: 50px;
   i{
     margin: 0 10px;

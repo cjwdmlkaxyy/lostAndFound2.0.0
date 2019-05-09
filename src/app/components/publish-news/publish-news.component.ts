@@ -5,6 +5,7 @@ import { HttpRequestService } from '../../service/http-request.service';
 import { NzMessageService } from 'ng-zorro-antd';
 import * as $ from 'jquery';
 import { PublicService } from '../../service/public.service';
+import { CheckValueService } from '../../service/check-value.service';
 
 @Component({
   selector: 'app-publish-news',
@@ -16,7 +17,8 @@ export class PublishNewsComponent implements OnInit {
   constructor(private PublicDate: PublicDateService,
               public HttpRequest: HttpRequestService,
               private NzMessage: NzMessageService,
-              private publiceServe: PublicService) { }
+              private publiceServe: PublicService,
+              public checkValue: CheckValueService) { }
 
   goodsClass: any = [];
   urlFront = 'http://47.102.139.16:8082/';
@@ -42,14 +44,7 @@ export class PublishNewsComponent implements OnInit {
     username: ''
   };
   // 发布信息flags
-  saveInfosFlags = {
-    goodsType: false,
-    infoTittle: false,
-    description: false,
-    lostTime: false,
-    conPerson: false,
-    conPhone: false,
-  };
+  saveInfosFlags: any;
 
   clearSaveInfos() {
    this.saveInfos = {
@@ -82,10 +77,24 @@ export class PublishNewsComponent implements OnInit {
     this.detailAddress = '';
     $('#timePicker').val('');
   }
-
+  clearSaveInfosFlag() {
+    this.saveInfosFlags = {
+      goodsType: false,
+      infoTittle: false,
+      description: false,
+      lostTime: false,
+      conPerson: false,
+      conPhone: false,
+      conPhoneErr: false, // 是否输入正确
+      firstQuestion: false,
+      qqErr: false,
+      file: false
+    };
+  }
   ngOnInit() {
     this.clearSaveInfos();
-    let goodType = this.PublicDate.goodsType.concat();
+    this.clearSaveInfosFlag();
+    const goodType = this.PublicDate.goodsType.concat();
     goodType.splice(0, 1);
     for (let i = 0, k = -1; i < goodType.length; i++) {
       if (i % 8 === 0) {
@@ -152,22 +161,16 @@ export class PublishNewsComponent implements OnInit {
   }
   /*发布消息*/
   publishNews() {
+    /*校验发布的信息是否输入正确*/
+    if (this.checkInfos()) {
+      return;
+    }
     this.saveInfos.lostPlace = this.provinceName + this.cityName + this.districtName + this.detailAddress;
     console.log(this.saveInfos);
     if (this.isLogined) {
       this.NzMessage.info('请先登录');
       return;
     }
-    if (!this.saveInfos.file1) {
-      this.NzMessage.info('请选择一张图片');
-      return;
-    }
-
-    /*校验发布的信息是否输入正确*/
-    if (this.checkInfos()) {
-      return;
-    }
-
     // 将数据封装成FormData
     const data: any = new FormData();
     data.append('goodsWay', this.saveInfos.goodsWay);
@@ -210,6 +213,8 @@ export class PublishNewsComponent implements OnInit {
         _this.showLoading = false;
         _this.NzMessage.success('发布消息成功');
         _this.clearSaveInfos();
+        _this.clearSaveInfosFlag();
+        $('#uploadImg1').val('');
       },
       error: function (err) {
         console.log(err);
@@ -243,7 +248,7 @@ export class PublishNewsComponent implements OnInit {
 
   /*选择了省、城市、区*/
   selectedProvince(val) {
-    for (let item of this.provinceList) {
+    for (const item of this.provinceList) {
       if (item[1] === val) {
         this.saveInfos.province = item[0];
         this.provinceName = item[1];
@@ -255,27 +260,27 @@ export class PublishNewsComponent implements OnInit {
       this.cityList = JSON.parse(res.data);
       this.saveInfos.city = this.cityList[0][0];
 
-      this.HttpRequest.getArea(this.saveInfos.city).subscribe( (res: any) =>{
-        this.districtList = JSON.parse(res.data);
+      this.HttpRequest.getArea(this.saveInfos.city).subscribe( (res1: any) => {
+        this.districtList = JSON.parse(res1.data);
         this.saveInfos.district = this.districtList[0][0];
       });
     });
   }
   selectedCity(val) {
-    for (let item of this.cityList) {
+    for (const item of this.cityList) {
       if (item[1] === val) {
         this.saveInfos.city = item[0];
         this.cityName = item[1];
         break;
       }
     }
-    this.HttpRequest.getArea(this.saveInfos.city).subscribe( (res: any) =>{
+    this.HttpRequest.getArea(this.saveInfos.city).subscribe( (res: any) => {
       this.districtList = JSON.parse(res.data);
       this.saveInfos.district = this.districtList[0][0];
     });
   }
   selectedArea(val) {
-    for (let item of this.districtList) {
+    for (const item of this.districtList) {
       if (item[1] === val) {
         this.saveInfos.district = item[0];
         this.districtName = item[1];
@@ -298,7 +303,7 @@ export class PublishNewsComponent implements OnInit {
       this.saveInfosFlags.description = true;
       flag = true;
     }
-    if(this.saveInfos.lostTime === '' || this.saveInfos.lostTime === null){
+    if (this.saveInfos.lostTime === '' || this.saveInfos.lostTime === null){
       this.saveInfosFlags.lostTime = true;
       flag = true;
     }
@@ -310,6 +315,14 @@ export class PublishNewsComponent implements OnInit {
       this.saveInfosFlags.conPhone = true;
       flag = true;
     }
+    if (this.saveInfos.findGoodsQuestion1 === '' || this.saveInfos.findGoodsAnswer1 === '') {
+      this.saveInfosFlags.firstQuestion = true;
+      flag = true;
+    }
+    if (!this.saveInfos.file1) {
+      this.saveInfosFlags.file = true;
+      flag = true;
+    }
 
     $('.icon-danger').each(function (e) {
       flag = true;
@@ -319,6 +332,27 @@ export class PublishNewsComponent implements OnInit {
       return true;
     } else {
       return false;
+    }
+  }
+
+  checkVal(val: any, flag: any) {
+    console.log(flag, val);
+    if (flag === 'phone') {
+      if (!val) {
+        return;
+      } else if (this.checkValue.checkPhoneNum(val)) {
+        this.saveInfosFlags.conPhoneErr = false;
+      } else {
+        this.saveInfosFlags.conPhoneErr = true;
+      }
+    } else {
+      if (!val) {
+        return;
+      } else if (this.checkValue.checkQQ(val)) {
+        this.saveInfosFlags.qqErr = false;
+      } else {
+        this.saveInfosFlags.qqErr = true;
+      }
     }
   }
 

@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
 
   getData() {
     this.httpRequest.searchGoods(this.searchInfos).subscribe((res: any) => {
-       this.publicService.checkResponse(res.code);
        if (!this.publicService.checkResponse(res.code)) {
            this.renderData = JSON.parse(res.data.goods);
            this.showLoading = false;

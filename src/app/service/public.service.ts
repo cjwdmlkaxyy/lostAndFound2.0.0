@@ -13,4 +13,8 @@ export class PublicService {
       return true;
     }
   }
+
+  error() {
+    this.nzMessage.error('系统错误，请稍后重试');
+  }
 }
