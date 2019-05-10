@@ -66,7 +66,7 @@
                 <div class="m-margin-bottom">
                   <span *ngIf="item.goodsWay == 1">丢失地点:</span>
                   <span *ngIf="item.goodsWay == 0">拾物地点:</span>
-                  <span>{{item.lostPlace}}</span>
+                  <span class="word-wrap">{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.lostPlace}}</span>
                 </div>
                 <div class="m-margin-bottom">
                   <span *ngIf="item.goodsWay == 1">丢失时间:</span>

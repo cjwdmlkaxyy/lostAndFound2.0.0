@@ -29,12 +29,7 @@ export class NewDetialsComponent implements OnInit {
     public httpRequest: HttpRequestService,
     private publicServe: PublicService,
     private nzMessage: NzMessageService
-  ) {
-    this.route.params.subscribe((params: Params) => {
-        localStorage.setItem('goodsId', params.id);
-        // this.searchCondition.id = localStorage.getItem('goodsId');
-    });
-  }
+  ) {}
 
   renderData: any;
 
@@ -57,6 +52,10 @@ export class NewDetialsComponent implements OnInit {
   };
   ngOnInit() {
     // this.clearAnswer();
+    this.route.params.subscribe((params: Params) => {
+      localStorage.setItem('goodsId', params.id);
+      this.searchCondition.id = params.id;
+    });
     $('#leaveWords').hide();
     this.leaveWordFlag = 'leaveWords';
     this.getData();
@@ -73,13 +72,17 @@ export class NewDetialsComponent implements OnInit {
   }
   /*发表留言*/
   publishWords() {
-    $('#leaveWords').fadeOut(200);
-    this.leaveWordFlag = 'leaveWords';
+    if (!this.leaveWordsInfos.userId) {
+      this.nzMessage.info('请先登录');
+      return;
+    }
     if (!this.leaveWordsInfos.message) {
       this.nzMessage.info('请输入留言内容');
+      return;
     }
     this.httpRequest.publishLeaveWords(this.leaveWordsInfos).subscribe(res => {
-      console.log(res);
+      $('#leaveWords').fadeOut(200);
+      this.leaveWordFlag = 'leaveWords';
     }, err => {
       console.log(err);
       this.publicServe.error();
@@ -147,14 +150,17 @@ export class NewDetialsComponent implements OnInit {
         if (res.data.info === '输入答案有误') {
           this.answerErr = true;
         } else {
-          const data = JSON.parse(res.data.info);
-          this.answersList.concPersion = data.concPersion;
-          this.answersList.concPhone = data.telphoneNo;
-          this.answersList.qq = data.qq;
-          this.answersList.concPlace = data.concPlace;
-          this.answerErr = false;
+          const startIndex = res.data.info.indexOf('(');
+          const endIndex = res.data.info.indexOf(')');
+          const string = res.data.info.substring(startIndex + 1, endIndex);
+          const array = string.split(',');
+          for (const i of array) {
+            const arr = i.split('=');
+            if (arr[0].trim() in this.answersList) {
+              this.answersList[arr[0].trim()] = arr[1];
+            }
+          }
         }
-        // $('#answer').fadeOut(200);
       }
     }, (err: any) => {
       console.log(err);

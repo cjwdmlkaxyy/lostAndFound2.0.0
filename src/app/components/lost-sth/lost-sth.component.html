@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="row" style="padding-top: 10px !important;">
-        <div style="line-height: 14px;">
+        <div style="line-height: 24px;">
           <label>所属区域:</label>
           <span class="font-color-cyan" (click)="search('area','')"
                 [ngClass]="searchStyle.areaSearch === '' ? 'area-search' : ''">不限</span>
@@ -92,7 +92,7 @@
               <div class="m-margin-bottom">
                 <span *ngIf="item.goodsWay == 1">丢失地点:</span>
                 <span *ngIf="item.goodsWay == 0">拾物地点:</span>
-                <span>{{item.lostPlace}}</span>
+                <span class="word-wrap">{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.lostPlace}}</span>
               </div>
               <div class="m-margin-bottom">
                 <span *ngIf="item.goodsWay == 1">丢失时间:</span>

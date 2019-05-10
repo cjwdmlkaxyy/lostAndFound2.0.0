@@ -14,6 +14,7 @@ export class FrameComponent implements OnInit {
     city: ['', '成都市'] // 由于懒得改，所以就随便写个值
   }; // 所在地
   currentCityObj: any;
+  link = [];
 
   userInfosFlag = localStorage.getItem('userInfos');
   userInfos: any = localStorage.getItem('userInfos');
@@ -30,6 +31,7 @@ export class FrameComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.link = this.PublicDate.link;
     // 避免重复加载
     if (this.PublicDate.getAllCities.length === 0) {
       this.PublicDate.getProvince(); // 加载所有城市，更好的用户体验

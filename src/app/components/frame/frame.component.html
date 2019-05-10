@@ -45,32 +45,14 @@
       <div class="container">
         <div class="row">友情链接:</div>
         <div class="row text-center">
-          <div>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-          </div>
-          <div>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
-            <span>中国拾物招领网</span>
+          <div class="link">
+            <a *ngFor="let item of link"
+               [href]="item.href" target="_blank">{{item.name}}</a>
           </div>
         </div>
         <div class="text-center">
-          <span>关于我们</span>
-          <span routerLink="./statement">网站声明</span>
+          <span class="cursor" routerLink="./aboutUs">关于我们</span>
+          <span class="cursor" routerLink="./statement">网站声明</span>
         </div>
         <div class="text-center">
           <span>Made By 四川轻化工大学 计算机学院 计算机科学与技术20156班 陈金燕</span>

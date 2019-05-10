@@ -67,6 +67,7 @@ export class LostSthComponent implements OnInit {
 
     if (this.communicateWithHeader.messagesVal) {
       this.localCity = this.communicateWithHeader.messagesVal.city[0];
+      console.log(this.communicateWithHeader.messagesVal);
       if (this.localCity == '110100') { // 北京市
             this.getProviceId = '110000';
       } else if (this.localCity == '310100') { // 上海市
@@ -76,7 +77,7 @@ export class LostSthComponent implements OnInit {
       } else if (this.localCity == '500100') { // 重庆市
         this.getProviceId = '500000';
       } else {
-      this.getProviceId = this.communicateWithHeader.messagesVal.province;
+      this.getProviceId = '';
       }
       this.getArea(this.localCity);
     } else {

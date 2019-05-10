@@ -61,6 +61,20 @@ export class PublicDateService {
 
   directlyCities = ['北京市', '上海市', '天津市', '重庆市'];
 
+  /*link Array*/
+  link = [
+    {name: '中国失物招领网', href: 'http://www.cswzl.com'},
+    {name: '失物认领网', href: 'http://www.shiwurenling.com/'},
+    {name: '丢哪儿', href: 'http://www.diunal.com'},
+    {name: '四川失物招领网', href: 'http://www.cdswzl.com/'},
+    {name: '北京失物招领网', href: 'https://bj.qd8.com/shiwuzhaoling/'},
+    {name: '成都失物招领网', href: 'https://cd.qd8.com/shiwuzhaoling/'},
+    {name: '上海失物招领网', href: 'https://sh.qd8.com/shiwuzhaoling/'},
+    {name: '重庆失物招领网', href: 'https://cq.qd8.com/shiwuzhaoling/'},
+    {name: '杭州失物招领网', href: 'https://hz.qd8.com/shiwuzhaoling/'},
+    {name: '深圳失物招领网', href: 'https://sz.qd8.com/shiwuzhaoling/'}
+  ];
+
   getProvinces: Array<any> = []; // 得到所有的省
   getAllCities: Array<any> = []; // 得到所有城市,除直辖市外
 

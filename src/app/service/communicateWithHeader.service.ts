@@ -18,6 +18,7 @@ export class CommunicateWithHeaderService {
 
   /*订阅其他组件发送过来的消息*/
   public getMessages(): Observable<any> {
+    console.log(this.messagesVal);
     return this.messages.asObservable();
   }
 

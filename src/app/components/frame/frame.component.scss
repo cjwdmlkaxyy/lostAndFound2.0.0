@@ -79,7 +79,7 @@ img{
   box-sizing: border-box;
 }
 .footer-bgImg{
-  background: url("../../../assets/img/footerbg1.jpg");
+  background-image: url("../../../assets/img/footerbg1.jpg");
   //background-position: center center;
   background-attachment: fixed;
   background-size:100% 100%;
@@ -110,6 +110,21 @@ img{
 
   span{
     margin:auto 15px;
+  }
+  .cursor{
+    cursor: pointer;
+  }
+  .cursor:hover{
+    color:#ffa730;
+  }
+  .link{
+    a {
+      color: $basicColor-gray;
+      margin: 0 8px;
+    }
+    a:hover{
+      color:#ffa730;
+    }
   }
 }
 

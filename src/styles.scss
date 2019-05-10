@@ -147,3 +147,11 @@ a {
 .-loading{
   text-align: center;
 }
+.word-wrap{
+  width: 170px;
+  display: inline-block;
+  vertical-align: bottom;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

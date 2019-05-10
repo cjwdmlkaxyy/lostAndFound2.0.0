@@ -76,7 +76,7 @@ export class FindSthComponent implements OnInit {
       } else if (this.localCity == '500100') { // 重庆市
         this.getProviceId = '500000';
       } else {
-      this.getProviceId = this.communicateWithHeader.messagesVal.province;
+      this.getProviceId = '';
       }
       this.getArea(this.localCity);
     } else {

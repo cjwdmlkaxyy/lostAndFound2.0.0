@@ -30,7 +30,7 @@
     <div class="row">
       <span *ngIf="item.goodsWay == 1">丢失地点</span>
       <span *ngIf="item.goodsWay == 0">拾物地点:</span>
-      <span style="background-color: #ff4500ab">四川省成都市锦江区仁恒置地广场周围</span>
+      <span style="background-color: #ff4500ab">{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.lostPlace}}</span>
     </div>
     <div class="row">
       <span *ngIf="item.goodsWay == 1">丢失时间:</span>
@@ -43,11 +43,8 @@
     </div>
     <div class="row">
       <span>联系电话:</span>
-      <a (click)="answerLayer()" style="cursor:pointer;color: blue;" title="获取联系方式">{{item.phoneNo | filterInfosValue: 'phone'}}</a>
-    </div>
-    <div class="row">
-      <span>QQ:</span>
-      <a (click)="answerLayer()" style="cursor:pointer;color: blue;" title="获取联系方式">{{item.phoneNo | filterInfosValue: 'phone'}}</a>
+      <span style="padding:1px 4px;background-color: #f0ad4e;color:#fff;border-radius:50%;">密</span>
+      <a (click)="answerLayer()" style="cursor:pointer;color: #f0ad4e;padding:2px 10px;border:1px solid #f0ad4e;margin-left:40px;" title="获取联系方式">获取联系方式</a>
     </div>
     <div class="row" *ngIf="item.concPlace">
       <span>联系地址:</span>
@@ -66,7 +63,7 @@
         </div>
         <div class="row" *ngFor="let item of messageList">
           <div>
-            <img src="http://temp.im/50x50" />
+            <img src="../../../assets/img/user.jpg" style="width:50px;height:50px;border-radius:50%;" />
             <span class="font-color-cyan">{{item.name}}:</span>
             <span>{{item.message}}</span>
           </div>
@@ -97,6 +94,7 @@
     <div class="answer-question">
       <div class="title">
         <span>请回答下面的问题</span>
+        <p style="font-size:9px;color:#c1bdbd;">为了保证用户信息安全，请回答问题获取用户联系方式。</p>
       </div>
       <div class="question"
            *ngFor="let item of questionLists, let idx = index">
@@ -106,15 +104,21 @@
           <input type='text' [attr.idx] = "idx">
         </div>
       </div>
-      <div *ngIf="answersList.concPhone !== ''">
+      <div *ngIf="answersList.concPersion !== ''">
         <div>联系人：{{answersList.concPersion}}</div>
         <div>联系电话：{{answersList.concPhone}}</div>
         <div>QQ：{{answersList.qq}}</div>
         <div>联系地址：{{answersList.concPlace}}</div>
       </div>
-      <div *ngIf="answerErr">由于您没有回答对问题，所以不能获取该用户的联系信息！</div>
+      <div style="color:red;"
+          *ngIf="answerErr && !answersList.concPersion">由于您没有回答对问题，所以不能获取该用户的联系信息！</div>
       <div class="btn-line">
-        <button class="btn btn-success" (click)="confirmAnswer()">确定</button>
+        <button class="btn btn-success"
+                *ngIf="answersList.concPersion === ''"
+                (click)="confirmAnswer()">确定</button>
+        <button class="btn btn-success"
+                *ngIf="answersList.concPersion !== ''"
+                (click)="cancleAnswer()">确定</button>
         <button class="btn btn-danger" (click)="cancleAnswer()">取消</button>
       </div>
     </div>
