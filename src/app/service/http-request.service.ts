@@ -25,7 +25,7 @@ export class HttpRequestService{
       headers: new HttpHeaders({
         // 'Content-Type':  'application/json',
         // 'Authorization': 'my-auth-token',
-        'token': this.header.token
+        // 'token': this.header.token
       })
     });
   }
@@ -80,5 +80,11 @@ export class HttpRequestService{
   * */
   answerQuestion(val): Observable<any> {
     return this.http.post(this.urlFront + '/goods/answerQuestion', val);
+  }
+  /*
+  * get messages by goods Id
+  * */
+  getMessages(id: string, pageSize: number, pageNum: number): Observable<any> {
+    return this.http.get(this.urlFront + '/goods/getMessage/' + id + '/' + pageNum + '/' + pageSize);
   }
 }

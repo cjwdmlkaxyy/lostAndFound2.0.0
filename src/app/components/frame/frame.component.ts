@@ -36,7 +36,7 @@ export class FrameComponent implements OnInit {
     if (this.PublicDate.getAllCities.length === 0) {
       this.PublicDate.getProvince(); // 加载所有城市，更好的用户体验
     }
-    if (this.userInfosFlag !== '') {
+    if (this.userInfosFlag) {
       this.userInfos = JSON.parse(this.userInfosFlag);
       if (this.userInfos.name === '' || this.userInfos.name === null) {
         this.userName = this.userInfos.username;

@@ -2,6 +2,12 @@
   <div id="topImg">
     <img src="http://static.runoob.com/images/mix/img_fjords_wide.jpg" class="img-top">
   </div>
+  <div class="-loading" style="position:fixed;top:70%;left:49%;"
+       *ngIf="loading">
+    <nz-spin nzSimple [nzSize]="'large'" nzTip="Loading...">
+      <nz-alert></nz-alert>
+    </nz-spin>
+  </div>
   <div class="main row" style="margin-top: 100px !important;padding: 50px !important;"
        *ngFor="let item of renderData">
     <div class="row text-center">

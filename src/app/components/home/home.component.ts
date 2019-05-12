@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   }
 
   getData() {
+    console.log(2222222222);
     this.httpRequest.searchGoods(this.searchInfos).subscribe((res: any) => {
        if (!this.publicService.checkResponse(res.code)) {
            this.renderData = JSON.parse(res.data.goods);

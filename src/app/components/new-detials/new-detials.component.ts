@@ -42,7 +42,7 @@ export class NewDetialsComponent implements OnInit {
   messageList = [];
   questionLists = [];
   answers: any;
-  test: any;
+  loading = true; // 加载动画
   answerErr = false; // 回答错误
   answersList = {
     concPersion: '',
@@ -63,6 +63,20 @@ export class NewDetialsComponent implements OnInit {
     if (this.userInfos) {
       this.leaveWordsInfos.userId = JSON.parse(this.userInfos).id;
     }
+    this.getMessages();
+  }
+  /*获取留言*/
+  getMessages() {
+    this.httpRequest.getMessages(this.searchCondition.id, 10, 1).subscribe(res => {
+      if (!this.publicServe.checkResponse(res.code)) {
+        const data = JSON.parse(res.data.goods);
+        this.messageList = data;
+        console.log(this.messageList);
+      }
+    }, err => {
+      this.publicServe.error();
+      console.log(err);
+    });
   }
   /*我要留言*/
   leaveWords() {
@@ -81,6 +95,7 @@ export class NewDetialsComponent implements OnInit {
       return;
     }
     this.httpRequest.publishLeaveWords(this.leaveWordsInfos).subscribe(res => {
+      this.getMessages();
       $('#leaveWords').fadeOut(200);
       this.leaveWordFlag = 'leaveWords';
     }, err => {
@@ -103,9 +118,8 @@ export class NewDetialsComponent implements OnInit {
   }
   getData() {
     this.httpRequest.searchGoods(this.searchCondition).subscribe( (res: any) => {
+      this.loading = false;
       this.renderData = JSON.parse(res.data.goods);
-      this.messageList = this.renderData[0].message;
-      console.log(this.renderData);
       let obj = null;
       if (this.renderData[0].findGoodsQuestion1) {
           obj = {
@@ -129,6 +143,8 @@ export class NewDetialsComponent implements OnInit {
           this.questionLists.push(obj);
       }
     }, (err: any) => {
+      this.loading = false;
+      this.publicServe.error();
       console.log(err);
     });
   }
