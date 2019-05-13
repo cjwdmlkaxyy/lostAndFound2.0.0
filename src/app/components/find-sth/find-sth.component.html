@@ -27,7 +27,7 @@
                 [ngClass]="searchStyle.areaSearch === '' ? 'area-search' : ''">不限</span>
           <span class="font-color-cyan" (click)="search('localCity', localCity)"
                 [ngClass]="searchStyle.areaSearch === localCity ? 'area-search' : ''">本市</span>
-          <span class="font-color-cyan" style="white-space:nowrap;"
+          <span class="font-color-cyan"
                 [ngClass]="searchStyle.areaSearch === i[0] ? 'area-search' : ''"
                 *ngFor="let i of district"
                 (click)="search('area', i[0])">{{i[1]}}</span>
@@ -111,7 +111,7 @@
             <span style="line-height: 22px;">{{item.description}}</span>
           </div>
           <div style="padding-right:5px;">
-            <span>发布时间:</span><span>{{item.createTime | date: 'yyyy-MM-dd hh:mm:ss'}}</span>
+            <span>发布时间:</span><span>{{item.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PublicDateService } from '../../service/public-date.service';
 import { CommunicateWithHeaderService } from '../../service/communicateWithHeader.service';
+import { HttpRequestService } from '../../service/http-request.service';
+import { PublicService } from '../../service/public.service';
 
 @Component({
   selector: 'app-frame',
@@ -20,7 +22,9 @@ export class FrameComponent implements OnInit {
   userInfos: any = localStorage.getItem('userInfos');
 
   constructor(public PublicDate: PublicDateService,
-              private communicateWithHeader: CommunicateWithHeaderService) {
+              private communicateWithHeader: CommunicateWithHeaderService,
+              private httpResquest: HttpRequestService,
+              private publicServe: PublicService) {
     /*
     * 实现fixed时横向滚动
     * */
@@ -31,7 +35,7 @@ export class FrameComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.link = this.PublicDate.link;
+    // this.link = this.PublicDate.link;
     // 避免重复加载
     if (this.PublicDate.getAllCities.length === 0) {
       this.PublicDate.getProvince(); // 加载所有城市，更好的用户体验
@@ -56,12 +60,24 @@ export class FrameComponent implements OnInit {
       this.location = res;
       this.currentCityObj = res.city;
     });
+    this.getLinks();
   }
 
   /*退出登录*/
   logOut() {
     localStorage.setItem('userInfos', '');
     localStorage.setItem('token', '');
+  }
+
+  getLinks() {
+    this.httpResquest.getLinks().subscribe(res => {
+      const data = JSON.parse(res.data.data);
+      this.link = data;
+      console.log(data);
+    }, err => {
+      console.log(err);
+      this.publicServe.error();
+    });
   }
 
 }

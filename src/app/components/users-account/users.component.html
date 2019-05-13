@@ -58,10 +58,10 @@
           <div>
             <div class="operation">
               <!--<span>编辑</span>-->
-              <span>留言(5)</span>
+              <span>留言({{item.message.length}})</span>
               <span (click)="deleteData(item.id)">删除</span>
             </div>
-            <div style="padding-right:5px;"><span>发布时间:</span><span>2019-02-12 18:00:03</span></div>
+            <div style="padding-right:5px;"><span>发布时间:</span><span>{{item.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span></div>
           </div>
         </div>
       </div>

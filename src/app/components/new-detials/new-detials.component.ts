@@ -20,7 +20,7 @@ export class NewDetialsComponent implements OnInit {
   id: any;
   leaveWordFlag: string;
   searchCondition = {
-    id: localStorage.getItem('goodsId')
+    id: ''
   };
 
   constructor(
@@ -34,7 +34,7 @@ export class NewDetialsComponent implements OnInit {
   renderData: any;
 
   leaveWordsInfos = {
-    goodsId: localStorage.getItem('goodsId'),
+    goodsId: '',
     message: '',
     userId: null
   };
@@ -53,9 +53,10 @@ export class NewDetialsComponent implements OnInit {
   ngOnInit() {
     // this.clearAnswer();
     this.route.params.subscribe((params: Params) => {
-      localStorage.setItem('goodsId', params.id);
+      // localStorage.setItem('goodsId', params.id);
       this.searchCondition.id = params.id;
     });
+    this.leaveWordsInfos.goodsId = this.searchCondition.id;
     $('#leaveWords').hide();
     this.leaveWordFlag = 'leaveWords';
     this.getData();
@@ -67,11 +68,10 @@ export class NewDetialsComponent implements OnInit {
   }
   /*获取留言*/
   getMessages() {
-    this.httpRequest.getMessages(this.searchCondition.id, 10, 1).subscribe(res => {
+    this.httpRequest.getMessages(this.searchCondition.id, 100, 1).subscribe(res => {
       if (!this.publicServe.checkResponse(res.code)) {
         const data = JSON.parse(res.data.goods);
         this.messageList = data;
-        console.log(this.messageList);
       }
     }, err => {
       this.publicServe.error();

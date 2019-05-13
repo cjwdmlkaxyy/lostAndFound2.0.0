@@ -87,4 +87,12 @@ export class HttpRequestService{
   getMessages(id: string, pageSize: number, pageNum: number): Observable<any> {
     return this.http.get(this.urlFront + '/goods/getMessage/' + id + '/' + pageNum + '/' + pageSize);
   }
+  /*
+  * get All links
+  * */
+  getLinks(): Observable<any> {
+    return this.http.post('http://47.102.139.16:8083/connection/getConnection', {
+      name: ''
+    });
+  }
 }

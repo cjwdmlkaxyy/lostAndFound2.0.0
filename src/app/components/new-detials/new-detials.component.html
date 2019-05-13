@@ -67,14 +67,17 @@
              *ngIf="messageList.length === 0">
           <span>暂无网友留言</span>
         </div>
-        <div class="row" *ngFor="let item of messageList">
-          <div>
-            <img src="../../../assets/img/user.jpg" style="width:50px;height:50px;border-radius:50%;" />
-            <span class="font-color-cyan">{{item.name}}:</span>
-            <span>{{item.message}}</span>
+        <div style="max-height:500px;overflow-y:auto;">
+          <div class="row" *ngFor="let item of messageList">
+            <div>
+              <img src="../../../assets/img/user.jpg" style="width:50px;height:50px;border-radius:50%;" />
+              <span class="font-color-cyan">{{item.name}}:</span>
+              <span>{{item.message}}</span>
+            </div>
+            <div class="right">{{item.leaveTime | date: 'yyyy-MM-dd hh:mm:ss'}}</div>
           </div>
-          <div class="right">{{item.leaveTime | date: 'yyyy-MM-dd hh:mm:ss'}}</div>
         </div>
+
         <div class="row" id="leaveWords" style="padding: 20px 0 20px 50px !important; display: none;">
           <textarea class="publish-leave-words" placeholder="请输入留言" 
                     style="height: 100px;width:90%;resize:none;"
