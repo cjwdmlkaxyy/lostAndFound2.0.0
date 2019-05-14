@@ -71,10 +71,11 @@
           <div class="row" *ngFor="let item of messageList">
             <div>
               <img src="../../../assets/img/user.jpg" style="width:50px;height:50px;border-radius:50%;" />
-              <span class="font-color-cyan">{{item.name}}:</span>
+              <span class="font-color-cyan" *ngIf="item.name">{{item.name}}:</span>
+              <span class="font-color-cyan" *ngIf="!item.name">{{item.loginAccount}}:</span>
               <span>{{item.message}}</span>
             </div>
-            <div class="right">{{item.leaveTime | date: 'yyyy-MM-dd hh:mm:ss'}}</div>
+            <div class="right">{{item.leaveTime | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
           </div>
         </div>
 
