@@ -35,7 +35,7 @@
   <div class="newest">
     <div class="text-center row">
       <span class="title">最新信息</span>
-      <p><span class="title-describe">显示最新发布的50条消息</span></p>
+      <p><span class="title-describe">本页只显示最新发布的50条消息</span></p>
     </div>
     <div class="-loading" *ngIf="showLoading" style="padding-top: 55px;">
         <nz-spin nzSimple [nzSize]="'large'" nzTip="Loading...">
@@ -43,51 +43,33 @@
         </nz-spin>
     </div>
     <div class="news">
-        <div class="messages" *ngFor="let item of renderData" [routerLink]="item.id">
-          <div class="message-content">
-            <div class="m-img">
-              <img [src]="item.picUrlEntityList[0].goodsPicUrl">
+        <div class="news-float" *ngFor="let item of renderData" [routerLink]="item.id">
+            <div class="img">
+                <img [src]="item.picUrlEntityList[0].goodsPicUrl" style="width:212px">
             </div>
-            <div class="m-right">
-              <div class="m-tag">
-                <div [ngClass]="item.goodsWay == 1 ? 'find' : 'lost'">
+            <div class="container-message">
+              <div>
+                <span>信息标题:</span>
+                <span>{{item.infoTittle}}</span>
+                <div class="flag" [ngClass]="item.goodsWay == 1 ? 'find' : 'lost'">
                   <span *ngIf="item.goodsWay == 1">寻物</span>
                   <span *ngIf="item.goodsWay == 0">招领</span>
                 </div>
               </div>
-              <div class="m-main-information">
-                <div class="m-title"><span>{{item.infoTittle}}</span></div>
-                <div class="line"><span class="sr-only">这是一根线</span></div>
-                <div class="m-margin-bottom">
-                  <span *ngIf="item.goodsWay == 1">丢失类型:</span>
-                  <span *ngIf="item.goodsWay == 0">拾物类型:</span>
-                  <span>{{ item.typeOfGoods | conversionValue}}</span>
-                </div>
-                <div class="m-margin-bottom">
-                  <span *ngIf="item.goodsWay == 1">丢失地点:</span>
-                  <span *ngIf="item.goodsWay == 0">拾物地点:</span>
-                  <span class="word-wrap">{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.lostPlace}}</span>
-                </div>
-                <div class="m-margin-bottom">
-                  <span *ngIf="item.goodsWay == 1">丢失时间:</span>
-                  <span *ngIf="item.goodsWay == 0">拾物时间:</span>
-                  <span>{{item.lostTime | date: 'yyyy-MM-dd'}}</span>
-                </div>
-                <div class="m-margin-bottom">
-                  <span>发布者:</span><span>{{item.netName}}</span>
-                </div>
+              <div>
+                <span>物品类型:</span>
+                <span style="color: orange;">{{ item.typeOfGoods | conversionValue}}</span>
+              </div>
+              <div>
+                <span *ngIf="item.goodsWay == 1">丢失地点:</span>
+                <span *ngIf="item.goodsWay == 0">拾物地点:</span>
+                <span class="word-wrap" style="width: 165px;">{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.lostPlace}}</span>
+              </div>
+              <div>
+                <span>发布时间:</span>
+                <span>{{item.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
               </div>
             </div>
-          </div>
-          <div class="m-footer">
-            <div>
-              <span style="font-weight: bold;">描述:</span>
-              <span style="line-height: 22px;">{{item.description}}</span>
-            </div>
-            <div style="padding-right:5px;">
-              <span>发布时间:</span><span>{{item.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
-            </div>
-          </div>
         </div>
     </div>
   </div>
