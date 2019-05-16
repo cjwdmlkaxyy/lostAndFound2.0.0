@@ -161,16 +161,17 @@ export class PublishNewsComponent implements OnInit {
   }
   /*发布消息*/
   publishNews() {
+    if (this.isLogined) {
+      this.NzMessage.info('请先登录');
+      return;
+    }
     /*校验发布的信息是否输入正确*/
     if (this.checkInfos()) {
       return;
     }
     this.saveInfos.lostPlace = this.provinceName + this.cityName + this.districtName + this.detailAddress;
-    console.log(this.saveInfos);
-    if (this.isLogined) {
-      this.NzMessage.info('请先登录');
-      return;
-    }
+    // console.log(this.saveInfos);
+
     // 将数据封装成FormData
     const data: any = new FormData();
     data.append('goodsWay', this.saveInfos.goodsWay);
