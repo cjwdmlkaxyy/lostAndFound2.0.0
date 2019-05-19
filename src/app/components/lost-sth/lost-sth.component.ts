@@ -8,7 +8,7 @@ import { CommunicateWithHeaderService } from '../../service/communicateWithHeade
 @Component({
   selector: 'app-lost-sth',
   templateUrl: './lost-sth.component.html',
-  styleUrls: ['./lost-sth.component.scss', '../home/home.component.scss']
+  styleUrls: ['./lost-sth.component.scss']
 })
 export class LostSthComponent implements OnInit {
 

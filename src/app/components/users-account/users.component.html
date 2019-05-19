@@ -2,7 +2,7 @@
   <div class="main">
     <div class="user-tab">
       <span>你好！</span>
-      <span>{{userInfos.netName}}</span>
+      <span>{{showNetname}}</span>
       <span style="color: #2aa387;cursor:pointer;" (click)="showUserInfos()">修改个人信息</span>
     </div>
     <div class="user-messages"
@@ -10,7 +10,7 @@
       <div class="messages-line">
         <div class="head-portrait">
           <img src="../../../assets/img/user.jpg" class="user-head-portrait">
-          <span>小小白兔:</span>
+          <span>{{showNetname}}:</span>
         </div>
       </div>
       <div class="messages">
@@ -119,13 +119,13 @@
                (change)="checkEmail(userInfos.email)"
                [(ngModel)]="userInfos.email">
       </div>
-      <div>
+      <!--<div>
         <label>出生日期:</label>
         <nz-demo-date-picker-start-end style="display: inline-block; margin-bottom: -8px"
                                        [isShowEndPicker]="false"
                                        [birthday]="userInfos.birthday"
                                        (startDateVal)="formatDate($event)"></nz-demo-date-picker-start-end>
-      </div>
+      </div>-->
       <div style="display: flex;">
         <label>所在地区:</label>
         <div class="location">

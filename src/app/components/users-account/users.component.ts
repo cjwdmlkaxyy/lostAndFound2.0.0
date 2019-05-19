@@ -20,12 +20,13 @@ export class UsersComponent implements OnInit {
     private nzMessage: NzMessageService
   ) {}
 
+  showNetname: string;
   userInfos = { // 更新用户信息
     id: JSON.parse(localStorage.getItem('userInfos')).id,
-    netName: '343',
+    netName: '',
     phone: '',
     email: '',
-    birthday: null,
+    // birthday: null,
     province: '',
     city: '',
     district: '',
@@ -161,11 +162,12 @@ export class UsersComponent implements OnInit {
       this.beforeUpdatePhone = data[0].phone;
       this.userInfos.netName = data[0].netName;
       this.userInfos.phone = data[0].phone;
-      this.userInfos.birthday = new Date(data[0].birthday);
+      // this.userInfos.birthday = new Date(data[0].birthday);
       this.userInfos.email = data[0].email;
       this.userInfos.province = data[0].province;
       this.userInfos.city = data[0].city;
       this.userInfos.district = data[0].district;
+      this.showNetname = this.userInfos.netName;
       this.getInitArea();
       console.log(data);
     }, (err: any) => {
@@ -192,9 +194,7 @@ export class UsersComponent implements OnInit {
       return;
     }
 
-    console.log(this.userInfos);
     this.registerService.updateUsersInfos(this.userInfos).subscribe( (res: any) => {
-      console.log(res);
       if (res.code === '000000') {
         $('.update-user-infos').fadeOut(500);
         this.nzMessage.create('success', '修改成功');
@@ -280,9 +280,11 @@ export class UsersComponent implements OnInit {
       if (res.code !== '999999') {
         $('.delete-layer').fadeOut(200);
         this.getData();
+        this.nzMessage.success('删除成功');
       }
     }, (err: any) => {
       console.log(err);
+      this.nzMessage.error('系统错误，请稍候再试');
     });
   }
   cancelDel() {
@@ -295,7 +297,7 @@ export class UsersComponent implements OnInit {
   formatDate(e) {
     let date = new Date(e);
     console.log(date);
-    this.userInfos.birthday = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    // this.userInfos.birthday = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
   }
 
 }

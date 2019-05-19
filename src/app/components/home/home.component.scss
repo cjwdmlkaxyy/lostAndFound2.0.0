@@ -25,7 +25,6 @@ div::before,div::after{
   padding:20px 0 0 0;
   overflow: hidden;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -38,10 +37,12 @@ div::before,div::after{
 
 /***************/
 .news-float{
-  width: 280px;
+  width: 268px;
   border: 1px rgba(225, 129, 48, 0.3) solid;
   padding: 20px 0;
   cursor: pointer;
+  //margin-bottom:20px;
+  margin: 0 12px 20px;
 }
 .news-float > .img{
   width:100%;

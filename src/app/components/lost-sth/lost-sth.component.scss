@@ -77,6 +77,32 @@
     margin-right:5px;
   }
 }
+.newest{
+  padding-top:100px;
+  .title{
+    color:$basicColor;
+    font-weight:bold;
+    font-size:30px;
+  }
+  .title-describe{
+    color:$basicColor-gray;
+  }
+}
+.news{
+  //height:800px;
+  padding:20px 0 0 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.find{
+  background-color: $basicColor-orange;
+}
+.lost{
+  background-color: $basicColor-green;
+}
 .messages{
   margin: 20px 5px;
   width: 500px;
