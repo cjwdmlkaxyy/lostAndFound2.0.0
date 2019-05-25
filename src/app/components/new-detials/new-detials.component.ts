@@ -46,7 +46,7 @@ export class NewDetialsComponent implements OnInit {
   answerErr = false; // 回答错误
   answersList = {
     concPersion: '',
-    concPhone: '',
+    telphoneNo: '',
     qq: '',
     concPlace: ''
   };

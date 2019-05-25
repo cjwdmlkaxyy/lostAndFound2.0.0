@@ -100,7 +100,14 @@
                 <span>{{item.lostTime | date: 'yyyy-MM-dd'}}</span>
               </div>
               <div class="m-margin-bottom">
-                <span>发布者:</span><span>{{item.netName}}</span>
+                <span>发布者:</span>
+                <span *ngIf="!item.netName">{{item.loginAccount}}</span>
+                <span *ngIf="item.netName">{{item.netName}}</span>
+              </div>
+              <div class="m-margin-bottom">
+                <span>消息状态:</span>
+                <span *ngIf="item.goodsWay == 1" style="color:orangered;font-weight: bold;">{{item.goodsStatus | GoodsStatus: 'lost'}}</span>
+                <span *ngIf="item.goodsWay == 0" style="color:orangered;font-weight: bold;">{{item.goodsStatus | GoodsStatus: 'found'}}</span>
               </div>
             </div>
           </div>

@@ -49,6 +49,7 @@ export class PublishNewsComponent implements OnInit {
   clearSaveInfos() {
    this.saveInfos = {
       goodsWay: 1, // 发布信息标志 0:失物招领-招领  1:失物发布-寻物
+      goodsStatus: 0, // 固定传一个0-正在寻找失物或招领
       id: this.userInfos.id, // 用户id,必传
       username: this.userInfos.username, // 登陆账号名，必传
       typeOfGoods: '', // 必传
@@ -175,6 +176,7 @@ export class PublishNewsComponent implements OnInit {
     // 将数据封装成FormData
     const data: any = new FormData();
     data.append('goodsWay', this.saveInfos.goodsWay);
+    data.append('goodsStatus', this.saveInfos.goodsStatus);
     data.append('id', this.saveInfos.id);
     data.append('username', this.saveInfos.username);
     data.append('typeOfGoods', this.saveInfos.typeOfGoods);
@@ -205,7 +207,7 @@ export class PublishNewsComponent implements OnInit {
     // 用ajax请求实现上传图片
     $.ajax({
       url: this.urlFront + 'goods/img/upload',
-      // url: 'http://192.168.2.57:8082/' + 'goods/img/upload',
+      // url: 'http://127.0.0.1:8082/' + 'goods/img/upload',
       type: 'POST',
       data: data,
       contentType: false,

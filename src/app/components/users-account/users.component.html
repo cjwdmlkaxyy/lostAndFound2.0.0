@@ -14,8 +14,8 @@
         </div>
       </div>
       <div class="messages">
-        <div class="message-content" [routerLink]="item.id">
-          <div class="m-img">
+        <div class="message-content">
+          <div class="m-img" [routerLink]="item.id">
             <img class="show-img"
                  [src]="item.picUrlEntityList[0].goodsPicUrl">
           </div>
@@ -27,25 +27,38 @@
               </div>
             </div>
             <div class="m-main-information">
-              <div class="m-title"><span>{{item.infoTittle}}</span></div>
+              <div class="m-title" [routerLink]="item.id"><span>{{item.infoTittle}}</span></div>
               <div class="line"><span class="sr-only">这是一根线</span></div>
-              <div class="m-margin-bottom">
+              <div class="m-margin-bottom" [routerLink]="item.id">
                 <span *ngIf="item.goodsWay == 0">拾物类型:</span>
                 <span *ngIf="item.goodsWay == 1">丢失类型:</span>
                 <span>{{item.typeOfGoods | conversionValue}}</span>
               </div>
-              <div class="m-margin-bottom">
+              <div class="m-margin-bottom" [routerLink]="item.id">
                 <span *ngIf="item.goodsWay == 0">拾物地点:</span>
                 <span *ngIf="item.goodsWay == 1">丢失地点:</span>
                 <span>{{item.lostPlace}}</span>
               </div>
-              <div class="m-margin-bottom">
+              <div class="m-margin-bottom" [routerLink]="item.id">
                 <span *ngIf="item.goodsWay == 0">拾物时间:</span>
                 <span *ngIf="item.goodsWay == 1">丢失时间:</span>
                 <span>{{item.lostTime | date: 'yyyy-MM-dd'}}</span>
               </div>
+              <div class="m-margin-bottom" [routerLink]="item.id">
+                <span>发布者:</span>
+                <span *ngIf="!item.netName">{{item.loginAccount}}</span>
+                <span *ngIf="item.netName">{{item.netName}}</span>
+              </div>
               <div class="m-margin-bottom">
-                <span>发布者:</span><span>小白兔好好吃</span>
+                <span>信息状态:</span>
+                <span *ngIf="item.goodsWay == 0">{{item?.goodsStatus | GoodsStatus: 'found'}}</span>
+                <span *ngIf="item.goodsWay == 1">{{item?.goodsStatus | GoodsStatus: 'lost'}}</span>
+                <div class="inline-block" style="margin-left: 20px;background: #e18130;padding: 0 16px;color: #fff;border-radius: 13px;"
+                     (click)="updateGoodsStatus(item.id, 1)"
+                     *ngIf="item.goodsStatus === 0">
+                  <span *ngIf="item.goodsWay == 0">已找到(修改状态)</span>
+                  <span *ngIf="item.goodsWay == 1">已找到(修改状态)</span>
+                </div>
               </div>
             </div>
           </div>
@@ -119,13 +132,13 @@
                (change)="checkEmail(userInfos.email)"
                [(ngModel)]="userInfos.email">
       </div>
-      <!--<div>
+      <div>
         <label>出生日期:</label>
         <nz-demo-date-picker-start-end style="display: inline-block; margin-bottom: -8px"
                                        [isShowEndPicker]="false"
                                        [birthday]="userInfos.birthday"
                                        (startDateVal)="formatDate($event)"></nz-demo-date-picker-start-end>
-      </div>-->
+      </div>
       <div style="display: flex;">
         <label>所在地区:</label>
         <div class="location">

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { element } from '@angular/core/src/render3';
 
 @Component({
@@ -35,7 +35,7 @@ import { element } from '@angular/core/src/render3';
     `
   ]
 })
-export class NzDemoDatePickerStartEndComponent implements OnInit {
+export class NzDemoDatePickerStartEndComponent implements OnInit, OnChanges {
   @Input() isShowEndPicker: Boolean;
   @Input() birthday: Date;
   @Output() startDateVal = new EventEmitter<Date>();
@@ -45,6 +45,11 @@ export class NzDemoDatePickerStartEndComponent implements OnInit {
   endValue: Date | null = null;
 
   ngOnInit() {
+
+  }
+
+  ngOnChanges() {
+    console.log(this.birthday);
     this.startValue = this.birthday;
   }
 

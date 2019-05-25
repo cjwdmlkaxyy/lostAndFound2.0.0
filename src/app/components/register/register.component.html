@@ -75,7 +75,7 @@
             </div>
             <div class="row" [className]="css.phone">
                 <label><span class="starColor">*</span>电话号码:</label>
-                <input type="text" class="form-control" autocomplete="off"
+                <input type="text" class="form-control"
                        (blur)="checkPhone(registerInfos.phone)"
                        [(ngModel)]="registerInfos.phone" name="phoneNum">
               <ng-container *ngIf="css.phone == 'has-success'">
@@ -97,7 +97,7 @@
             </div>
             <div class="row has-warning" [className]="css.email">
                 <label><span class="starColor">*</span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱:</label>
-                <input type="text" class="form-control" autocomplete="off"
+                <input type="text" class="form-control"
                      (blur)="checkEmail(registerInfos.email)"
                      [(ngModel)]="registerInfos.email" name="E-mail">
               <ng-container *ngIf="css.email == 'has-success'">

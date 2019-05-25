@@ -79,13 +79,13 @@ export class HttpRequestService{
   * answer question
   * */
   answerQuestion(val): Observable<any> {
-    return this.http.post(this.urlFront + '/goods/answerQuestion', val);
+    return this.http.post(this.urlFront + 'goods/answerQuestion', val);
   }
   /*
   * get messages by goods Id
   * */
   getMessages(id: string, pageSize: number, pageNum: number): Observable<any> {
-    return this.http.get(this.urlFront + '/goods/getMessage/' + id + '/' + pageNum + '/' + pageSize);
+    return this.http.get(this.urlFront + 'goods/getMessage/' + id + '/' + pageNum + '/' + pageSize);
   }
   /*
   * get All links
@@ -94,5 +94,11 @@ export class HttpRequestService{
     return this.http.post('http://47.102.139.16:8083/connection/getConnection', {
       name: ''
     });
+  }
+  /*
+  * update the status of goods
+  * */
+  updateGoodsStatus(data): Observable<any> {
+    return this.http.post(this.urlFront + 'goods/updateGoodsInfo', data);
   }
 }

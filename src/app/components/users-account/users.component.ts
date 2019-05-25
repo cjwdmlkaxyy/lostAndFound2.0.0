@@ -5,6 +5,7 @@ import {RegisterService} from '../../service/register.service';
 import { HttpRequestService } from '../../service/http-request.service';
 import { stringify } from '@angular/compiler/src/util';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -17,7 +18,8 @@ export class UsersComponent implements OnInit {
     private CheckValue: CheckValueService,
     public registerService: RegisterService,
     public HttpRequest: HttpRequestService,
-    private nzMessage: NzMessageService
+    private nzMessage: NzMessageService,
+    private route: Router
   ) {}
 
   showNetname: string;
@@ -26,7 +28,7 @@ export class UsersComponent implements OnInit {
     netName: '',
     phone: '',
     email: '',
-    // birthday: null,
+    birthday: null,
     province: '',
     city: '',
     district: '',
@@ -81,6 +83,7 @@ export class UsersComponent implements OnInit {
   getData() {
     this.HttpRequest.searchGoods(this.searchInfos).subscribe( (res: any) => {
       this.renderData = JSON.parse(res.data.goods);
+      console.log(this.renderData);
       this.pagesConfig.totalPages = res.data.pageCount;
       this.pagesConfig.totalNum = res.data.recordCount;
       this.showLoading = false;
@@ -162,7 +165,7 @@ export class UsersComponent implements OnInit {
       this.beforeUpdatePhone = data[0].phone;
       this.userInfos.netName = data[0].netName;
       this.userInfos.phone = data[0].phone;
-      // this.userInfos.birthday = new Date(data[0].birthday);
+      this.userInfos.birthday = new Date(data[0].birthday);
       this.userInfos.email = data[0].email;
       this.userInfos.province = data[0].province;
       this.userInfos.city = data[0].city;
@@ -296,8 +299,22 @@ export class UsersComponent implements OnInit {
 
   formatDate(e) {
     let date = new Date(e);
-    console.log(date);
-    // this.userInfos.birthday = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    this.userInfos.birthday = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  }
+
+  updateGoodsStatus(id, val) {
+    const obj = {
+      id: id,
+      status: val
+    };
+    this.route.navigate(['user'])
+    this.HttpRequest.updateGoodsStatus(obj).subscribe( res => {
+      this.nzMessage.success('修改成功');
+      this.getData();
+    }, err => {
+      console.log(err);
+      this.nzMessage.error('系统错误，请稍候重试');
+    });
   }
 
 }

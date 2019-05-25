@@ -69,6 +69,11 @@
                 <span>发布时间:</span>
                 <span>{{item.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
               </div>
+              <div>
+                <span>信息状态:</span>
+                <span *ngIf="item.goodsWay == 1" style="color:orangered;font-weight: bold;">{{item.goodsStatus | GoodsStatus: 'lost'}}</span>
+                <span *ngIf="item.goodsWay == 0" style="color:orangered;font-weight: bold;">{{item.goodsStatus | GoodsStatus: 'found'}}</span>
+              </div>
             </div>
         </div>
     </div>

@@ -73,7 +73,6 @@ export class FrameComponent implements OnInit {
     this.httpResquest.getLinks().subscribe(res => {
       const data = JSON.parse(res.data.data);
       this.link = data;
-      console.log(data);
     }, err => {
       console.log(err);
       this.publicServe.error();

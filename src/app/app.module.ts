@@ -30,7 +30,7 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 
 /*管道*/
-import { ConversionValuePipe, SecrecyPhone } from './pipe/Conversion-value.pipe';
+import { ConversionValuePipe, SecrecyPhone, GoodsStatus } from './pipe/Conversion-value.pipe';
 
 registerLocaleData(zh);
 
@@ -56,7 +56,8 @@ registerLocaleData(zh);
     UsersComponent,
     NzDemoDatePickerStartEndComponent,
     ConversionValuePipe,
-    SecrecyPhone
+    SecrecyPhone,
+    GoodsStatus
   ],
   imports: [
     BrowserModule,
