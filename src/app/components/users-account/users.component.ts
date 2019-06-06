@@ -51,7 +51,7 @@ export class UsersComponent implements OnInit {
   showLoading = false;
   beforeUpdatePhone = '';
   beforeUpdateEmail =  '';
-  test123: boolean;
+  userBirthday: any; // 用户生日
 
   ngOnInit() {
     this.pagesInfos();
@@ -165,12 +165,15 @@ export class UsersComponent implements OnInit {
       this.beforeUpdatePhone = data[0].phone;
       this.userInfos.netName = data[0].netName;
       this.userInfos.phone = data[0].phone;
-      this.userInfos.birthday = new Date(data[0].birthday);
       this.userInfos.email = data[0].email;
       this.userInfos.province = data[0].province;
       this.userInfos.city = data[0].city;
       this.userInfos.district = data[0].district;
       this.showNetname = this.userInfos.netName;
+      // 格式化时间
+      // this.userInfos.birthday = new Date(data[0].birthday).getTime();
+      this.formatDate(data[0].birthday);
+      // this.userBirthday = new Date(data[0].birthday);
       this.getInitArea();
       console.log(data);
     }, (err: any) => {
