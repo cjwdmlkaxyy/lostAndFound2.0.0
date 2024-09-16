@@ -10,6 +10,7 @@ import {RegisterComponent} from './components/register/register.component';
 import {FrameComponent} from './components/frame/frame.component';
 import {NewDetialsComponent} from './components/new-detials/new-detials.component';
 import {StatementComponent} from './components/statement/statement.component';
+import {SwitchCityComponent} from './components/switch-city/switch-city.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/frame/index', pathMatch: 'full'},
@@ -25,7 +26,8 @@ const routes: Routes = [
     {path: 'lostSth/:id', component: NewDetialsComponent},
     {path: 'aboutUs', component: AboutUsComponent},
     {path: 'publishNews', component: PublishNewsComponent},
-    {path: 'statement', component: StatementComponent}
+    {path: 'statement', component: StatementComponent},
+    {path: 'switchCity', component: SwitchCityComponent}
   ]},
 ];
 

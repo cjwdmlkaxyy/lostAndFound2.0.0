@@ -1,0 +1,25 @@
+.pagination > li > a, .pagination > li > span {
+  float:initial;
+}
+
+.pages{
+  border:1px #ebebeb solid;
+  display: inline-block;
+  width:34px;
+  height:34px;
+  line-height:34px;
+  text-align: center;
+  background: #fff;
+  color: #bdbdbd;
+  margin:0 5px;
+
+  &:hover{
+    background: #00816e;
+    color: #fff;
+  }
+}
+
+.active{
+  background: #00816e !important;
+  color: #fff !important;
+}

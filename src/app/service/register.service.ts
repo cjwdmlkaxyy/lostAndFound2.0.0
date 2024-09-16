@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class RegisterService {
 
-  urlFront:string = 'http://192.168.2.28:8081';
+  urlFront:string = 'http://192.168.2.28:8085';
   registerInfos: object = {};
 
 
@@ -20,7 +20,7 @@ export class RegisterService {
   checkAccount(flag,info): Observable<any>{
     let url = '';
     switch(flag){
-      case 'account' :
+      case 'account' :  //校验账号是否重复
         url = '/user/signloginacc/';
         break;
       case 'phone':

@@ -1,0 +1,24 @@
+@import "../../publicSource/basicColor";
+
+.main{
+  padding:0;
+  background-color: rgba($basicColor-orange,0.1);
+  margin-top:50px;
+
+  .title{
+    padding:5px 0;
+    background-color: $basicColor-orange;
+    color:#fff;
+    font-size:15px;
+    width:90px;
+  }
+
+  .row{
+    padding:0;
+    margin:10px 0 0;
+  }
+
+  .leave-body{
+    padding:20px 50px;
+  }
+}

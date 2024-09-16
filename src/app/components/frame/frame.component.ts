@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrameComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    /*
+    * 实现fixed时横向滚动
+    * */
+    window.onscroll = function () {
+      let s1 = -Math.max(document.body.scrollLeft, document.documentElement.scrollLeft);
+      $('header').css('left',s1+'px');
+    }
+  }
 
-  ngOnInit() {
+  ngOnInit(){
   }
 
 }

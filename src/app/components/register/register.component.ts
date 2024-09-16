@@ -125,12 +125,14 @@ export class RegisterComponent implements OnInit {
       this.css.phone = 'has-error';
       console.log('不能为空');
       return;
+    }else {
+
     }
-    if(value.length >= 6){
+    /*if(value.length >= 6){
       this.css.phone = 'has-success';
     }else{
       this.css.phone = 'has-error';
-    }
+    }*/
   }
 
   checkEmail(value){

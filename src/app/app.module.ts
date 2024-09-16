@@ -19,6 +19,15 @@ import {ExponentialStrengthPipe} from './pipe/exponential-strength.pipe';
 import { NewDetialsComponent } from './components/new-detials/new-detials.component';
 import {CheckValueDirective} from './directive/check-value.directive';
 import { StatementComponent } from './components/statement/statement.component';
+import { PublishLeaveWordsComponent } from './components/publish-leave-words/publish-leave-words.component';
+import { CommonPageComponent } from './components/common-page/common-page.component';
+import { SwitchCityComponent} from './components/switch-city/switch-city.component';
+import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+
+registerLocaleData(zh);
 
 @NgModule({
   declarations: [
@@ -31,20 +40,25 @@ import { StatementComponent } from './components/statement/statement.component';
     LostSthComponent,
     PublishNewsComponent,
     FrameComponent,
+    SwitchCityComponent,
     HighlightDirective,
     UnlessDirective,
     ExponentialStrengthPipe,
     NewDetialsComponent,
     CheckValueDirective,
-    StatementComponent
+    StatementComponent,
+    PublishLeaveWordsComponent,
+    CommonPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgZorroAntdModule.forRoot(),
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
